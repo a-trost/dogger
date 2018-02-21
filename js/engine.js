@@ -24,8 +24,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 505;
-    canvas.height = 606;
+    canvas.width = 900;
+    canvas.height = 700;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -107,15 +107,24 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/iso-block.png',  
+                'images/iso-block.png',
+                'images/iso-block.png',
+                'images/iso-block.png', // Top row is water
+                'images/iso-block.png',
+                'images/iso-block.png',
+                'images/iso-block.png',
+                'images/iso-block.png',
+                'images/iso-block.png',
+                'images/iso-block.png',
+                // 'images/stone-block.png',   // Row 1 of 3 of stone
+                // 'images/stone-block.png',   // Row 2 of 3 of stone
+                // 'images/stone-block.png',   // Row 3 of 3 of stone
+                // 'images/grass-block.png',   // Row 1 of 2 of grass
+                // 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = 10,
+            numCols = 4,
             row, col;
         
         // Before drawing, clear existing canvas
@@ -134,7 +143,18 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                if (row == 0) { 
+                    ctx.drawImage(Resources.get(rowImages[row]), col * 200, row * 100);
+
+                } 
+                else if (row%2 == 0) { 
+                    ctx.drawImage(Resources.get(rowImages[row]), col * 200, row * 50);
+
+                }
+                else {
+                    ctx.drawImage(Resources.get(rowImages[row]), (col+.5) * 200, row * 50);
+                    
+                }
             }
         }
 
@@ -172,8 +192,9 @@ var Engine = (function(global) {
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/ram-r.png',
+        'images/dog-r.png',
+        'images/iso-block.png'
     ]);
     Resources.onReady(init);
 
