@@ -68,7 +68,6 @@ class Player {
                 this.xMovement = 100;
                 this.yMovement = 50;
                 this.sprite = 'images/dog-r.png'
-                
                 break;
         }
         this.x += this.xMovement;
@@ -89,12 +88,18 @@ let player = new Player();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function (e) {
+    console.log(e);
     var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
+        'ArrowLeft': 'left',
+        'ArrowUp': 'up',
+        'ArrowRight': 'right',
+        'ArrowDown': 'down',
+        'KeyW': 'up',
+        'KeyA': 'left',
+        'KeyS': 'down',
+        'KeyD': 'right',
+       
     };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.code]);
 });
