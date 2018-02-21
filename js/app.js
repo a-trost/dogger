@@ -9,11 +9,13 @@ class Enemy {
         this.sprite = 'images/ram-r.png';
         this.x = 0;
         this.y = 0;
+        this.speed = 1;
     }
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
     update(dt) {
-
+        // this.x += this.speed * 2;
+        // this.y += this.speed * 1;
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
@@ -27,16 +29,50 @@ class Enemy {
 
 class Player {
     constructor() {
-        this.sprite = 'images/char-boy.png';
+        this.sprite = 'images/dog-r.png';
+        this.x = 0;
+        this.y = 400;
+        this.xMovement = 0;
+        this.yMovement = 0;
+
     }
     update(dt) {
 
     }
     render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 
     }
     handleInput(input) {
-    //make a switch for the 4 possible arrow keys
+        //make a switch for the 4 possible arrow keys
+        switch (input) {
+            case 'up':
+                this.xMovement = 100;
+                this.yMovement = -50;
+                this.sprite = 'images/dog-u.png'
+                break;
+            case 'down':
+                this.xMovement = -100;
+                this.yMovement = 50;
+                this.sprite = 'images/dog-d.png'
+                
+                break;
+            case 'left':
+                this.xMovement = -100;
+                this.yMovement = -50;
+                this.sprite = 'images/dog-l.png'
+                
+                break;
+            case 'right':
+                this.xMovement = 100;
+                this.yMovement = 50;
+                this.sprite = 'images/dog-r.png'
+                
+                break;
+        }
+        this.x += this.xMovement;
+        this.y += this.yMovement;
     }
 };
 
@@ -45,7 +81,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
-for( i=0; i <4; i++) {allEnemies.push(new Enemy());}
+for (i = 0; i < 4; i++) { allEnemies.push(new Enemy()); }
 let player = new Player();
 
 

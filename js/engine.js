@@ -145,20 +145,22 @@ var Engine = (function(global) {
                  */
                 if (row == 0) { 
                     ctx.drawImage(Resources.get(rowImages[row]), col * 200, row * 100);
-
+                    // console.log(`Square at ${col * 200}, ${row*100}`);
                 } 
                 else if (row%2 == 0) { 
                     ctx.drawImage(Resources.get(rowImages[row]), col * 200, row * 50);
-
+                    // console.log(`Square at ${col * 200}, ${row*50}`);
                 }
                 else {
                     ctx.drawImage(Resources.get(rowImages[row]), (col+.5) * 200, row * 50);
-                    
+                    // console.log(`Square at ${(col+.5) * 200}, ${row*50}`);
                 }
+                
             }
         }
-
         renderEntities();
+        // exit();
+
     }
 
     /* This function is called by the render function and is called on each game
@@ -192,9 +194,21 @@ var Engine = (function(global) {
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
+        'images/ram-u.png',
+        'images/ram-d.png',
+        'images/ram-l.png',
         'images/ram-r.png',
+        'images/dog-u.png',
+        'images/dog-d.png',
+        'images/dog-l.png',
         'images/dog-r.png',
-        'images/iso-block.png'
+        'images/iso-block.png',
+        'images/sloth-u.png',
+        'images/sloth-d.png',
+        'images/sloth-l.png',
+        'images/sloth-r.png',
+        
+        
     ]);
     Resources.onReady(init);
 
