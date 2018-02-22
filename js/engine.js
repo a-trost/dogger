@@ -106,24 +106,7 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        var rowImages = [
-                'images/iso-block.png',  
-                'images/iso-block.png',
-                'images/iso-block.png',
-                'images/iso-block.png', // Top row is water
-                'images/iso-block.png',
-                'images/iso-block.png',
-                'images/iso-block.png',
-                'images/iso-block.png',
-                'images/iso-block.png',
-                'images/iso-block.png',
-                // 'images/stone-block.png',   // Row 1 of 3 of stone
-                // 'images/stone-block.png',   // Row 2 of 3 of stone
-                // 'images/stone-block.png',   // Row 3 of 3 of stone
-                // 'images/grass-block.png',   // Row 1 of 2 of grass
-                // 'images/grass-block.png'    // Row 2 of 2 of grass
-            ],
-            numRows = 10,
+        var numRows = 10,
             numCols = 4,
             row, col;
         
@@ -176,6 +159,7 @@ var Engine = (function(global) {
         'images/dog-l.png',
         'images/dog-r.png',
         'images/block-grass.png',
+        'images/block-slate.png',
         'images/sloth-u.png',
         'images/sloth-d.png',
         'images/sloth-l.png',

@@ -1,28 +1,36 @@
-// Enemies our player must avoid
+// Gameboard Square for player/enemies/prizes to stand on
+class Square {
+    constructor(x = 0, y = 0, row = 0, col = 0, status = 'open', texture = 'grass') {
+        this.x = x;
+        this.y = y;
+        // Status Options: open, prize, enemy, player, finish, barrier        
+        this.status = status;
+        this.texture = texture;
+        this.row = row;
+        this.col = col;
+        this.sprite = `images/block-${texture}.png`;
+    }
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+};
+
 class Character {
-    constructor(character = 'ram', x = 0, y = 0, ) {
+    constructor(character = 'ram', x = 0, y = 0, row = 0, col = 0, ) {
         this.character = character;
         this.x = x;
         this.y = y;
+        this.row = row;
+        this.col = col;
     }
-    teleport(direction) {
-        console.log("Teleport!");
-        // if (this.x < 0)
-        //if 0 > x > 700
-        //if 0 > y > 450
-    };
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 };
 
 class Enemy extends Character {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    constructor(character = 'ram', x = 0, y = 0, direction = 'r', speed = 1) {
-        super(character, x, y)
+    constructor(character = 'ram', row = 0, col = 0, direction = 'r', speed = 1) {
+        super(character, x, y, row, col)
         this.direction = direction;
         this.speed = speed;
         this.sprite = `images/${character}-${direction}.png`;
@@ -39,91 +47,114 @@ class Enemy extends Character {
             this.y -= this.speed * 1;
         }
 
-        if (this.x < 0 || this.x > 700 || this.y < 0 || this.y > 450) {
-            this.teleport(direction);
-        }
+        // if (this.x < 0 || this.x > 700 || this.y < 0 || this.y > 450) {
+        //     this.teleport(direction);
+        // }
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
     }
-    // Draw the enemy on the screen, required method for game
-
-
 };
 
 class Player extends Character {
-    constructor(character = 'dog', x = 0, y = 400) {
-        super(character, x, y)
+    constructor(character = 'dog', x = 0, y = 400, row = 7, col = 4) {
+        super(character, x, y, row, col)
         this.sprite = `images/${character}-r.png`;
         this.xMovement = 0;
         this.yMovement = 0;
-
     }
-    update(dt) {
 
+    update(dt) {
+    }
+
+    moveToSquare(newSquare) {
+        this.x = newSquare.x;
+        this.y = newSquare.y;
+        this.row = newSquare.row;
+        this.col = newSquare.col;
     }
 
     handleInput(input) {
-        //make a switch for the 4 possible arrow keys
-        switch (input) {
-            case 'up':
-                this.xMovement = 100;
-                this.yMovement = -50;
-                this.sprite = `images/${this.character}-u.png`;
-                break;
-            case 'down':
-                this.xMovement = -100;
-                this.yMovement = 50;
-                this.sprite = `images/${this.character}-d.png`;
-
-                break;
-            case 'left':
-                this.xMovement = -100;
-                this.yMovement = -50;
-                this.sprite = `images/${this.character}-l.png`;
-
-                break;
-            case 'right':
-                this.xMovement = 100;
-                this.yMovement = 50;
-                this.sprite = `images/${this.character}-r.png`;
-                break;
+        if (['up', 'down', 'left', 'right'].includes(input)) {
+            let rowChange = 0, colChange = 0;
+            switch (input) {
+                case 'up':
+                    rowChange = -1;
+                    break;
+                case 'down':
+                    rowChange = +1;
+                    break;
+                case 'left':
+                    colChange = -1;
+                    break;
+                case 'right':
+                    colChange = +1;
+                    break;
+            }
+            this.sprite = `images/${this.character}-${input[0]}.png`;
+            let newSquare = findSquareByRowCol((this.row + rowChange), (this.col + colChange));
+            if (newSquare) {
+                switch (newSquare.status) {
+                    case 'open':
+                        this.moveToSquare(newSquare);
+                        break;
+                    case 'enemy':
+                        break;
+                    case 'prize':
+                        // find the special listed at this square, consume it
+                        this.moveToSquare(newSquare);
+                        allPrizes.find(element => element.col == this.col && element.row == this.row ).consume();
+                        break;
+                    case 'finish':
+                        moveToSquare(newSquare);
+                        break;
+                }
+            }
         }
-        this.x += this.xMovement;
-        this.y += this.yMovement;
     }
 };
 
-class Square { //Square for player/enemies/prizes to stand on
-    constructor(x = 0, y = 0, row = 0, col = 0, status = 'open', texture = 'grass') {
-        this.x = x;
-        this.y = y;
-        this.status = status;
-        this.texture = texture;
-        this.row = row;
-        this.col = col;
-        this.sprite = `images/block-${texture}.png`;
 
-    }
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
-}
-
-class Prize {
-    constructor(x = 0, y = 0, character = 'hotdog', points = 100) {
-        this.x = x;
-        this.y = y;
+class Prize extends Character {
+    constructor(character = 'hotdog', points = 100, row = 3, col = 4) {
+        super(character, x, y, row, col);
+        let square = findSquareByRowCol(row, col);
+        square.status = 'prize';
+        this.x = square.x;
+        this.y = square.y;
         this.character = character;
-        this.points = points;
-        this.sprite = `images/${character}.png`
+        this.points = points; // Value for collecting 
+        this.sprite = `images/${character}.png`;
+        this.width = 200;
+        this.height = 200;
     }
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
+    }
+    consume() {
+        this.width = 0;
+        this.height = 0;
+        findSquareByRowCol(this.row, this.col).status = 'open';
+        score.addPoints(this.points);
+    }
+};
+
+let score = {
+    score: 0,
+    lives: 3,
+    addPoints: function (points) {
+        this.score += points;
+        console.log("Score:" + this.score)
+    },
+    loseLife: function () {
+        this.lives -= 1;
+        if (this.lives === 0) {
+            console.log("Game Over!")
+        } else {
+            console.log(`You have ${this.lives} lives left.`)
+        }
     }
 }
-
-// Now instantiate your objects.
 
 let allSquares = [];
 let positionIterator = squarePositions.entries();
@@ -135,20 +166,18 @@ for (let [rowIndex, row] of positionIterator) {
         }
     }
 };
-console.log(allSquares);
+
+allSquares[0].texture = 'slate';
 let allEnemies = [];
 allEnemies.push(new Enemy(character = 'ram', x = 700, y = 250, direction = 'l', speed = 1.2));
 allEnemies.push(new Enemy(character = 'ram', x = 0, y = 0, direction = 'r', speed = 1));
-allEnemies.push(new Enemy(character = 'sloth', x = 700, y = 450, direction = 'l', speed = .5));
+allEnemies.push(new Enemy(character = 'sloth', x = 700, y = 450, direction = 'l', speed = .2));
 let allPrizes = [];
+allPrizes.push(new Prize('hotdog', 100, 5, 4));
 allPrizes.push(new Prize());
 let player = new Player();
 
 
-
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function (e) {
     var allowedKeys = {
         'ArrowLeft': 'left',
@@ -164,10 +193,21 @@ document.addEventListener('keyup', function (e) {
     player.handleInput(allowedKeys[e.code]);
 });
 
+function findSquareByRowCol(row, col) {
+    return allSquares.find(function (element) { return element.col == col && element.row == row });
+};
 
-
+// TODO: Figure out how to move enemies from square to square
 
 // TODO: Make collision detection:
     // If Player is on a square:
-     // get that square and change its status to 'player
+     // get that square and change its status to 'player'
     // If Player is going to move to a square, 
+
+// TODO: Change Board Positions to take in more info per row:
+    // Texture - a png file
+    // special - If it spawns enemies, if it could spawn barriers, if it's the start or the finish.
+    // row 
+
+
+// TODO: Make Depth Sorting 
