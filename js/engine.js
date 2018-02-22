@@ -128,36 +128,8 @@ var Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height)    
 
-        /* Loop through the number of rows and columns we've defined above
-         * and, using the rowImages array, draw the correct image for that
-         * portion of the "grid"
-         */
-        for (row = 0; row < numRows; row++) {
-            for (col = 0; col < numCols; col++) {
-                /* The drawImage function of the canvas' context element
-                 * requires 3 parameters: the image to draw, the x coordinate
-                 * to start drawing and the y coordinate to start drawing.
-                 * We're using our Resources helpers to refer to our images
-                 * so that we get the benefits of caching these images, since
-                 * we're using them over and over.
-                 */
-                if (row == 0) { 
-                    ctx.drawImage(Resources.get(rowImages[row]), col * 200, row * 100);
-                    // console.log(`Square at ${col * 200}, ${row*100}`);
-                } 
-                else if (row%2 == 0) { 
-                    ctx.drawImage(Resources.get(rowImages[row]), col * 200, row * 50);
-                    // console.log(`Square at ${col * 200}, ${row*50}`);
-                }
-                else {
-                    ctx.drawImage(Resources.get(rowImages[row]), (col+.5) * 200, row * 50);
-                    // console.log(`Square at ${(col+.5) * 200}, ${row*50}`);
-                }
-                
-            }
-        }
         renderEntities();
         // exit();
 
@@ -171,11 +143,12 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });
-
+        allSquares.forEach(square => square.render());
+        allPrizes.forEach(prize => prize.render());    
         player.render();
+            
+        allEnemies.forEach(enemy => enemy.render());
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -191,9 +164,9 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
+        // 'images/stone-block.png',
+        // 'images/water-block.png',
+        'images/hotdog.png',
         'images/ram-u.png',
         'images/ram-d.png',
         'images/ram-l.png',
@@ -202,7 +175,7 @@ var Engine = (function(global) {
         'images/dog-d.png',
         'images/dog-l.png',
         'images/dog-r.png',
-        'images/iso-block.png',
+        'images/block-grass.png',
         'images/sloth-u.png',
         'images/sloth-d.png',
         'images/sloth-l.png',
