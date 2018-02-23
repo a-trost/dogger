@@ -1,4 +1,4 @@
-squarePositions = [ //x,y,pos
+const squarePositions = [ //x,y,pos
     [ //backmost row
         [false, false], [false, false], [false, false], [600, 0], [700, 50], [false, false], [false, false], [false, false], [false, false],
     ],
@@ -14,13 +14,36 @@ squarePositions = [ //x,y,pos
     [ //fifth back row
         [false, false], [0, 100], [100, 150], [200, 200], [300, 250], [400, 300], [500, 350], [600, 400], [700, 450],
     ],
-    [ //fifth back row
+    [ //sixth back row
         [false, false], [false, false], [0, 200], [100, 250], [200, 300], [300, 350], [400, 400], [500, 450], [false, false],
     ],
-    [ //fifth back row
+    [ //seventh back row
         [false, false], [false, false], [false, false], [0, 300], [100, 350], [200, 400], [300, 450], [false, false], [false, false],
     ],
-    [ //fifth back row
+    [ //front row
         [false, false], [false, false], [false, false], [false, false], [0, 400], [100, 450], [false, false], [false, false], [false, false],
     ],
 ]
+
+const levels = {
+    1: {
+        rowTextures:['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
+        enemies:[false, false, 'sloth', 'ram', 'fox'],
+        enemyCount:[0,0,1,2,2],
+        enemySpeed:[0,0,5,20,15],
+        prizeLocations:[[3,1],],
+        prizeValue:100,
+        barrierLocations:[[5,6]],
+        barrierTextures:['rock'],
+    },
+    2: {
+        rowTextures:['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
+        enemies:[false, false, 'ram', 'sloth', 'sloth'],
+        enemyCount:[0,0,1,2,2],
+        enemySpeed:[0,0,5,20,15],
+        prizeLocations:[[3,1],],
+        prizeValue:100,
+        barrierLocations:[[5,6]],
+        barrierTextures:['rock'],
+    },
+}
