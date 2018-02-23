@@ -27,23 +27,39 @@ const squarePositions = [ //x,y,pos
 
 const levels = {
     1: {
-        rowTextures:['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
-        enemies:[false, false, 'sloth', 'ram', 'fox'],
-        enemyCount:[0,0,1,2,2],
-        enemySpeed:[0,0,5,20,15],
-        prizeLocations:[[3,1],],
-        prizeValue:100,
-        barrierLocations:[[5,6]],
-        barrierTextures:['rock'],
+        rowTextures: ['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
+        enemies: [
+            { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
+            { character: 'sloth', row: 2, col: 4, speed: 5, direction: 'r', },
+            { character: 'ram', row: 3, col: 0, speed: 20, direction: 'r', },
+            { character: 'ram', row: 3, col: 2, speed: 20, direction: 'r', },
+            { character: 'ram', row: 3, col: 4, speed: 20, direction: 'r', },
+            { character: 'fox', row: 4, col: 2, speed: 10, direction: 'l', },
+            { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
+        ],
+        prizes: [
+            {character: 'hotdog', row: 3, col: 1, value=100 }
+        ],
+        barriers: [
+            {character: 'rock', row:5, col:6}
+        ],
     },
     2: {
-        rowTextures:['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
-        enemies:[false, false, 'ram', 'sloth', 'sloth'],
-        enemyCount:[0,0,1,3,2],
-        enemySpeed:[0,0,5,20,15],
-        prizeLocations:[[3,1],],
-        prizeValue:100,
-        barrierLocations:[[5,6]],
-        barrierTextures:['rock'],
+        rowTextures: ['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
+        enemies: [
+            { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
+            { character: 'sloth', row: 2, col: 4, speed: 5, direction: 'r', },
+            { character: 'ram', row: 3, col: 0, speed: 20, direction: 'r', },
+            { character: 'ram', row: 3, col: 2, speed: 20, direction: 'r', },
+            { character: 'ram', row: 3, col: 4, speed: 20, direction: 'r', },
+            { character: 'fox', row: 4, col: 2, speed: 10, direction: 'l', },
+            { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
+        ],
+        prizes: [
+            {character: 'hotdog', row: 3, col: 1, value=100 }
+        ],
+        barriers: [
+            {character: 'rock', row:5, col:6}
+        ],
     },
 }
