@@ -38,7 +38,7 @@ const levels = {
             { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            {character: 'hotdog', row: 3, col: 1, value=100 }
+            {character: 'hotdog', row: 3, col: 1, value:100 },
         ],
         barriers: [
             {character: 'rock', row:5, col:6}
@@ -56,7 +56,7 @@ const levels = {
             { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            {character: 'hotdog', row: 3, col: 1, value=100 }
+            {character: 'hotdog', row: 3, col: 1, value:100 }
         ],
         barriers: [
             {character: 'rock', row:5, col:6}
