@@ -139,6 +139,7 @@ var Engine = (function(global) {
     Resources.load([
         'images/block-grass.png',
         'images/block-slate.png',
+        'images/block-finish.png',        
         'images/hotdog.png',
         'images/ram-u.png',
         'images/ram-d.png',
