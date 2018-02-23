@@ -39,7 +39,7 @@ const levels = {
     2: {
         rowTextures:['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
         enemies:[false, false, 'ram', 'sloth', 'sloth'],
-        enemyCount:[0,0,1,2,2],
+        enemyCount:[0,0,1,3,2],
         enemySpeed:[0,0,5,20,15],
         prizeLocations:[[3,1],],
         prizeValue:100,
