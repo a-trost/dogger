@@ -67,7 +67,10 @@ class Enemy extends Character {
 		( this.x <= player.x + 75 ) &&
             (this.row == player.row)
             ){
-                console.log("Caught!");
+                let playerLosingSquare = findSquareByRowCol(player.row, player.col);
+                player.moveToSquare(findSquareByRowCol(7, 4));
+                player.row=7, player.col = 4; 
+                playerLosingSquare.status = 'open';
                 //Add Game end functionality here
             };
     }
@@ -163,9 +166,10 @@ class Prize extends Character {
 let score = {
     score: 0,
     lives: 3,
+    level: 1,
     addPoints: function (points) {
         this.score += points;
-        console.log("Score:" + this.score)
+        document.getElementById('score').innerText = this.score;
     },
     loseLife: function () {
         this.lives -= 1;
@@ -188,11 +192,15 @@ for (let [rowIndex, row] of positionIterator) {
     }
 };
 
-allSquares[0].texture = 'slate';
+
 let allEnemies = [];
-allEnemies.push(new Enemy(character = 'fox', row=3, col=7, direction = 'l', speed = 15));
-allEnemies.push(new Enemy(character = 'ram', row = 3, col = 0, direction = 'r', speed = 50));
-allEnemies.push(new Enemy(character = 'sloth', row=4, col=7, direction = 'l', speed = 10));
+for (var enemy of levels[(score.level)].enemies ) {
+allEnemies.push(new Enemy(character = enemy.character, row=enemy.row, col=enemy.col, direction = enemy.direction, speed = enemy.speed));
+    }
+  
+// allEnemies.push(new Enemy(character = 'fox', row=3, col=7, direction = 'l', speed = 15));
+// allEnemies.push(new Enemy(character = 'ram', row = 3, col = 0, direction = 'r', speed = 50));
+// allEnemies.push(new Enemy(character = 'sloth', row=4, col=7, direction = 'l', speed = 10));
 let allPrizes = [];
 allPrizes.push(new Prize('hotdog', 100, 5, 4));
 allPrizes.push(new Prize());
