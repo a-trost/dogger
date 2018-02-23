@@ -41,6 +41,7 @@ var Engine = (function(global) {
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
+
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
@@ -81,7 +82,6 @@ var Engine = (function(global) {
         updateEntities(dt);
         // checkCollisions();
     }
-
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -103,19 +103,9 @@ var Engine = (function(global) {
      * they are just drawing the entire screen over and over.
      */
     function render() {
-        /* This array holds the relative URL to the image used
-         * for that particular row of the game level.
-         */
-        var numRows = 10,
-            numCols = 4,
-            row, col;
-        
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height)    
-
         renderEntities();
-        // exit();
-
     }
 
     /* This function is called by the render function and is called on each game
@@ -139,7 +129,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -147,8 +137,8 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        // 'images/stone-block.png',
-        // 'images/water-block.png',
+        'images/block-grass.png',
+        'images/block-slate.png',
         'images/hotdog.png',
         'images/ram-u.png',
         'images/ram-d.png',
@@ -158,13 +148,14 @@ var Engine = (function(global) {
         'images/dog-d.png',
         'images/dog-l.png',
         'images/dog-r.png',
-        'images/block-grass.png',
-        'images/block-slate.png',
         'images/sloth-u.png',
         'images/sloth-d.png',
         'images/sloth-l.png',
         'images/sloth-r.png',
-        
+        'images/fox-u.png',
+        'images/fox-d.png',
+        'images/fox-l.png',
+        'images/fox-r.png',
         
     ]);
     Resources.onReady(init);

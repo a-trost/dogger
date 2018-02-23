@@ -29,8 +29,11 @@ class Character {
 };
 
 class Enemy extends Character {
-    constructor(character = 'ram', row = 0, col = 0, direction = 'r', speed = 1) {
+    constructor(character = 'ram', row = 4, col = 4, direction = 'r', speed = 1) {
         super(character, x, y, row, col)
+        let square = findSquareByRowCol(row, col);
+        this.x = square.x;
+        this.y = square.y;
         this.direction = direction;
         this.speed = speed;
         this.sprite = `images/${character}-${direction}.png`;
@@ -40,19 +43,33 @@ class Enemy extends Character {
     // Parameter: dt, a time delta between ticks
     update(dt) {
         if (this.direction === 'r') {
-            this.x += this.speed * 2;
-            this.y += this.speed * 1;
-        } else {
-            this.x -= this.speed * 2;
-            this.y -= this.speed * 1;
+            this.x += this.speed * 2 * dt;
+            this.y += this.speed * 1 * dt;
+        } else if (this.direction === 'l') {
+            this.x -= this.speed * 2 * dt;
+            this.y -= this.speed * 1 * dt;
         }
+        this.checkPlayerCollision();
+        // if (Math.round(this.x) % 20 == 0) {console.log("Enemy: x "+Math.round(this.x)+"  y "+Math.round(this.y))};
+        // console.log(Math.round(this.x), Math.round(this.y));
+        // let square = allSquares.find(element => element.x == Math.round(this.x + 50) && element.row == Math.round(this.y + 25));
+        // if (square.status == 'player') {
+        //     console.log("GOTCHA!")
+        // }
 
         // if (this.x < 0 || this.x > 700 || this.y < 0 || this.y > 450) {
         //     this.teleport(direction);
         // }
-        // You should multiply any movement by the dt parameter
-        // which will ensure the game runs at the same speed for
-        // all computers.
+    }
+    checkPlayerCollision() {
+        if (
+            ( this.x + 75 >= player.x ) &&
+		( this.x <= player.x + 75 ) &&
+            (this.row == player.row)
+            ){
+                console.log("Caught!");
+                //Add Game end functionality here
+            };
     }
 };
 
@@ -63,10 +80,8 @@ class Player extends Character {
         this.xMovement = 0;
         this.yMovement = 0;
     }
-
     update(dt) {
     }
-
     moveToSquare(newSquare) {
         this.x = newSquare.x;
         this.y = newSquare.y;
@@ -92,21 +107,27 @@ class Player extends Character {
                     break;
             }
             this.sprite = `images/${this.character}-${input[0]}.png`;
+            let oldSquare = findSquareByRowCol(this.row, this.col);
             let newSquare = findSquareByRowCol((this.row + rowChange), (this.col + colChange));
             if (newSquare) {
                 switch (newSquare.status) {
                     case 'open':
                         this.moveToSquare(newSquare);
-                        break;
-                    case 'enemy':
+                        newSquare.status = 'player';
+                        oldSquare.status = 'open';
                         break;
                     case 'prize':
-                        // find the special listed at this square, consume it
+                        // find the prize listed at this square, consume it
                         this.moveToSquare(newSquare);
-                        allPrizes.find(element => element.col == this.col && element.row == this.row ).consume();
+                        allPrizes.find(element => element.col == this.col && element.row == this.row).consume();
+                        newSquare.status = 'player';
+                        oldSquare.status = 'open';
                         break;
                     case 'finish':
                         moveToSquare(newSquare);
+                        console.log("You did it!");
+                        break;
+                    case 'barrier':
                         break;
                 }
             }
@@ -169,13 +190,13 @@ for (let [rowIndex, row] of positionIterator) {
 
 allSquares[0].texture = 'slate';
 let allEnemies = [];
-allEnemies.push(new Enemy(character = 'ram', x = 700, y = 250, direction = 'l', speed = 1.2));
-allEnemies.push(new Enemy(character = 'ram', x = 0, y = 0, direction = 'r', speed = 1));
-allEnemies.push(new Enemy(character = 'sloth', x = 700, y = 450, direction = 'l', speed = .2));
+allEnemies.push(new Enemy(character = 'fox', row=3, col=7, direction = 'l', speed = 15));
+allEnemies.push(new Enemy(character = 'ram', row = 3, col = 0, direction = 'r', speed = 50));
+allEnemies.push(new Enemy(character = 'sloth', row=4, col=7, direction = 'l', speed = 10));
 let allPrizes = [];
 allPrizes.push(new Prize('hotdog', 100, 5, 4));
 allPrizes.push(new Prize());
-let player = new Player();
+let player = new Player('dog');
 
 
 document.addEventListener('keyup', function (e) {
@@ -197,12 +218,7 @@ function findSquareByRowCol(row, col) {
     return allSquares.find(function (element) { return element.col == col && element.row == row });
 };
 
-// TODO: Figure out how to move enemies from square to square
 
-// TODO: Make collision detection:
-    // If Player is on a square:
-     // get that square and change its status to 'player'
-    // If Player is going to move to a square, 
 
 // TODO: Change Board Positions to take in more info per row:
     // Texture - a png file
