@@ -24,6 +24,35 @@ const squarePositions = [ //x,y,pos
         [false, false], [false, false], [false, false], [false, false], [0, 400], [100, 450], [false, false], [false, false], [false, false],
     ],
 ]
+const edgeBorders = {
+    0: [600, 700],
+    1: [400, 700],
+    2: [200, 700],
+    3: [0, 700],
+    4: [0, 700],
+    5: [0, 500],
+    6: [0, 300],
+    7: [0, 100],
+}
+const edgeStartingCoordinates = {
+    // Named for the row and direction traveling: 2r is row 2 with an enemy traveling right.
+    '0r': [600, 0],
+    '0l': [700, 50],
+    '1r': [400, 0],
+    '1l': [700, 150],
+    '2r': [200, 0],
+    '2l': [700, 250],
+    '3r': [0, 0],
+    '3l': [700, 350],
+    '4r': [0, 100],
+    '4l': [700, 450],
+    '5r': [0, 200],
+    '5l': [500, 450],
+    '6r': [0, 300],
+    '6l': [300, 450],
+    '7r': [0, 400],
+    '7l': [100, 450],
+}
 
 const levels = {
     1: {
@@ -38,10 +67,10 @@ const levels = {
             { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            {character: 'hotdog', row: 3, col: 1, value:100 },
+            { character: 'hotdog', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            {character: 'rock', row:5, col:6}
+            { character: 'rock', row: 5, col: 6 }
         ],
     },
     2: {
@@ -56,10 +85,10 @@ const levels = {
             { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            {character: 'hotdog', row: 3, col: 1, value:100 }
+            { character: 'hotdog', row: 3, col: 1, value: 100 }
         ],
         barriers: [
-            {character: 'rock', row:5, col:6}
+            { character: 'rock', row: 5, col: 6 }
         ],
     },
 }
