@@ -50,6 +50,7 @@ class Enemy extends Character {
             this.y -= this.speed * 1 * dt;
         }
         this.checkPlayerCollision();
+        this.checkEdgeCollision();
         // if (Math.round(this.x) % 20 == 0) {console.log("Enemy: x "+Math.round(this.x)+"  y "+Math.round(this.y))};
         // console.log(Math.round(this.x), Math.round(this.y));
         // let square = allSquares.find(element => element.x == Math.round(this.x + 50) && element.row == Math.round(this.y + 25));
@@ -61,10 +62,20 @@ class Enemy extends Character {
         //     this.teleport(direction);
         // }
     }
+
+
+    checkEdgeCollision() {
+        if ((this.x < edgeBorders[this.row][0]) || (this.x > edgeBorders[this.row][1]))
+        {
+            [this.x,this.y]=edgeStartingCoordinates[`${this.row}${this.direction}`]
+        }
+
+    }
+
     checkPlayerCollision() {
         if (
-            ( this.x + 75 >= player.x ) &&
-		( this.x <= player.x + 75 ) &&
+            ( this.x + 65 >= player.x ) &&
+		( this.x <= player.x + 65 ) &&
             (this.row == player.row)
             ){
                 let playerLosingSquare = findSquareByRowCol(player.row, player.col);
@@ -127,7 +138,9 @@ class Player extends Character {
                         oldSquare.status = 'open';
                         break;
                     case 'finish':
-                        moveToSquare(newSquare);
+                        this.moveToSquare(newSquare);
+                        newSquare.status = 'player';
+                        oldSquare.status = 'open';
                         console.log("You did it!");
                         break;
                     case 'barrier':
@@ -187,20 +200,19 @@ for (let [rowIndex, row] of positionIterator) {
     let rowIterator = row.entries()
     for (let [colIndex, coord] of rowIterator) {
         if (coord[0] !== false) {
-            allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex));
-        }
+            let texture = levels[score.level]['rowTextures'][rowIndex];
+            if (texture ==='finish'){
+                allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex, status='finish', texture=texture));
+            } else {
+            allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex, status='open', texture=texture));
+        }}
     }
 };
-
 
 let allEnemies = [];
 for (var enemy of levels[(score.level)].enemies ) {
 allEnemies.push(new Enemy(character = enemy.character, row=enemy.row, col=enemy.col, direction = enemy.direction, speed = enemy.speed));
     }
-  
-// allEnemies.push(new Enemy(character = 'fox', row=3, col=7, direction = 'l', speed = 15));
-// allEnemies.push(new Enemy(character = 'ram', row = 3, col = 0, direction = 'r', speed = 50));
-// allEnemies.push(new Enemy(character = 'sloth', row=4, col=7, direction = 'l', speed = 10));
 let allPrizes = [];
 allPrizes.push(new Prize('hotdog', 100, 5, 4));
 allPrizes.push(new Prize());
