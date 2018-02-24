@@ -13,4 +13,5 @@ Get across the board to go to the next level.
 
 ## Credit Where it's Due
 - Udacity made the initial game engine
-- All 3d models made by Google from [Google Poly](https://poly.google.com/).
+- 3d models made by Google from [Google Poly](https://poly.google.com/):
+- Inspiration from games like Frogger and Crossy Road
