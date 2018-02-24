@@ -118,7 +118,7 @@ var Engine = (function(global) {
          */
         allSquares.forEach(square => square.render());
         allPrizes.forEach(prize => prize.render());
-        let allObjects = [...allEnemies, player]
+        let allObjects = [...allEnemies,...allBarriers, player]
         allObjects.sort(function (a, b) {
             return a.y - b.y;
           });
@@ -145,22 +145,21 @@ var Engine = (function(global) {
         'images/block-road-l.png',  
         'images/block-road-r.png',        
         'images/hotdog.png',
-        'images/ram-u.png',
-        'images/ram-d.png',
         'images/ram-l.png',
         'images/ram-r.png',
+        'images/cat-l.png',
+        'images/cat-r.png',
         'images/dog-u.png',
         'images/dog-d.png',
         'images/dog-l.png',
         'images/dog-r.png',
-        'images/sloth-u.png',
-        'images/sloth-d.png',
         'images/sloth-l.png',
         'images/sloth-r.png',
-        'images/fox-u.png',
-        'images/fox-d.png',
         'images/fox-l.png',
         'images/fox-r.png',
+        'images/roomba-l.png',
+        'images/roomba-r.png',
+        'images/washer.png',
         
     ]);
     Resources.onReady(init);

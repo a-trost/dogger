@@ -61,17 +61,15 @@ const levels = {
         enemies: [
             { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
             { character: 'sloth', row: 2, col: 4, speed: 5, direction: 'r', },
-            { character: 'ram', row: 3, col: 0, speed: 20, direction: 'r', },
-            { character: 'ram', row: 3, col: 2, speed: 20, direction: 'r', },
-            { character: 'ram', row: 3, col: 4, speed: 20, direction: 'r', },
-            { character: 'fox', row: 4, col: 2, speed: 10, direction: 'l', },
-            { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
+            { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
+            { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
+            { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
             { character: 'hotdog', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'rock', row: 5, col: 6 }
+            { character: 'washer', row: 5, col: 4 }
         ],
     },
     2: {
@@ -83,14 +81,14 @@ const levels = {
             { character: 'ram', row: 3, col: 0, speed: 20, direction: 'r', },
             { character: 'ram', row: 3, col: 2, speed: 20, direction: 'r', },
             { character: 'ram', row: 3, col: 4, speed: 20, direction: 'r', },
-            { character: 'fox', row: 4, col: 2, speed: 10, direction: 'l', },
-            { character: 'fox', row: 4, col: 6, speed: 10, direction: 'l', },
+            { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
+            { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
             { character: 'hotdog', row: 3, col: 1, value: 100 }
         ],
         barriers: [
-            { character: 'rock', row: 5, col: 6 }
+            { character: 'washer', row: 6, col: 5 }
         ],
     },
 }

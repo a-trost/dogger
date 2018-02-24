@@ -167,6 +167,24 @@ class Prize extends Character {
     }
 };
 
+class Barrier extends Character {
+    constructor(character = 'hotdog', row = 3, col = 4) {
+        super(character, x, y, row, col);
+        let square = findSquareByRowCol(row, col);
+        square.status = 'barrier';
+        this.x = square.x;
+        this.y = square.y;
+        this.character = character;
+        this.points = points; // Value for collecting 
+        this.sprite = `images/${character}.png`;
+        this.width = 200;
+        this.height = 200;
+    }
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
+    }
+}
+
 let score = {
     score: 0,
     lives: 3,
@@ -185,7 +203,7 @@ let score = {
     }
 }
 
-let allEnemies = [], allSquares = [], allPrizes = [], player = {};
+let allEnemies = [], allSquares = [], allPrizes = [], allBarriers=[], player = {};
 
 function createSquares() {
     let positionIterator = squarePositions.entries();
@@ -211,8 +229,15 @@ function createEnemies() {
 }
 
 function createPrizes() {
-    allPrizes.push(new Prize('hotdog', 100, 5, 4));
-    allPrizes.push(new Prize());
+    for (var prize of levels[(score.level)].prizes) {
+        allPrizes.push(new Prize(character = prize.character, row = prize.row, col = prize.col, points = prize.points));
+    };
+}
+
+function createBarriers() {
+    for (var barrier of levels[(score.level)].barriers) {
+        allBarriers.push(new Barrier(character = barrier.character, row = barrier.row, col = barrier.col, points = barrier.points));
+    };
 }
 
 function findSquareByRowCol(row, col) {
@@ -262,10 +287,11 @@ function startGame() {
 
 function startLevel() {
     startKeyboardListener();
-    allEnemies = [], allSquares = [], allPrizes = [];
+    allEnemies = [], allSquares = [], allPrizes = [], allBarriers=[];
     createSquares();
     createEnemies();
     createPrizes();
+    createBarriers();
     player = new Player('dog');
 }
 const phraseHolder = document.getElementById('phrase-holder')
