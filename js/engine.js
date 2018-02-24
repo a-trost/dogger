@@ -26,7 +26,8 @@ var Engine = (function(global) {
 
     canvas.width = 900;
     canvas.height = 700;
-    doc.body.appendChild(canvas);
+    doc.querySelector('#game-board').appendChild(canvas);
+    // doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -139,7 +140,9 @@ var Engine = (function(global) {
     Resources.load([
         'images/block-grass.png',
         'images/block-slate.png',
-        'images/block-finish.png',        
+        'images/block-finish.png',   
+        'images/block-road-l.png',  
+        'images/block-road-r.png',        
         'images/hotdog.png',
         'images/ram-u.png',
         'images/ram-d.png',
