@@ -42,33 +42,25 @@ class Enemy extends Character {
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
     update(dt) {
+        this.moveEnemy(dt);
+        this.checkPlayerCollision();
+        this.checkEdgeCollision();
+    }
+
+    moveEnemy(dt) {
         if (this.direction === 'r') {
             this.x += this.speed * 2 * dt;
             this.y += this.speed * 1 * dt;
         } else if (this.direction === 'l') {
             this.x -= this.speed * 2 * dt;
             this.y -= this.speed * 1 * dt;
-        }
-        this.checkPlayerCollision();
-        this.checkEdgeCollision();
-        // if (Math.round(this.x) % 20 == 0) {console.log("Enemy: x "+Math.round(this.x)+"  y "+Math.round(this.y))};
-        // console.log(Math.round(this.x), Math.round(this.y));
-        // let square = allSquares.find(element => element.x == Math.round(this.x + 50) && element.row == Math.round(this.y + 25));
-        // if (square.status == 'player') {
-        //     console.log("GOTCHA!")
-        // }
-
-        // if (this.x < 0 || this.x > 700 || this.y < 0 || this.y > 450) {
-        //     this.teleport(direction);
-        // }
+        };
     }
-
 
     checkEdgeCollision() {
         if ((this.x < edgeBorders[this.row][0]) || (this.x > edgeBorders[this.row][1])) {
             [this.x, this.y] = edgeStartingCoordinates[`${this.row}${this.direction}`]
-        }
-
+        };
     }
 
     checkPlayerCollision() {
@@ -192,13 +184,15 @@ let score = {
         }
     }
 }
-let allEnemies = [], allSquares = [], allPrizes = [];
+let allEnemies = [], allSquares = [], allPrizes = [], player = {};
 
 function startLevel() {
     allEnemies = [], allSquares = [], allPrizes = [];
     createSquares();
     createEnemies();
     createPrizes();
+    player = new Player('dog');
+
 }
 
 function createSquares() {
@@ -227,9 +221,6 @@ function createPrizes() {
     allPrizes.push(new Prize());
 }
 
-let player = new Player('dog');
-startLevel();
-
 document.addEventListener('keyup', function (e) {
     var allowedKeys = {
         'ArrowLeft': 'left',
@@ -249,12 +240,9 @@ function findSquareByRowCol(row, col) {
     return allSquares.find(function (element) { return element.col == col && element.row == row });
 };
 
+startLevel();
 
 // TODO: Try to make left/right teleporting for player
 // TODO: Make Game Start Functionality
-// TODO: Improve Square textures
 // TODO: Add more Square textures:
     // Road, dirt, 
-
-// TODO: Make Depth Sorting 
-    // Sort all by Y
