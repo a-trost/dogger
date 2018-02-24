@@ -243,6 +243,11 @@ function stopKeyboardListener() {
 
 function winLevel() {
     score.level++;
+    phraseHolder.style.display = 'flex'
+    phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level '+ score.level + '</span>';
+    setTimeout(function () {
+        phraseHolder.style.display = 'none'
+    }, 4000);
     stopKeyboardListener();
     score.addPoints(1000);
     startLevel();
@@ -251,7 +256,7 @@ function winLevel() {
 function startGame() {
     Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
-    document.querySelector('#score-panel').style.display = 'block';    
+    document.querySelector('#score-panel').style.display = 'block';
     startLevel();
 }
 
@@ -263,13 +268,10 @@ function startLevel() {
     createPrizes();
     player = new Player('dog');
 }
-
+const phraseHolder = document.getElementById('phrase-holder')
 document.getElementById("game-start-btn").addEventListener("click", startGame);
 
-// TODO: Make level end function
-    // Score +1,000
-    // Level +1
-    // startLevel();
+
 // TODO: Add more Square textures:
     // Home: Carpet, kitchen
     // City: Sidewalk

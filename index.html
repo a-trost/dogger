@@ -12,13 +12,16 @@
 </head>
 
 <body>
-
-
+    <div id="phrase-holder" class="row justify-content-md-center align-items-center">
+        <div class="col">
+            <span class="success-phrase">Level 2</span>
+        </div>
+    </div>
     <div class="container">
         <button type="button" id="score-panel" class="btn btn-outline-success">
             Score:
-                <span id="score">0</span>
-            
+            <span id="score">0</span>
+
         </button>
 
         <div class="row justify-content-md-center align-items-center my-5" id="game-intro">
@@ -38,25 +41,27 @@
         <div id="game-board"></div>
         <div class="row">
 
-        <div id="game-directions" class="col card bg-light p-3 my-3">
-            <div class="card-header"><h1>Dogger</h1></div>
-            <div class="card-body">
-                <h5 class="card-title">Directions</h5>
-            
+            <div id="game-directions" class="col card bg-light p-3 my-3">
+                <div class="card-header">
+                    <h1>Dogger</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Directions</h5>
 
-        <p class="card-text">
-            Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
-            board does not have true Up, Down, Left, or Right.
-        </p>
-        <p class="card-text">
-            Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
-            rocks.
-        </p>
-        <p class="card-text">Get across the board to go to the next level.</p>
-    </div>
-    </div>
-</div>
-        
+
+                    <p class="card-text">
+                        Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
+                        board does not have true Up, Down, Left, or Right.
+                    </p>
+                    <p class="card-text">
+                        Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
+                        rocks.
+                    </p>
+                    <p class="card-text">Get across the board to go to the next level.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="js/boardpositions.js"></script>
