@@ -56,6 +56,7 @@ const edgeStartingCoordinates = {
 
 const levels = {
     1: {
+        world: 'House',
         rowTextures: ['finish', 'grass', 'grass', 'road-l', 'road-r', 'grass', 'grass', 'grass'],
         enemies: [
             { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
@@ -74,6 +75,7 @@ const levels = {
         ],
     },
     2: {
+        world: 'City',
         rowTextures: ['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
         enemies: [
             { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
