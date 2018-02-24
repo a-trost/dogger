@@ -118,10 +118,12 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
         allSquares.forEach(square => square.render());
-        allPrizes.forEach(prize => prize.render());    
-        player.render();
-            
-        allEnemies.forEach(enemy => enemy.render());
+        allPrizes.forEach(prize => prize.render());
+        let allObjects = [...allEnemies, player]
+        allObjects.sort(function (a, b) {
+            return a.y - b.y;
+          });
+        allObjects.forEach(item => item.render());
 
     }
 
