@@ -1,7 +1,39 @@
 body {
     text-align: center;
-    font-family:'Asap', Arial, Helvetica, sans-serif;
+    font-family: 'Asap', Arial, Helvetica, sans-serif;
 }
-h1,h2,h3,p {
+
+h1, h2, h3, p {
     text-align: left;
 }
+
+#game-intro {
+    border-radius: 25px;
+    background: #bc4e9c;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f80759, #bc4e9c);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#hero-image {
+    max-width:450px;
+    padding-top:25px;
+}
+
+#hero-header {
+    padding: 20px;
+    font-weight:800;
+}
+
+#hero-description {
+    font-size: 1.5rem;
+}
+
+#game-start-btn {
+    margin:20px 10px;
+    font-size: 1.75rem;
+}
+
+#score-panel {display:none;}

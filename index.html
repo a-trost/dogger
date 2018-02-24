@@ -5,36 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dogger the Game</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Asap:400,700" rel="stylesheet">
 </head>
 
 <body>
-        <div class="container">
-    <h3>Score: <span id="score">0</span></h3>
-    <div id="game-board"></div>
-    <h1>Dogger</h1> 
-    <h3>Directions</h3>  
-    <p>
-    Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric board does not have true Up, Down, Left, or Right.        
-    </p>
-    <p>
-Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like rocks.
-</p>
-<p>Get across the board to go to the next level.</p>
+
+
+    <div class="container">
+        <div id="score-panel">
+            <h3>Score:
+                <span id="score">0</span>
+            </h3>
+        </div>
+
+        <div class="row justify-content-md-center align-items-center my-5" id="game-intro">
+
+            <div class="col md-3">
+                <img id="hero-image" class="img-fluid" src="images/dogger-hero.png">
+            </div>
+            <div class="col md-3" style="color:white;">
+                <h1 class="text-center display-4" id="hero-header">Dogger</h1>
+                <p id="hero-description">Daisy has grown tired of home life and yearns for adventure. Help her escape the tedium of her home and see
+                    what’s beyond the backyard. </p>
+                <button type="button" class="btn btn-outline-light" id="game-start-btn">Let's go!</button>
+            </div>
+
+        </div>
+
+        <div id="game-board"></div>
+        <div class="row">
+
+        <div id="game-directions" class="col card bg-light p-3 my-3">
+            <div class="card-header"><h1>Dogger</h1></div>
+            <div class="card-body">
+                <h5 class="card-title">Directions</h5>
+            
+
+        <p class="card-text">
+            Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
+            board does not have true Up, Down, Left, or Right.
+        </p>
+        <p class="card-text">
+            Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
+            rocks.
+        </p>
+        <p class="card-text">Get across the board to go to the next level.</p>
+    </div>
+    </div>
 </div>
+        
+    </div>
 
-
-
-
-<script src="js/boardpositions.js"></script>
-<script src="js/resources.js"></script>
-<script src="js/app.js"></script>
-<script src="js/engine.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/boardpositions.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
