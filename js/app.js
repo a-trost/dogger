@@ -186,14 +186,7 @@ let score = {
 }
 let allEnemies = [], allSquares = [], allPrizes = [], player = {};
 
-function startLevel() {
-    allEnemies = [], allSquares = [], allPrizes = [];
-    createSquares();
-    createEnemies();
-    createPrizes();
-    player = new Player('dog');
 
-}
 
 function createSquares() {
     let positionIterator = squarePositions.entries();
@@ -221,28 +214,38 @@ function createPrizes() {
     allPrizes.push(new Prize());
 }
 
-document.addEventListener('keyup', function (e) {
-    var allowedKeys = {
-        'ArrowLeft': 'left',
-        'ArrowUp': 'up',
-        'ArrowRight': 'right',
-        'ArrowDown': 'down',
-        'KeyW': 'up',
-        'KeyA': 'left',
-        'KeyS': 'down',
-        'KeyD': 'right',
-    };
 
-    player.handleInput(allowedKeys[e.code]);
-});
 
 function findSquareByRowCol(row, col) {
     return allSquares.find(function (element) { return element.col == col && element.row == row });
 };
 
-startLevel();
+function startLevel() {
+    Engine(window);
+    document.querySelector('#game-intro').style.display = 'none';
+    document.addEventListener('keyup', function (e) {
+        var allowedKeys = {
+            'ArrowLeft': 'left',
+            'ArrowUp': 'up',
+            'ArrowRight': 'right',
+            'ArrowDown': 'down',
+            'KeyW': 'up',
+            'KeyA': 'left',
+            'KeyS': 'down',
+            'KeyD': 'right',
+        };
+        player.handleInput(allowedKeys[e.code]);
+    });
+    allEnemies = [], allSquares = [], allPrizes = [];
+    createSquares();
+    createEnemies();
+    createPrizes();
+    player = new Player('dog');
+}
 
-// TODO: Try to make left/right teleporting for player
-// TODO: Make Game Start Functionality
+
+
+document.getElementById("game-start-btn").addEventListener("click", startLevel);
+
 // TODO: Add more Square textures:
     // Road, dirt, 
