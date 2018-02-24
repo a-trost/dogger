@@ -65,25 +65,24 @@ class Enemy extends Character {
 
 
     checkEdgeCollision() {
-        if ((this.x < edgeBorders[this.row][0]) || (this.x > edgeBorders[this.row][1]))
-        {
-            [this.x,this.y]=edgeStartingCoordinates[`${this.row}${this.direction}`]
+        if ((this.x < edgeBorders[this.row][0]) || (this.x > edgeBorders[this.row][1])) {
+            [this.x, this.y] = edgeStartingCoordinates[`${this.row}${this.direction}`]
         }
 
     }
 
     checkPlayerCollision() {
         if (
-            ( this.x + 65 >= player.x ) &&
-		( this.x <= player.x + 65 ) &&
+            (this.x + 65 >= player.x) &&
+            (this.x <= player.x + 65) &&
             (this.row == player.row)
-            ){
-                let playerLosingSquare = findSquareByRowCol(player.row, player.col);
-                player.moveToSquare(findSquareByRowCol(7, 4));
-                player.row=7, player.col = 4; 
-                playerLosingSquare.status = 'open';
-                //Add Game end functionality here
-            };
+        ) {
+            let playerLosingSquare = findSquareByRowCol(player.row, player.col);
+            player.moveToSquare(findSquareByRowCol(7, 4));
+            player.row = 7, player.col = 4;
+            playerLosingSquare.status = 'open';
+            //Add Game end functionality here
+        };
     }
 };
 
@@ -193,31 +192,43 @@ let score = {
         }
     }
 }
+let allEnemies = [], allSquares = [], allPrizes = [];
 
-let allSquares = [];
-let positionIterator = squarePositions.entries();
-for (let [rowIndex, row] of positionIterator) {
-    let rowIterator = row.entries()
-    for (let [colIndex, coord] of rowIterator) {
-        if (coord[0] !== false) {
-            let texture = levels[score.level]['rowTextures'][rowIndex];
-            if (texture ==='finish'){
-                allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex, status='finish', texture=texture));
-            } else {
-            allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex, status='open', texture=texture));
-        }}
-    }
-};
+function startLevel() {
+    allEnemies = [], allSquares = [], allPrizes = [];
+    createSquares();
+    createEnemies();
+    createPrizes();
+}
 
-let allEnemies = [];
-for (var enemy of levels[(score.level)].enemies ) {
-allEnemies.push(new Enemy(character = enemy.character, row=enemy.row, col=enemy.col, direction = enemy.direction, speed = enemy.speed));
-    }
-let allPrizes = [];
-allPrizes.push(new Prize('hotdog', 100, 5, 4));
-allPrizes.push(new Prize());
+function createSquares() {
+    let positionIterator = squarePositions.entries();
+    for (let [rowIndex, row] of positionIterator) {
+        let rowIterator = row.entries()
+        for (let [colIndex, coord] of rowIterator) {
+            if (coord[0] !== false) {
+                let texture = levels[score.level]['rowTextures'][rowIndex];
+                if (texture === 'finish') {
+                    allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex, status = 'finish', texture = texture));
+                } else {
+                    allSquares.push(new Square(x = coord[0], y = coord[1], row = rowIndex, col = colIndex, status = 'open', texture = texture));
+                }
+            }
+        }
+    };
+}
+function createEnemies() {
+    for (var enemy of levels[(score.level)].enemies) {
+        allEnemies.push(new Enemy(character = enemy.character, row = enemy.row, col = enemy.col, direction = enemy.direction, speed = enemy.speed));
+    };
+}
+function createPrizes() {
+    allPrizes.push(new Prize('hotdog', 100, 5, 4));
+    allPrizes.push(new Prize());
+}
+
 let player = new Player('dog');
-
+startLevel();
 
 document.addEventListener('keyup', function (e) {
     var allowedKeys = {
@@ -239,11 +250,11 @@ function findSquareByRowCol(row, col) {
 };
 
 
-
-// TODO: Change Board Positions to take in more info per row:
-    // Texture - a png file
-    // special - If it spawns enemies, if it could spawn barriers, if it's the start or the finish.
-    // row 
-
+// TODO: Try to make left/right teleporting for player
+// TODO: Make Game Start Functionality
+// TODO: Improve Square textures
+// TODO: Add more Square textures:
+    // Road, dirt, 
 
 // TODO: Make Depth Sorting 
+    // Sort all by Y
