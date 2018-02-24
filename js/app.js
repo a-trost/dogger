@@ -132,7 +132,7 @@ class Player extends Character {
                         this.moveToSquare(newSquare);
                         newSquare.status = 'player';
                         oldSquare.status = 'open';
-                        console.log("You did it!");
+                        winLevel();
                         break;
                     case 'barrier':
                         break;
@@ -184,9 +184,8 @@ let score = {
         }
     }
 }
+
 let allEnemies = [], allSquares = [], allPrizes = [], player = {};
-
-
 
 function createSquares() {
     let positionIterator = squarePositions.entries();
@@ -204,38 +203,60 @@ function createSquares() {
         }
     };
 }
+
 function createEnemies() {
     for (var enemy of levels[(score.level)].enemies) {
         allEnemies.push(new Enemy(character = enemy.character, row = enemy.row, col = enemy.col, direction = enemy.direction, speed = enemy.speed));
     };
 }
+
 function createPrizes() {
     allPrizes.push(new Prize('hotdog', 100, 5, 4));
     allPrizes.push(new Prize());
 }
 
-
-
 function findSquareByRowCol(row, col) {
     return allSquares.find(function (element) { return element.col == col && element.row == row });
-};
+}
 
-function startLevel() {
+function allowedKeys(e) {
+    var allowedKeys = {
+        'ArrowLeft': 'left',
+        'ArrowUp': 'up',
+        'ArrowRight': 'right',
+        'ArrowDown': 'down',
+        'KeyW': 'up',
+        'KeyA': 'left',
+        'KeyS': 'down',
+        'KeyD': 'right',
+    };
+    player.handleInput(allowedKeys[e.code]);
+}
+
+function startKeyboardListener() {
+    document.addEventListener('keyup', allowedKeys);
+}
+
+function stopKeyboardListener() {
+    document.removeEventListener('keyup', allowedKeys);
+}
+
+function winLevel() {
+    score.level++;
+    stopKeyboardListener();
+    score.addPoints(1000);
+    startLevel();
+}
+
+function startGame() {
     Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
-    document.addEventListener('keyup', function (e) {
-        var allowedKeys = {
-            'ArrowLeft': 'left',
-            'ArrowUp': 'up',
-            'ArrowRight': 'right',
-            'ArrowDown': 'down',
-            'KeyW': 'up',
-            'KeyA': 'left',
-            'KeyS': 'down',
-            'KeyD': 'right',
-        };
-        player.handleInput(allowedKeys[e.code]);
-    });
+    document.querySelector('#score-panel').style.display = 'block';    
+    startLevel();
+}
+
+function startLevel() {
+    startKeyboardListener();
     allEnemies = [], allSquares = [], allPrizes = [];
     createSquares();
     createEnemies();
@@ -243,9 +264,15 @@ function startLevel() {
     player = new Player('dog');
 }
 
+document.getElementById("game-start-btn").addEventListener("click", startGame);
 
-
-document.getElementById("game-start-btn").addEventListener("click", startLevel);
-
+// TODO: Make level end function
+    // Score +1,000
+    // Level +1
+    // startLevel();
 // TODO: Add more Square textures:
-    // Road, dirt, 
+    // Home: Carpet, kitchen
+    // City: Sidewalk
+    // Moon: Moon texture
+// TODO: Save progress to local machine
+// TODO: Add world select buttons to start screen
