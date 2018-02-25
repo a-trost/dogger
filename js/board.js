@@ -57,10 +57,9 @@ const edgeStartingCoordinates = {
 const levels = {
     1: {
         world: 'House',
-        rowTextures: ['finish', 'grass', 'grass', 'road-l', 'road-r', 'grass', 'grass', 'grass'],
+        rowTextures: ['finish', 'carpet2', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'carpet1'],
         enemies: [
-            { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
-            { character: 'sloth', row: 2, col: 4, speed: 5, direction: 'r', },
+            { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
             { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
             { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
@@ -69,26 +68,38 @@ const levels = {
             { character: 'hotdog', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'washer', row: 5, col: 4 }
-        ],
+            { character: 'washer', row: 5, col: 5 },
+            { character: 'tv', row: 5, col: 6 }
+            ],
     },
+
     2: {
-        world: 'City',
-        rowTextures: ['finish', 'grass', 'grass', 'slate', 'slate', 'grass', 'grass', 'grass'],
+        world: 'House',
+        rowTextures: ['finish', 'kitchen', 'kitchen', 'kitchen', 'carpet2', 'carpet2', 'carpet2', 'carpet2'],
         enemies: [
-            { character: 'sloth', row: 2, col: 1, speed: 5, direction: 'r', },
-            { character: 'sloth', row: 2, col: 4, speed: 5, direction: 'r', },
-            { character: 'ram', row: 3, col: 0, speed: 20, direction: 'r', },
-            { character: 'ram', row: 3, col: 2, speed: 20, direction: 'r', },
-            { character: 'ram', row: 3, col: 4, speed: 20, direction: 'r', },
+            { character: 'hamster', row: 2, col: 2, speed: 50, direction: 'r', },
+            
+            { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
+            { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
+            { character: 'cat', row: 3, col: 0, speed: 40, direction: 'r', },
+            
             { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 3, col: 1, value: 100 }
+            { character: 'hotdog', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'washer', row: 6, col: 5 }
-        ],
+            { character: 'washer', row: 5, col: 5 },
+            { character: 'toaster', row: 1, col: 3 }
+            ],
     },
+
+
+
+
+
+
+
+
 }
