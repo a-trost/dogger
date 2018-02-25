@@ -139,36 +139,48 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
+        // Ground Textures
+        'images/block-carpet1.png',
+        'images/block-carpet2.png',              
+        'images/block-carpet3.png',              
+        'images/block-kitchen.png',    
         'images/block-grass.png',
         'images/block-slate.png',
         'images/block-finish.png',   
         'images/block-road-l.png',  
         'images/block-road-r.png',   
-        'images/block-carpet1.png',
-        'images/block-carpet2.png',              
-        'images/block-kitchen.png',     
-        'images/tv.png',
-        'images/toaster.png',
-        'images/hotdog.png',
-        'images/ram-l.png',
-        'images/ram-r.png',
-        'images/cat-l.png',
-        'images/cat-r.png',
+        // Player Textures
         'images/dog-u.png',
         'images/dog-d.png',
         'images/dog-l.png',
         'images/dog-r.png',
-        'images/sloth-l.png',
-        'images/sloth-r.png',
-        'images/fox-l.png',
-        'images/fox-r.png',
+        // Enemy Textures
         'images/roomba-l.png',
         'images/roomba-r.png',
         'images/hamster-r.png',
         'images/hamster-l.png',
-
+        'images/cat-l.png',
+        'images/cat-r.png',
+        'images/ram-l.png',
+        'images/ram-r.png',
+        'images/sloth-l.png',
+        'images/sloth-r.png',
+        'images/fox-l.png',
+        'images/fox-r.png',
+        'images/deer-l.png',
+        'images/deer-r.png',
+        // Barrier Textures
         'images/washer.png',
+        'images/tv.png',
+        'images/toaster.png',
+        'images/rock1.png',
+        'images/rock2.png',
+        'images/rock3.png',
+        'images/rock4.png',
+        'images/tree1.png',
         
+        // Prize Textures
+        'images/hotdog.png',        
     ]);
     Resources.onReady(init);
 

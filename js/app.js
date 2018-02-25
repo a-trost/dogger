@@ -189,7 +189,7 @@ let score = {
     score: 0,
     lives: 3,
     level: 1,
-
+    currentWorld: "House",
     addPoints: function (points) {
         scorePhraseHolder.style.display = 'flex'
         scorePhraseHolder.innerHTML = '<span class="text-success" id="score-phrase">' + '+' + points + '</span>';
@@ -272,13 +272,39 @@ function stopKeyboardListener() {
     document.removeEventListener('keyup', allowedKeys);
 }
 
+function winGame() {
+    phraseHolder.style.display = 'flex'
+    phraseHolder.innerHTML = '<span class="success-phrase">' + "You Win!" + '</span>';
+    // setTimeout(function () {
+    //     phraseHolder.style.display = 'none'
+    // }, 4000);
+    stopKeyboardListener();
+    score.addPoints(10000);
+}
+
+function checkLevelProgress() {
+    if (levels[(score.level)].world === "End") {
+        winGame();
+    } else if (score.currentWorld != levels[(score.level)].world) {
+        score.currentWorld = levels[(score.level)].world
+        phraseHolder.style.display = 'flex'
+        phraseHolder.innerHTML = '<span class="success-phrase">' + 'The ' + score.currentWorld + '</span>';
+        setTimeout(function () {
+            phraseHolder.style.display = 'none'
+        }, 8000);
+    }
+    else {
+        phraseHolder.style.display = 'flex'
+        phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level ' + score.level + '</span>';
+        setTimeout(function () {
+            phraseHolder.style.display = 'none'
+        }, 4000);
+    }
+}
+
 function winLevel() {
     score.level++;
-    phraseHolder.style.display = 'flex'
-    phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level ' + score.level + '</span>';
-    setTimeout(function () {
-        phraseHolder.style.display = 'none'
-    }, 4000);
+    checkLevelProgress();
     stopKeyboardListener();
     score.addPoints(1000);
     startLevel();
@@ -306,9 +332,8 @@ document.getElementById("game-start-btn").addEventListener("click", startGame);
 
 
 // TODO: Add more textures:
-    // Home: Carpet, kitchen, barriers
+    // Forest: Trees, Deer    
     // City: Sidewalk, cars, vans
-    // Forest: Trees, Deer
     // Moon: rocky ground, rocks, UFO
 // TODO: Save progress to local machine
 // TODO: Add world select buttons to start screen
