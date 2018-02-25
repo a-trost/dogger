@@ -39,7 +39,17 @@ h1, h2, h3, p {
 #score-panel {display:none;}
 
 /* Animated Text Styling */
-.success-phrase{
+#score-phrase {
+font-size:12pt;
+animation: textfade 1.5s;
+opacity:0;
+}
+
+#score-phrase-holder {
+    display:none;
+}
+
+.success-phrase {
     font-size: 10vmin;
     color:white;
     animation: textfade 1.5s;
@@ -56,10 +66,7 @@ h1, h2, h3, p {
     text-align: center;
     display: none;
     pointer-events: none;
-    /* background-color: #bc4e9c; */
     width: 100%
-    /* top:200px;
-    left:500px; */
 }
 
 @keyframes textfade {

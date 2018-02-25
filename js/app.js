@@ -189,7 +189,13 @@ let score = {
     score: 0,
     lives: 3,
     level: 1,
+
     addPoints: function (points) {
+        scorePhraseHolder.style.display = 'flex'
+        scorePhraseHolder.innerHTML = '<span class="text-success" id="score-phrase">' + '+' + points + '</span>';
+        setTimeout(function () {
+            scorePhraseHolder.style.display = 'none'
+        }, 4000);
         this.score += points;
         document.getElementById('score').innerText = this.score;
     },
@@ -203,7 +209,7 @@ let score = {
     }
 }
 
-let allEnemies = [], allSquares = [], allPrizes = [], allBarriers=[], player = {};
+let allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [], player = {};
 
 function createSquares() {
     let positionIterator = squarePositions.entries();
@@ -230,7 +236,7 @@ function createEnemies() {
 
 function createPrizes() {
     for (var prize of levels[(score.level)].prizes) {
-        allPrizes.push(new Prize(character = prize.character,points = prize.value, row = prize.row, col = prize.col, ));
+        allPrizes.push(new Prize(character = prize.character, points = prize.value, row = prize.row, col = prize.col, ));
     };
 }
 
@@ -269,7 +275,7 @@ function stopKeyboardListener() {
 function winLevel() {
     score.level++;
     phraseHolder.style.display = 'flex'
-    phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level '+ score.level + '</span>';
+    phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level ' + score.level + '</span>';
     setTimeout(function () {
         phraseHolder.style.display = 'none'
     }, 4000);
@@ -287,7 +293,7 @@ function startGame() {
 
 function startLevel() {
     startKeyboardListener();
-    allEnemies = [], allSquares = [], allPrizes = [], allBarriers=[];
+    allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [];
     createSquares();
     createEnemies();
     createPrizes();
@@ -295,12 +301,16 @@ function startLevel() {
     player = new Player('dog');
 }
 const phraseHolder = document.getElementById('phrase-holder')
+const scorePhraseHolder = document.getElementById('score-phrase-holder');
 document.getElementById("game-start-btn").addEventListener("click", startGame);
 
 
-// TODO: Add more Square textures:
-    // Home: Carpet, kitchen
-    // City: Sidewalk
-    // Moon: Moon texture
+// TODO: Add more textures:
+    // Home: Carpet, kitchen, barriers
+    // City: Sidewalk, cars, vans
+    // Forest: Trees, Deer
+    // Moon: rocky ground, rocks, UFO
 // TODO: Save progress to local machine
 // TODO: Add world select buttons to start screen
+// TODO: Add Music/Sounds
+// TODO: Add Settings Screen for Volume, etc.
