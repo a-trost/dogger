@@ -12,6 +12,6 @@ Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdo
 Get across the board to go to the next level.
 
 ## Credit Where it's Due
-- Udacity made the initial game engine
-- 3d models made by Google from [Google Poly](https://poly.google.com/):
-- Inspiration from games like Frogger and Crossy Road
+- Udacity made the [initial game engine](https://github.com/udacity/frontend-nanodegree-arcade-game).
+- 3d models made by [Google Poly](https://poly.google.com/).
+- Inspiration from games like Frogger and Crossy Road.
