@@ -143,7 +143,12 @@ var Engine = (function(global) {
         'images/block-slate.png',
         'images/block-finish.png',   
         'images/block-road-l.png',  
-        'images/block-road-r.png',        
+        'images/block-road-r.png',   
+        'images/block-carpet1.png',
+        'images/block-carpet2.png',              
+        'images/block-kitchen.png',     
+        'images/tv.png',
+        'images/toaster.png',
         'images/hotdog.png',
         'images/ram-l.png',
         'images/ram-r.png',
@@ -159,6 +164,9 @@ var Engine = (function(global) {
         'images/fox-r.png',
         'images/roomba-l.png',
         'images/roomba-r.png',
+        'images/hamster-r.png',
+        'images/hamster-l.png',
+
         'images/washer.png',
         
     ]);

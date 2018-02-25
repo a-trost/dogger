@@ -230,7 +230,7 @@ function createEnemies() {
 
 function createPrizes() {
     for (var prize of levels[(score.level)].prizes) {
-        allPrizes.push(new Prize(character = prize.character, row = prize.row, col = prize.col, points = prize.points));
+        allPrizes.push(new Prize(character = prize.character,points = prize.value, row = prize.row, col = prize.col, ));
     };
 }
 
