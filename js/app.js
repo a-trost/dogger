@@ -1,3 +1,4 @@
+
 // Gameboard Square for player/enemies/prizes to stand on
 class Square {
     constructor(x = 0, y = 0, row = 0, col = 0, status = 'open', texture = 'grass') {
@@ -190,6 +191,11 @@ let score = {
     lives: 3,
     level: 1,
     currentWorld: "House",
+    addLevel: function () {
+        this.level++;
+        document.getElementById('level').innerText = this.level;
+
+    },
     addPoints: function (points) {
         scorePhraseHolder.style.display = 'flex'
         scorePhraseHolder.innerHTML = '<span class="text-success" id="score-phrase">' + '+' + points + '</span>';
@@ -303,7 +309,7 @@ function checkLevelProgress() {
 }
 
 function winLevel() {
-    score.level++;
+    score.addLevel();
     checkLevelProgress();
     stopKeyboardListener();
     score.addPoints(1000);
@@ -315,6 +321,11 @@ function startGame() {
     document.querySelector('#game-intro').style.display = 'none';
     document.querySelector('#score-panel').style.display = 'block';
     startLevel();
+    var touchArea = document.getElementById('game-board');
+    var myRegion = new ZingTouch.Region(touchArea);
+    myRegion.bind(touchArea, 'swipe', function (e) {
+        player.handleInput('up');
+    });
 }
 
 function startLevel() {

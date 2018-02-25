@@ -99,12 +99,10 @@ const levels = {
         world: 'House',
         rowTextures: ['finish', 'kitchen', 'carpet3', 'carpet3', 'carpet3', 'carpet3', 'carpet3', 'carpet3'],
         enemies: [
-            { character: 'hamster', row: 2, col: 2, speed: 50, direction: 'r', },
-
+            { character: 'cat', row: 2, col: 2, speed: 50, direction: 'r', },
             { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
-            { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
+            { character: 'hamster', row: 3, col: 4, speed: 40, direction: 'r', },
             { character: 'cat', row: 3, col: 0, speed: 40, direction: 'r', },
-
             { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
@@ -121,11 +119,9 @@ const levels = {
             rowTextures: ['finish', 'grass', 'kitchen', 'kitchen', 'kitchen', 'kitchen', 'kitchen', 'kitchen'],
             enemies: [
                 { character: 'hamster', row: 2, col: 2, speed: 50, direction: 'r', },
-
                 { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
                 { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
                 { character: 'cat', row: 3, col: 0, speed: 40, direction: 'r', },
-
                 { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
                 { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
             ],
