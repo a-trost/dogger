@@ -217,14 +217,22 @@ let score = {
 
 let music = {
     musicPlayer: document.createElement("audio"),
+    volume: 1,
     startMusic: function () {
         this.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
         this.musicPlayer.loop = true;
         this.musicPlayer.play();
     },
-    pauseMusic: function() {
+    pauseMusic: function () {
         this.musicPlayer.pause();
     },
+    changeVolume: function (change) {
+        this.volume += change;
+        if (this.volume > 1) { this.volume = 1 }
+        else if (this.volume < 0) { this.volume = 0 };
+        document.getElementById("audio").volume = this.volume;
+
+    }
 }
 
 
