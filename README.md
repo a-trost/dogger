@@ -14,4 +14,5 @@ Get across the board to go to the next level.
 ## Credit Where it's Due
 - Udacity made the [initial game engine](https://github.com/udacity/frontend-nanodegree-arcade-game).
 - 3d models made by [Google Poly](https://poly.google.com/).
+- Music by [A.A. Aalto](http://freemusicarchive.org/music/A_A_Aalto/Bright_Corners/) used under CC License.
 - Inspiration from games like Frogger and Crossy Road.
