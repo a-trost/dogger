@@ -215,6 +215,19 @@ let score = {
     }
 }
 
+let music = {
+    musicPlayer: document.createElement("audio"),
+    startMusic: function () {
+        this.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
+        this.musicPlayer.loop = true;
+        this.musicPlayer.play();
+    },
+    pauseMusic: function() {
+        this.musicPlayer.pause();
+    },
+}
+
+
 let allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [], player = {};
 
 function createSquares() {
@@ -316,11 +329,15 @@ function winLevel() {
     startLevel();
 }
 
+
+
+
 function startGame() {
     Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
     document.querySelector('#score-panel').style.display = 'block';
     startLevel();
+    music.startMusic();
     var touchArea = document.getElementById('game-board');
     var myRegion = new ZingTouch.Region(touchArea);
     myRegion.bind(touchArea, 'swipe', function (e) {
@@ -349,4 +366,5 @@ document.getElementById("game-start-btn").addEventListener("click", startGame);
 // TODO: Save progress to local machine
 // TODO: Add world select buttons to start screen
 // TODO: Add Music/Sounds
+    // mp3/A_A_Aalto_-_Balloons_Rising.mp3
 // TODO: Add Settings Screen for Volume, etc.
