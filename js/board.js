@@ -68,8 +68,10 @@ const levels = {
             { character: 'hotdog', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'washer', row: 5, col: 5 },
-            { character: 'tv', row: 5, col: 6 }
+            { character: 'washer', row: 5, col: 2 },
+            
+            { character: 'chair', row: 5, col: 5 },
+
         ],
     },
 
@@ -152,6 +154,26 @@ const levels = {
                 { character: 'rock1', row: 5, col: 5 },
                 { character: 'rock3', row: 5, col: 3 },
                 { character: 'rock4', row: 4, col: 3 }
+            ],
+        },
+
+        5: {
+            world: 'City',
+            rowTextures: ['finish', 'grass', 'road-l', 'road-r', 'road-l', 'road-r', 'grass', 'grass'],
+            enemies: [
+                { character: 'carr', row: 2, col: 2, speed: 50, direction: 'l', },
+                { character: 'vanb', row: 2, col: 5, speed: 50, direction: 'l', },
+                { character: 'vang', row: 3, col: 4, speed: 40, direction: 'r', },
+                { character: 'vanw', row: 3, col: 0, speed: 40, direction: 'r', },
+                { character: 'carb', row: 4, col: 2, speed: 40, direction: 'l', },
+                { character: 'vanb', row: 4, col: 6, speed: 40, direction: 'l', },
+                { character: 'carb', row: 5, col: 2, speed: 50, direction: 'r', },
+                { character: 'carr', row: 5, col: 4, speed: 50, direction: 'r', },
+            ],
+            prizes: [
+                { character: 'hotdog', row: 4, col: 3, value: 100 },
+            ],
+            barriers: [
                 
             ],
         },
