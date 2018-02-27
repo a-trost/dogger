@@ -193,7 +193,7 @@ let score = {
     level: 1,
     currentWorld: "House",
 
-    addToLocalStorage: function() {
+    addToLocalStorage: function () {
         localStorage.previousScore = this.score;
     },
 
@@ -209,31 +209,33 @@ let score = {
         this.lives -= 1;
         let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
         document.getElementById('lives').innerHTML = livesIcons;
-        
+
         if (this.lives === 0) {
             console.log("Game Over!")
 
-        } 
+        }
     }
 }
 
 let music = {
     musicPlayer: document.createElement("audio"),
-    volume: 1,
+    playing: true,
     startMusic: function () {
-        this.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
-        this.musicPlayer.loop = true;
-        this.musicPlayer.play();
+        music.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
+        music.musicPlayer.loop = true;
+        music.musicPlayer.play();
     },
-    pauseMusic: function () {
-        this.musicPlayer.pause();
+    toggleMusic: function () {
+        console.log("Click!");
+        if (music.playing) {
+            music.playing = false;
+            music.musicPlayer.pause();
+        }
+        else { 
+            music.playing = true; music.musicPlayer.play() 
+        };
     },
-    changeVolume: function (change) {
-        this.volume += change;
-        if (this.volume > 1) { this.volume = 1 }
-        else if (this.volume < 0) { this.volume = 0 };
-        document.getElementById("audio").volume = this.volume;
-    }
+    
 }
 
 
@@ -290,7 +292,7 @@ function allowedKeys(e) {
         'KeyD': 'right',
     };
     // Block Arrow Keys from scrolling the page
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
     }
     player.handleInput(allowedKeys[e.code]);
@@ -298,7 +300,12 @@ function allowedKeys(e) {
 
 function startKeyboardListener() {
     document.addEventListener('keydown', allowedKeys);
-    
+    var touchArea = document.getElementById('game-board');
+    var myRegion = new ZingTouch.Region(touchArea);
+    myRegion.bind(touchArea, 'swipe', function (e) {
+        player.handleInput('up');
+    });
+
 }
 
 function stopKeyboardListener() {
@@ -311,7 +318,7 @@ function winGame() {
 
     stopKeyboardListener();
     score.addPoints(10000);
-    score.addPoints(5000*score.lives);
+    score.addPoints(5000 * score.lives);
     score.addToLocalStorage();
 }
 
@@ -350,11 +357,7 @@ function startGame() {
     document.querySelector('#score-panel').style.display = 'flex';
     startLevel();
     music.startMusic();
-    var touchArea = document.getElementById('game-board');
-    var myRegion = new ZingTouch.Region(touchArea);
-    myRegion.bind(touchArea, 'swipe', function (e) {
-        player.handleInput('up');
-    });
+
 }
 
 function startLevel() {
@@ -368,6 +371,7 @@ function startLevel() {
 }
 const phraseHolder = document.getElementById('phrase-holder')
 const scorePhraseHolder = document.getElementById('score-phrase-holder');
+document.getElementById("music-pause").addEventListener("click", music.toggleMusic);
 document.getElementById("game-start-btn").addEventListener("click", startGame);
 
 
