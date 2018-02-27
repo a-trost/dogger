@@ -9,84 +9,112 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Asap:400,700" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/solid.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/fontawesome.js"></script>
 </head>
 
 <body>
-    <div id="phrase-holder" class="row justify-content-md-center align-items-center">
+    <!-- Announces Level Changes and "You Win!" text over the game board -->
+    <div id="phrase-holder" class="row justify-content-center align-items-center">
         <div class="col">
             <span class="success-phrase">Level 2</span>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col col-sm-auto">
+
+    <div class="container-fluid justify-content-center  align-self-center align-items-center">
+        <div class="row pt-3" id="score-panel">
+            <div style="border:1px red solid;" class="col col-2 py-2">Dogger</div>
+            <div style="border:1px red solid;" class="col col-3 py-2">Score:
+                <span id="score">0</span>
+                <span style="display:none;" class="text-success" id="score-phrase">+100</span>
+            </div>
+            <div style="border:1px red solid;" class="col col-2 py-2">Lives:
+                <span id="lives">
+                    <i class="fas fa-paw"></i>
+                    <i class="fas fa-paw"></i>
+                    <i class="fas fa-paw"></i>
+                </span>
+            </div>
+            <div style="border:1px red solid;" class="col col-3 py-2">Level
+                <span id="level">1</span> |
+                <span id="world"> The House</span>
+            </div>
+                    
+            <div style="border:1px red solid;" class="col col-2 py-2"><i class="fas fa-pause"></i>&nbsp&nbsp&nbsp&nbsp <i class="fas fa-volume-up"></i></div>
+        </div>
+        <!-- The game board where the canvas is rendered -->
+        <div width=900px id="game-board"></div>
+    </div>
+    <div class="container justify-content-center">
+        <!-- <div class="col col-sm-auto">
                 <button type="button" id="level-panel" class="btn btn-outline-success disabled" aria-disabled="true">
                     Level
-                    <span id="level">1</span>
+                    
                 </button>
             </div>
             <div class="col col-sm-auto">
                 <button type="button" id="score-panel" class="btn btn-outline-success disabled" aria-disabled="true">
                     Score:
-                    <span id="score">0</span>
+                    
                 </button>
-            </div>
+            </div> -->
 
-            <!-- Announces Level Changes and "You Win!" text over the game board -->
-            <div class="col col-sm-2 pt-2 pl-0 ml-0" id="score-phrase-holder">
-                <span class="text-success" id="score-phrase"></span>
-            </div>
+        <div class="col col-sm-2 pt-2 pl-0 ml-0" id="score-phrase-holder">
+            <span class="text-success" id="score-phrase"></span>
         </div>
+        <!-- </div> -->
 
         <!-- The initial game screen users will see with start button -->
-        <div class="row justify-content-md-center align-items-center my-5" id="game-intro">
-            <div class="col md-3">
+        <!--   -->
+        <div class="row justify-content-center align-items-center my-3" id="game-intro">
+            <div class="col col-12 col-md-6">
                 <img id="hero-image" class="img-fluid" src="images/dogger-hero.png">
             </div>
-            <div class="col md-3" style="color:white;">
+            <div class="col col-12 col-md-6" style="color:white;">
                 <h1 class="text-center display-4" id="hero-header">Dogger</h1>
                 <p id="hero-description">Daisy has grown tired of home life and yearns for adventure. Help her escape the tedium of her home and see
                     what’s beyond the backyard. </p>
-                <button type="button" class="btn btn-outline-light" id="game-start-btn">Let's go!</button>
+
+                <button type="button" class="btn btn-outline-light mx-1 my-3" id="game-start-btn">Let's go!</button>
             </div>
         </div>
 
-        <!-- The game board where the canvas is rendered -->
-        <div width=900px id="game-board"></div>
 
-        <div class="row">
-                <div class="card bg-light mb-3 col col-9 px-0">
-                        <div class="card-header">Directions</div>
-                        <div class="card-body">
-                          <h5 class="card-title">How to Play</h5>
-                          <p class="card-text">
-                                Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
-                                board does not have true Up, Down, Left, or Right.
-                            </p>
-                            <p class="card-text">
-                                Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
-                                rocks.
-                            </p>
-                            <p class="card-text">Get across the board to go to the next level.</p>
-                        </div>
-                    </div>
-                    <div class="card border-success mb-3 col col-3 px-0">
-                            <div class="card-header">High Scores</div>
-                            <div class="card-body text-success high-score-table">
-                              <h5 class="card-title">Your Best Scores</h5>
-                              <ul class="list-group list-group-flush">
-                                    <li class="list-group-item high-score-item">1. 53,500</li>
-                                    <li class="list-group-item high-score-item">2. 52,500</li>
-                                    <li class="list-group-item high-score-item">3. 50,000</li>
-                                    <li class="list-group-item high-score-item">4. 5,500</li>
-                                    <li class="list-group-item high-score-item">5. 500</li>
-                                  </ul>
 
-                            </div>
-                          </div>
-                   
-</div>            
+        <div class="row justify-content-between">
+            <div class="card bg-light mb-3 col col-12 col-md-8 px-0">
+                <div class="card-header">Directions</div>
+                <div class="card-body">
+                    <h5 class="card-title">How to Play</h5>
+                    <p class="card-text">
+                        Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
+                        board does not have true Up, Down, Left, or Right.
+                    </p>
+                    <p class="card-text">
+                        Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
+                        rocks.
+                    </p>
+                    <p class="card-text">Get across the board to go to the next level.</p>
+                </div>
+            </div>
+            <!-- <div class="col col-1"></div> -->
+            <div class="card border-success mb-3 col col-12 col-md-3 px-0">
+                <div class="card-header">High Scores</div>
+                <div class="card-body text-success high-score-table">
+                    <h5 class="card-title">Your Best Scores</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item high-score-item">1. 53,500</li>
+                        <li class="list-group-item high-score-item">2. 52,500</li>
+                        <li class="list-group-item high-score-item">3. 50,000</li>
+                        <li class="list-group-item high-score-item">4. 5,500</li>
+                        <li class="list-group-item high-score-item">5. 500</li>
+                    </ul>
+
+                </div>
+            </div>
+
         </div>
+    </div>
     </div>
 
     <script src="js/board.js"></script>
@@ -99,7 +127,7 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/zingtouch/1.0.5/zingtouch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zingtouch/1.0.5/zingtouch.min.js"></script>
 </body>
 
 </html>

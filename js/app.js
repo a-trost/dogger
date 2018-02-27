@@ -72,6 +72,7 @@ class Enemy extends Character {
         ) {
             let playerLosingSquare = findSquareByRowCol(player.row, player.col);
             player.moveToSquare(findSquareByRowCol(7, 4));
+            score.loseLife();
             player.row = 7, player.col = 4;
             playerLosingSquare.status = 'open';
             //Add Game end functionality here
@@ -201,21 +202,18 @@ let score = {
         document.getElementById('level').innerText = this.level;
     },
     addPoints: function (points) {
-        scorePhraseHolder.style.display = 'flex'
-        scorePhraseHolder.innerHTML = '<span class="text-success" id="score-phrase">' + '+' + points + '</span>';
-        setTimeout(function () {
-            scorePhraseHolder.style.display = 'none'
-        }, 4000);
         this.score += points;
         document.getElementById('score').innerText = this.score;
     },
     loseLife: function () {
         this.lives -= 1;
+        let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
+        document.getElementById('lives').innerHTML = livesIcons;
+        
         if (this.lives === 0) {
             console.log("Game Over!")
-        } else {
-            console.log(`You have ${this.lives} lives left.`)
-        }
+
+        } 
     }
 }
 
@@ -291,25 +289,29 @@ function allowedKeys(e) {
         'KeyS': 'down',
         'KeyD': 'right',
     };
+    // Block Arrow Keys from scrolling the page
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
     player.handleInput(allowedKeys[e.code]);
 }
 
 function startKeyboardListener() {
-    document.addEventListener('keyup', allowedKeys);
+    document.addEventListener('keydown', allowedKeys);
+    
 }
 
 function stopKeyboardListener() {
-    document.removeEventListener('keyup', allowedKeys);
+    document.removeEventListener('keydown', allowedKeys);
 }
 
 function winGame() {
     phraseHolder.style.display = 'flex'
     phraseHolder.innerHTML = '<span class="success-phrase">' + "You Win!" + '</span>';
-    // setTimeout(function () {
-    //     phraseHolder.style.display = 'none'
-    // }, 4000);
+
     stopKeyboardListener();
     score.addPoints(10000);
+    score.addPoints(5000*score.lives);
     score.addToLocalStorage();
 }
 
@@ -323,6 +325,7 @@ function checkLevelProgress() {
         setTimeout(function () {
             phraseHolder.style.display = 'none'
         }, 8000);
+        document.getElementById('world').innerHTML = 'The ' + score.currentWorld;
     }
     else {
         phraseHolder.style.display = 'flex'
@@ -341,13 +344,10 @@ function winLevel() {
     startLevel();
 }
 
-
-
-
 function startGame() {
     Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
-    document.querySelector('#score-panel').style.display = 'block';
+    document.querySelector('#score-panel').style.display = 'flex';
     startLevel();
     music.startMusic();
     var touchArea = document.getElementById('game-board');

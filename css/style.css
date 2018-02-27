@@ -17,14 +17,21 @@ h1, h2, h3, p {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+#game-board {
+    width: 900px;
+    margin:auto;
+}
+
 #hero-image {
-    max-width:450px;
-    padding-top:25px;
+    max-width: 450px;
+    padding-top: 25px;
+    width:100%;
+
 }
 
 #hero-header {
     padding: 20px;
-    font-weight:800;
+    font-weight: 800;
 }
 
 #hero-description {
@@ -32,39 +39,44 @@ h1, h2, h3, p {
 }
 
 #game-start-btn {
-    margin:20px 10px;
+    /* margin: 20px 10px; */
     font-size: 1.75rem;
 }
 
-#score-panel {display:none;}
+#score-panel {
+    display: none;
+    width: 900px;
+    margin:auto;
+    
+}
 
 .high-score-table {
     padding: 20px 0;
 }
 
-
 .high-score-item {
     text-align: left;
-    width:100%;
+    width: 100%;
     padding: 10px 20px;
 }
 
 /* Animated Text Styling */
+
 #score-phrase {
-font-size:12pt;
-animation: scorefade 1.5s;
-opacity:0;
+    font-size: 12pt;
+    animation: scorefade 1.5s;
+    opacity: 0;
 }
 
 #score-phrase-holder {
-    display:none;
+    display: none;
 }
 
 .success-phrase {
     font-size: 10vmin;
-    color:white;
+    color: white;
     animation: levelfade 1.5s;
-    opacity:0;
+    opacity: 0;
     text-shadow: 0px -5px #000;
     text-align: center;
 }
@@ -72,7 +84,7 @@ opacity:0;
 #phrase-holder {
     z-index: 5;
     margin: auto;
-    margin-top:20%;
+    margin-top: 20%;
     position: absolute;
     text-align: center;
     display: none;
@@ -85,17 +97,17 @@ opacity:0;
         opacity: 0;
         text-shadow: 0px 0px 50px #000;
         transform: scale(1.3);
-   }
+    }
     20%, 70% {
         opacity: 1;
         text-shadow: 0px 0px 50px #000;
         transform: scale(1);
-   }
+    }
     100% {
         opacity: 0;
         text-shadow: 0px 0px 50px #000;
         transform: scale(1.8);
-   }
+    }
 }
 
 @keyframes scorefade {
@@ -103,15 +115,15 @@ opacity:0;
         opacity: 0;
         text-shadow: 0px 0px 10px #CCC;
         transform: scale(1.3);
-   }
+    }
     20%, 70% {
         opacity: 1;
         text-shadow: 0px 0px 10px #CCC;
         transform: scale(1);
-   }
+    }
     100% {
         opacity: 0;
         text-shadow: 0px 0px 10px #CCC;
         transform: scale(1.8);
-   }
+    }
 }
