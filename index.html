@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dogger the Game</title>
+    <title>Dogger</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -31,11 +31,14 @@
                     <span id="score">0</span>
                 </button>
             </div>
+
+            <!-- Announces Level Changes and "You Win!" text over the game board -->
             <div class="col col-sm-2 pt-2 pl-0 ml-0" id="score-phrase-holder">
                 <span class="text-success" id="score-phrase"></span>
             </div>
         </div>
 
+        <!-- The initial game screen users will see with start button -->
         <div class="row justify-content-md-center align-items-center my-5" id="game-intro">
             <div class="col md-3">
                 <img id="hero-image" class="img-fluid" src="images/dogger-hero.png">
@@ -46,33 +49,44 @@
                     what’s beyond the backyard. </p>
                 <button type="button" class="btn btn-outline-light" id="game-start-btn">Let's go!</button>
             </div>
-
         </div>
 
+        <!-- The game board where the canvas is rendered -->
         <div width=900px id="game-board"></div>
+
         <div class="row">
+                <div class="card bg-light mb-3 col col-9 px-0">
+                        <div class="card-header">Directions</div>
+                        <div class="card-body">
+                          <h5 class="card-title">How to Play</h5>
+                          <p class="card-text">
+                                Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
+                                board does not have true Up, Down, Left, or Right.
+                            </p>
+                            <p class="card-text">
+                                Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
+                                rocks.
+                            </p>
+                            <p class="card-text">Get across the board to go to the next level.</p>
+                        </div>
+                    </div>
+                    <div class="card border-success mb-3 col col-3 px-0">
+                            <div class="card-header">High Scores</div>
+                            <div class="card-body text-success high-score-table">
+                              <h5 class="card-title">Your Best Scores</h5>
+                              <ul class="list-group list-group-flush">
+                                    <li class="list-group-item high-score-item">1. 53,500</li>
+                                    <li class="list-group-item high-score-item">2. 52,500</li>
+                                    <li class="list-group-item high-score-item">3. 50,000</li>
+                                    <li class="list-group-item high-score-item">4. 5,500</li>
+                                    <li class="list-group-item high-score-item">5. 500</li>
+                                  </ul>
 
-            <div id="game-directions" class="col card bg-light p-3 my-3">
-                <div class="card-header">
-                    <h1>Dogger</h1>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Directions</h5>
-
-
-                    <p class="card-text">
-                        Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric
-                        board does not have true Up, Down, Left, or Right.
-                    </p>
-                    <p class="card-text">
-                        Avoid any kind of moving character, like rams, sloths, foxes, etc. Collect hotdogs. You can't pass through barriers like
-                        rocks.
-                    </p>
-                    <p class="card-text">Get across the board to go to the next level.</p>
-                </div>
-            </div>
+                            </div>
+                          </div>
+                   
+</div>            
         </div>
-
     </div>
 
     <script src="js/board.js"></script>

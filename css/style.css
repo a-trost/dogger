@@ -38,6 +38,17 @@ h1, h2, h3, p {
 
 #score-panel {display:none;}
 
+.high-score-table {
+    padding: 20px 0;
+}
+
+
+.high-score-item {
+    text-align: left;
+    width:100%;
+    padding: 10px 20px;
+}
+
 /* Animated Text Styling */
 #score-phrase {
 font-size:12pt;
