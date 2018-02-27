@@ -191,10 +191,14 @@ let score = {
     lives: 3,
     level: 1,
     currentWorld: "House",
+
+    addToLocalStorage: function() {
+        localStorage.previousScore = this.score;
+    },
+
     addLevel: function () {
         this.level++;
         document.getElementById('level').innerText = this.level;
-
     },
     addPoints: function (points) {
         scorePhraseHolder.style.display = 'flex'
@@ -231,7 +235,6 @@ let music = {
         if (this.volume > 1) { this.volume = 1 }
         else if (this.volume < 0) { this.volume = 0 };
         document.getElementById("audio").volume = this.volume;
-
     }
 }
 
@@ -307,6 +310,7 @@ function winGame() {
     // }, 4000);
     stopKeyboardListener();
     score.addPoints(10000);
+    score.addToLocalStorage();
 }
 
 function checkLevelProgress() {
@@ -368,11 +372,11 @@ document.getElementById("game-start-btn").addEventListener("click", startGame);
 
 
 // TODO: Add more textures:
-    // Forest: Trees, Deer    
     // City: Sidewalk, cars, vans
     // Moon: rocky ground, rocks, UFO
+// TODO: Make Status Bar at the top instead of buttons for Score/Level/World/Music.
+// TODO: Make each level
 // TODO: Save progress to local machine
 // TODO: Add world select buttons to start screen
-// TODO: Add Music/Sounds
-    // mp3/A_A_Aalto_-_Balloons_Rising.mp3
+// TODO: Add Music Pause/Increase/decrease buttons
 // TODO: Add Settings Screen for Volume, etc.
