@@ -303,7 +303,12 @@ function startKeyboardListener() {
     var touchArea = document.getElementById('game-board');
     var myRegion = new ZingTouch.Region(touchArea);
     myRegion.bind(touchArea, 'swipe', function (e) {
-        player.handleInput('up');
+        var directionDegree = e.detail.data[0].currentDirection;
+        if (directionDegree >=0 && directionDegree <=90) {var directionOutput = 'up'}
+        else if (directionDegree >=90 && directionDegree <=180) {var directionOutput = 'left'}
+        else if (directionDegree >=180 && directionDegree <=270) {var directionOutput = 'down'}
+        else if (directionDegree >=270 && directionDegree <=360) {var directionOutput = 'right'}
+        player.handleInput(directionOutput);
     });
 
 }
@@ -315,7 +320,6 @@ function stopKeyboardListener() {
 function winGame() {
     phraseHolder.style.display = 'flex'
     phraseHolder.innerHTML = '<span class="success-phrase">' + "You Win!" + '</span>';
-
     stopKeyboardListener();
     score.addPoints(10000);
     score.addPoints(5000 * score.lives);
@@ -357,7 +361,6 @@ function startGame() {
     document.querySelector('#score-panel').style.display = 'flex';
     startLevel();
     music.startMusic();
-
 }
 
 function startLevel() {
@@ -375,12 +378,10 @@ document.getElementById("music-pause").addEventListener("click", music.toggleMus
 document.getElementById("game-start-btn").addEventListener("click", startGame);
 
 
+// TODO: Make Dogger Logo
 // TODO: Add more textures:
-    // City: Sidewalk, cars, vans
+    // City: Sidewalk, Ambulance
     // Moon: rocky ground, rocks, UFO
-// TODO: Make Status Bar at the top instead of buttons for Score/Level/World/Music.
 // TODO: Make each level
 // TODO: Save progress to local machine
 // TODO: Add world select buttons to start screen
-// TODO: Add Music Pause/Increase/decrease buttons
-// TODO: Add Settings Screen for Volume, etc.

@@ -60,6 +60,10 @@ h1, h2, h3, p {
     padding: 10px 20px;
 }
 
+#music-pause {
+    cursor: pointer;
+}
+
 /* Animated Text Styling */
 
 #score-phrase {
