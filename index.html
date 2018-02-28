@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Asap:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Asap:400" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/solid.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/fontawesome.js"></script>
 </head>
@@ -21,26 +21,29 @@
         </div>
     </div>
 
-    <div class="container-fluid justify-content-center  align-self-center align-items-center">
-        <div class="row pt-3" id="score-panel">
-            <div style="border:1px red solid;" class="col col-2 py-2">Dogger</div>
-            <div style="border:1px red solid;" class="col col-3 py-2">Score:
+    <div class="container-fluid align-items-center">
+        <div class="row mt-3" id="score-panel" style="background:#eee; border-radius:10px;" >
+            <div class="col col-2 py-2">
+                <img id="small-logo" src="images/dogger-logo-small.png">
+                
+            </div>
+            <div class="col col-3 py-3">Score:
                 <span id="score">0</span>
                 <span style="display:none;" class="text-success" id="score-phrase">+100</span>
             </div>
-            <div style="border:1px red solid;" class="col col-3 py-2">Lives:
+            <div class="col col-3 py-3">Lives:
                 <span id="lives">
                     <i class="fas fa-paw"></i>
                     <i class="fas fa-paw"></i>
                     <i class="fas fa-paw"></i>
                 </span>
             </div>
-            <div style="border:1px red solid;" class="col col-3 py-2">Level
+            <div class="col col-3 py-3">Level
                 <span id="level">1</span> |
                 <span id="world"> The House</span>
             </div>
                     
-            <div style="border:1px red solid;" class="col col-1 py-2"> <span id="music-pause"><i class="fas fa-pause"></i></span></div>
+            <div class="col col-1 py-3"> <span id="music-pause"><i class="fas fa-pause"></i></span></div>
         </div>
         <!-- The game board where the canvas is rendered -->
         <div width=900px id="game-board"></div>
@@ -65,17 +68,17 @@
         <!-- </div> -->
 
         <!-- The initial game screen users will see with start button -->
-        <!--   -->
         <div class="row justify-content-center align-items-center my-3" id="game-intro">
             <div class="col col-12 col-md-6">
                 <img id="hero-image" class="img-fluid" src="images/dogger-hero.png">
             </div>
             <div class="col col-12 col-md-6" style="color:white;">
-                <h1 class="text-center display-4" id="hero-header">Dogger</h1>
+                <!-- <h1 class="text-center display-4" id="hero-header">Dogger</h1> -->
+                <img src="images/dogger-logo.png" class="py-3" id="hero-header">
                 <p id="hero-description">Daisy has grown tired of home life and yearns for adventure. Help her escape the tedium of her home and see
                     what’s beyond the backyard. </p>
 
-                <button type="button" class="btn btn-outline-light mx-1 my-3" id="game-start-btn">Let's go!</button>
+                <button type="button" class="btn btn-outline-light mx-1 my-3 py-2" id="game-start-btn">Let's go!</button>
             </div>
         </div>
 

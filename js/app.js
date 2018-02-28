@@ -230,9 +230,13 @@ let music = {
         if (music.playing) {
             music.playing = false;
             music.musicPlayer.pause();
+            document.getElementById('music-pause').innerHTML = '<i class="fas fa-play">'
+            
         }
         else { 
-            music.playing = true; music.musicPlayer.play() 
+            music.playing = true; 
+            music.musicPlayer.play() 
+            document.getElementById('music-pause').innerHTML = '<i class="fas fa-pause">'
         };
     },
     
@@ -383,5 +387,5 @@ document.getElementById("game-start-btn").addEventListener("click", startGame);
     // City: Sidewalk, Ambulance
     // Moon: rocky ground, rocks, UFO
 // TODO: Make each level
-// TODO: Save progress to local machine
+// TODO: Save progress to local machine with initials
 // TODO: Add world select buttons to start screen
