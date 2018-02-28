@@ -304,9 +304,14 @@ function allowedKeys(e) {
 
 function startKeyboardListener() {
     document.addEventListener('keydown', allowedKeys);
-    var touchArea = document.getElementById('game-board');
-    var myRegion = new ZingTouch.Region(touchArea);
-    myRegion.bind(touchArea, 'swipe', function (e) {
+}
+
+function stopKeyboardListener() {
+    document.removeEventListener('keydown', allowedKeys);
+}
+
+function startSwipeListener() {
+    myRegion.bind(touchArea, mySwipeGesture, function (e) {
         var directionDegree = e.detail.data[0].currentDirection;
         if (directionDegree >=0 && directionDegree <=90) {var directionOutput = 'up'}
         else if (directionDegree >=90 && directionDegree <=180) {var directionOutput = 'left'}
@@ -314,11 +319,6 @@ function startKeyboardListener() {
         else if (directionDegree >=270 && directionDegree <=360) {var directionOutput = 'right'}
         player.handleInput(directionOutput);
     });
-
-}
-
-function stopKeyboardListener() {
-    document.removeEventListener('keydown', allowedKeys);
 }
 
 function winGame() {
@@ -363,6 +363,7 @@ function startGame() {
     Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
     document.querySelector('#score-panel').style.display = 'flex';
+    startSwipeListener();
     startLevel();
     music.startMusic();
 }
@@ -380,7 +381,11 @@ const phraseHolder = document.getElementById('phrase-holder')
 const scorePhraseHolder = document.getElementById('score-phrase-holder');
 document.getElementById("music-pause").addEventListener("click", music.toggleMusic);
 document.getElementById("game-start-btn").addEventListener("click", startGame);
-
+var touchArea = document.getElementById('game-board');
+var myRegion = new ZingTouch.Region(touchArea);
+var mySwipeGesture = new ZingTouch.Swipe({ numInputs: 1,
+    maxRestTime: 100,
+    escapeVelocity: 0.15 });
 
 // TODO: Make Dogger Logo
 // TODO: Add more textures:
