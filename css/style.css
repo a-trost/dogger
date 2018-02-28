@@ -9,30 +9,30 @@ h1, h2, h3, p {
 
 #game-intro {
     border-radius: 25px;
-    background: #bc4e9c;
+   
+    background: #fc4a1a;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #f80759, #bc4e9c);
+    background: linear-gradient(to right, #f7b733, #fc4a1a);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 #game-board {
     width: 900px;
-    margin:auto;
+    margin: auto;
 }
 
 #hero-image {
     max-width: 450px;
     padding-top: 25px;
-    width:100%;
-
+    width: 100%;
 }
 
 #hero-header {
-    width:80%;    
-    max-width:280px; 
+    width: 80%;
+    max-width: 280px;
 }
 
 #hero-description {
@@ -47,9 +47,8 @@ h1, h2, h3, p {
 #score-panel {
     display: none;
     width: 900px;
-    margin:auto;
+    margin: auto;
     font-size: 14pt;
-    
 }
 
 .high-score-table {
@@ -67,7 +66,7 @@ h1, h2, h3, p {
 }
 
 #small-logo {
-    height:40px;
+    height: 40px;
 }
 
 /* Animated Text Styling */
@@ -117,8 +116,9 @@ h1, h2, h3, p {
         opacity: 0;
         text-shadow: 0px 0px 50px #000;
         transform: scale(1.8);
+    }
 }
-}
+
 @keyframes scorefade {
     0% {
         opacity: 0;
