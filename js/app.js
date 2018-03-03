@@ -219,13 +219,13 @@ let score = {
         };
     },
     resetLives: function () {
-        this.lives =3;
-            let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
-            document.getElementById('lives').innerHTML = livesIcons;
+        this.lives = 3;
+        let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
+        document.getElementById('lives').innerHTML = livesIcons;
     },
     resetScore: function () {
         this.score = 0;
-        document.getElementById('score').innerText = this.score;        
+        document.getElementById('score').innerText = this.score;
     },
 }
 
@@ -335,8 +335,8 @@ function startSwipeListener() {
 function restartGame() {
     score.resetLives();
     score.resetScore();
-    score.level= 1;
-    score.currentWorld= "House";
+    score.level = 1;
+    score.currentWorld = "House";
     startLevel();
 }
 
@@ -360,30 +360,25 @@ function loseGame() {
 function checkLevelProgress() {
     if (levels[(score.level)].world === "End") {
         winGame();
-    } else if (score.currentWorld != levels[(score.level)].world) {
+    };
+    if (score.currentWorld != levels[(score.level)].world) {
         score.currentWorld = levels[(score.level)].world
-        phraseHolder.style.display = 'flex'
-        phraseHolder.innerHTML = '<span class="success-phrase">' + 'The ' + score.currentWorld + '</span>';
-        setTimeout(function () {
-            phraseHolder.style.display = 'none'
-        }, 8000);
-        document.getElementById('world').innerHTML = 'The ' + score.currentWorld;
+        Resources.load(worldTextures[score.currentWorld]);
+        return true;
     }
     else {
-        phraseHolder.style.display = 'flex'
-        phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level ' + score.level + '</span>';
-        setTimeout(function () {
-            phraseHolder.style.display = 'none'
-        }, 4000);
+        return false;
     }
 }
 
 function winLevel() {
     score.addLevel();
-    checkLevelProgress();
+    const worldChange = checkLevelProgress();
     stopKeyboardListener();
     score.addPoints(1000);
-    startLevel();
+    setTimeout(() => {
+        startLevel(worldChange);
+    }, 2000);
 }
 
 function startGame() {
@@ -391,11 +386,25 @@ function startGame() {
     document.querySelector('#game-intro').style.display = 'none';
     document.querySelector('#score-panel').style.display = 'flex';
     startSwipeListener();
-    startLevel();
+    startLevel(false);
     music.startMusic();
 }
 
-function startLevel() {
+function startLevel(worldChange = false) {
+    if (worldChange){
+        phraseHolder.style.display = 'flex'
+        phraseHolder.innerHTML = '<span class="success-phrase">' + 'The ' + score.currentWorld + '</span>';
+        setTimeout(function () {
+            phraseHolder.style.display = 'none'
+        }, 4000);
+        document.getElementById('world').innerHTML = 'The ' + score.currentWorld;
+    } else {
+        phraseHolder.style.display = 'flex'
+        phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level ' + score.level + '</span>';
+        setTimeout(function () {
+            phraseHolder.style.display = 'none'
+        }, 4000);
+    }
     startKeyboardListener();
     allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [];
     createSquares();
@@ -416,7 +425,8 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
-// TODO: Add game stop when collision happens
+// TODO: Load different textures for each world
+
 // TODO: Add more textures:
     // City: Sidewalk, Ambulance
 // TODO: Make each level

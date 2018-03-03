@@ -13,7 +13,7 @@
  * writing app.js a little simpler to work with.
  */
 
-var Engine = (function(global) {
+var Engine = (function (global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
@@ -34,41 +34,38 @@ var Engine = (function(global) {
      */
     function main() {
         if (player.collision === true) {
-
             setTimeout(() => {
                 player.resetPosition();
-                startLevel();                
+                startLevel();
                 main();
             }, 2000);
-        } else if (score.lives===0){
+        } else if (score.lives === 0) {
             setTimeout(() => {
                 loseGame();
                 main();
             }, 2000);
         } else {
-        
-        
-        /* Get our time delta information which is required if your game
-         * requires smooth animation. Because everyone's computer processes
-         * instructions at different speeds we need a constant value that
-         * would be the same for everyone (regardless of how fast their
-         * computer is) - hurray time!
-         */
-        var now = Date.now(),
-            dt = (now - lastTime) / 1000.0;
-        /* Call our update/render functions, pass along the time delta to
-         * our update function since it may be used for smooth animation.
-         */
-        update(dt);
-        render();
-        /* Set our lastTime variable which is used to determine the time delta
-         * for the next time this function is called.
-         */
-        lastTime = now;
-        /* Use the browser's requestAnimationFrame function to call this
-         * function again as soon as the browser is able to draw another frame.*/
-        win.requestAnimationFrame(main);
-         }
+            /* Get our time delta information which is required if your game
+             * requires smooth animation. Because everyone's computer processes
+             * instructions at different speeds we need a constant value that
+             * would be the same for everyone (regardless of how fast their
+             * computer is) - hurray time!
+             */
+            var now = Date.now(),
+                dt = (now - lastTime) / 1000.0;
+            /* Call our update/render functions, pass along the time delta to
+             * our update function since it may be used for smooth animation.
+             */
+            update(dt);
+            render();
+            /* Set our lastTime variable which is used to determine the time delta
+             * for the next time this function is called.
+             */
+            lastTime = now;
+            /* Use the browser's requestAnimationFrame function to call this
+             * function again as soon as the browser is able to draw another frame.*/
+            win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -76,9 +73,6 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-
-        
-        reset();
         lastTime = Date.now();
         main();
     }
@@ -94,7 +88,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
 
-        
+
         updateEntities(dt);
     }
     /* This is called by the update function and loops through all of the
@@ -105,8 +99,8 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-       
-        allEnemies.forEach(function(enemy) {
+
+        allEnemies.forEach(function (enemy) {
             enemy.update(dt);
         });
         player.update();
@@ -121,7 +115,7 @@ var Engine = (function(global) {
     function render() {
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)    
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         renderEntities();
     }
 
@@ -130,92 +124,23 @@ var Engine = (function(global) {
      * on your enemy and player entities within app.js
      */
     function renderEntities() {
-
-        
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
         allSquares.forEach(square => square.render());
         allPrizes.forEach(prize => prize.render());
-        let allObjects = [...allEnemies,...allBarriers, player]
+        let allObjects = [...allEnemies, ...allBarriers, player]
         allObjects.sort(function (a, b) {
             return a.y - b.y;
-          });
+        });
         allObjects.forEach(item => item.render());
 
     }
-
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
-     */
-    function reset() {
-
-        
-    }
-
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
-    Resources.load([
-        // Ground Textures
-        'images/block-carpet1.png',
-        'images/block-carpet2.png',              
-        'images/block-carpet3.png',              
-        'images/block-kitchen.png',    
-        'images/block-grass.png',
-        'images/block-slate.png',
-        'images/block-finish.png',   
-        'images/block-road-l.png',  
-        'images/block-road-r.png',   
-        // Player Textures
-        'images/dog-u.png',
-        'images/dog-d.png',
-        'images/dog-l.png',
-        'images/dog-r.png',
-        // Enemy Textures
-        'images/roomba-l.png',
-        'images/roomba-r.png',
-        'images/hamster-r.png',
-        'images/hamster-l.png',
-        'images/cat-l.png',
-        'images/cat-r.png',
-        'images/ram-l.png',
-        'images/ram-r.png',
-        'images/sloth-l.png',
-        'images/sloth-r.png',
-        'images/fox-l.png',
-        'images/fox-r.png',
-        'images/deer-l.png',
-        'images/deer-r.png',
-        'images/ferret-l.png',
-        'images/ferret-r.png',
-        'images/carr-r.png',
-        'images/carr-l.png',
-        'images/carb-r.png',
-        'images/carb-l.png',
-        'images/vanb-r.png',
-        'images/vanb-l.png',
-        'images/vanw-r.png',
-        'images/vanw-l.png',
-        'images/vang-r.png',
-        'images/vang-l.png',
-        'images/ufo-r.png',
-        'images/ufo-l.png',
-        // Barrier Textures
-        'images/washer.png',
-        'images/tv.png',
-        'images/toaster.png',
-        'images/chair.png',
-        'images/rock1.png',
-        'images/rock2.png',
-        'images/rock3.png',
-        'images/rock4.png',
-        'images/tree1.png',
-        // Prize Textures
-        'images/hotdog.png',        
-    ]);
+    Resources.load(worldTextures[score.currentWorld]);
     Resources.onReady(init);
 
     /* Assign the canvas' context object to the global variable (the window
