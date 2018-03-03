@@ -70,11 +70,7 @@ class Enemy extends Character {
             (this.x <= player.x + 65) &&
             (this.row == player.row)
         ) {
-            let playerLosingSquare = findSquareByRowCol(player.row, player.col);
-            player.moveToSquare(findSquareByRowCol(7, 4));
-            score.loseLife();
-            player.row = 7, player.col = 4;
-            playerLosingSquare.status = 'open';
+            player.collision = true;
             //Add Game end functionality here
         };
     }
@@ -86,6 +82,7 @@ class Player extends Character {
         this.sprite = `images/${character}-r.png`;
         this.xMovement = 0;
         this.yMovement = 0;
+        this.collision = false;
     }
     update(dt) {
     }
@@ -94,6 +91,15 @@ class Player extends Character {
         this.y = newSquare.y;
         this.row = newSquare.row;
         this.col = newSquare.col;
+    }
+
+    resetPosition() {
+        let playerLosingSquare = findSquareByRowCol(player.row, player.col);
+        player.moveToSquare(findSquareByRowCol(7, 4));
+        score.loseLife();
+        player.row = 7, player.col = 4;
+        playerLosingSquare.status = 'open';
+        player.collision = false;
     }
 
     handleInput(input) {
@@ -207,14 +213,20 @@ let score = {
     },
     loseLife: function () {
         this.lives -= 1;
-        let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
-        document.getElementById('lives').innerHTML = livesIcons;
-
-        if (this.lives === 0) {
-            console.log("Game Over!")
-
-        }
-    }
+        if (this.lives > 0) {
+            let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
+            document.getElementById('lives').innerHTML = livesIcons;
+        };
+    },
+    resetLives: function () {
+        this.lives =3;
+            let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
+            document.getElementById('lives').innerHTML = livesIcons;
+    },
+    resetScore: function () {
+        this.score = 0;
+        document.getElementById('score').innerText = this.score;        
+    },
 }
 
 let music = {
@@ -226,20 +238,19 @@ let music = {
         music.musicPlayer.play();
     },
     toggleMusic: function () {
-        console.log("Click!");
         if (music.playing) {
             music.playing = false;
             music.musicPlayer.pause();
             document.getElementById('music-pause').innerHTML = '<i class="fas fa-play">'
-            
+
         }
-        else { 
-            music.playing = true; 
-            music.musicPlayer.play() 
+        else {
+            music.playing = true;
+            music.musicPlayer.play()
             document.getElementById('music-pause').innerHTML = '<i class="fas fa-pause">'
         };
     },
-    
+
 }
 
 
@@ -311,14 +322,22 @@ function stopKeyboardListener() {
 }
 
 function startSwipeListener() {
-    myRegion.bind(touchArea, mySwipeGesture, function (e) {
+    myRegion.bind(gameBoard, mySwipeGesture, function (e) {
         var directionDegree = e.detail.data[0].currentDirection;
-        if (directionDegree >=0 && directionDegree <=90) {var directionOutput = 'up'}
-        else if (directionDegree >=90 && directionDegree <=180) {var directionOutput = 'left'}
-        else if (directionDegree >=180 && directionDegree <=270) {var directionOutput = 'down'}
-        else if (directionDegree >=270 && directionDegree <=360) {var directionOutput = 'right'}
+        if (directionDegree >= 0 && directionDegree <= 90) { var directionOutput = 'up' }
+        else if (directionDegree >= 90 && directionDegree <= 180) { var directionOutput = 'left' }
+        else if (directionDegree >= 180 && directionDegree <= 270) { var directionOutput = 'down' }
+        else if (directionDegree >= 270 && directionDegree <= 360) { var directionOutput = 'right' }
         player.handleInput(directionOutput);
     });
+};
+
+function restartGame() {
+    score.resetLives();
+    score.resetScore();
+    score.level= 1;
+    score.currentWorld= "House";
+    startLevel();
 }
 
 function winGame() {
@@ -328,7 +347,15 @@ function winGame() {
     score.addPoints(10000);
     score.addPoints(5000 * score.lives);
     score.addToLocalStorage();
-}
+};
+
+function loseGame() {
+    phraseHolder.style.display = 'flex'
+    phraseHolder.innerHTML = '<span class="success-phrase">' + "Game Over!" + '</span>';
+    score.addToLocalStorage();
+    // document.getElementById("game-board").removeChild(gameBoard.firstChild);
+    restartGame();
+};
 
 function checkLevelProgress() {
     if (levels[(score.level)].world === "End") {
@@ -381,16 +408,17 @@ const phraseHolder = document.getElementById('phrase-holder')
 const scorePhraseHolder = document.getElementById('score-phrase-holder');
 document.getElementById("music-pause").addEventListener("click", music.toggleMusic);
 document.getElementById("game-start-btn").addEventListener("click", startGame);
-var touchArea = document.getElementById('game-board');
-var myRegion = new ZingTouch.Region(touchArea);
-var mySwipeGesture = new ZingTouch.Swipe({ numInputs: 1,
+var gameBoard = document.getElementById('game-board');
+var myRegion = new ZingTouch.Region(gameBoard);
+var mySwipeGesture = new ZingTouch.Swipe({
+    numInputs: 1,
     maxRestTime: 100,
-    escapeVelocity: 0.15 });
+    escapeVelocity: 0.15
+});
 
-// TODO: Make Dogger Logo
+// TODO: Add game stop when collision happens
 // TODO: Add more textures:
     // City: Sidewalk, Ambulance
-    // Moon: rocky ground, rocks, UFO
 // TODO: Make each level
 // TODO: Save progress to local machine with initials
 // TODO: Add world select buttons to start screen

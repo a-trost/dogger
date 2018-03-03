@@ -33,6 +33,21 @@ var Engine = (function(global) {
      * and handles properly calling the update and render methods.
      */
     function main() {
+        if (player.collision === true) {
+
+            setTimeout(() => {
+                player.resetPosition();
+                startLevel();                
+                main();
+            }, 2000);
+        } else if (score.lives===0){
+            setTimeout(() => {
+                loseGame();
+                main();
+            }, 2000);
+        } else {
+        
+        
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
@@ -41,23 +56,19 @@ var Engine = (function(global) {
          */
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
-
-
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
         update(dt);
         render();
-
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
         lastTime = now;
-
         /* Use the browser's requestAnimationFrame function to call this
-         * function again as soon as the browser is able to draw another frame.
-         */
+         * function again as soon as the browser is able to draw another frame.*/
         win.requestAnimationFrame(main);
+         }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -65,6 +76,8 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
+
+        
         reset();
         lastTime = Date.now();
         main();
@@ -80,6 +93,8 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
+
+        
         updateEntities(dt);
     }
     /* This is called by the update function and loops through all of the
@@ -90,6 +105,7 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
+       
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
@@ -103,6 +119,7 @@ var Engine = (function(global) {
      * they are just drawing the entire screen over and over.
      */
     function render() {
+
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height)    
         renderEntities();
@@ -113,6 +130,8 @@ var Engine = (function(global) {
      * on your enemy and player entities within app.js
      */
     function renderEntities() {
+
+        
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
@@ -131,6 +150,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
+
         
     }
 
