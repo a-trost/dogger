@@ -1,5 +1,5 @@
 const worldTextures = {
-    'House':[
+    'House': [
         // Player Textures
         'images/dog-u.png',
         'images/dog-d.png',
@@ -28,7 +28,7 @@ const worldTextures = {
         'images/hotdog.png',
     ],
 
-    'Forest':[
+    'Forest': [
         // Player Textures
         'images/dog-u.png',
         'images/dog-d.png',
@@ -57,7 +57,7 @@ const worldTextures = {
         // Prize
         'images/hotdog.png',
     ],
-    'City':[
+    'City': [
         // Player Textures
         'images/dog-u.png',
         'images/dog-d.png',
@@ -70,8 +70,7 @@ const worldTextures = {
         'images/block-road-r.png',
         'images/block-sidewalk-l.png',
         'images/block-sidewalk-r.png',
-        
-        
+
         // Enemies
         'images/carr-r.png',
         'images/carr-l.png',
