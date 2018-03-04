@@ -33,15 +33,16 @@ var Engine = (function (global) {
      * and handles properly calling the update and render methods.
      */
     function main() {
-        if (player.collision === true) {
+        if (score.lives === 0) {
+            setTimeout(() => {
+                loseGame();
+                restartGame();
+                main();
+            }, 2000);
+        } else if (player.collision === true) {
             setTimeout(() => {
                 player.resetPosition();
                 startLevel();
-                main();
-            }, 2000);
-        } else if (score.lives === 0) {
-            setTimeout(() => {
-                loseGame();
                 main();
             }, 2000);
         } else {
@@ -87,8 +88,6 @@ var Engine = (function (global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-
-
         updateEntities(dt);
     }
     /* This is called by the update function and loops through all of the
@@ -134,7 +133,6 @@ var Engine = (function (global) {
             return a.y - b.y;
         });
         allObjects.forEach(item => item.render());
-
     }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

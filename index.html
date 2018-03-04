@@ -45,6 +45,36 @@
                     
             <div class="col col-1 py-3"> <span id="music-pause"><i class="fas fa-pause"></i></span></div>
         </div>
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button> -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="modalHeader">You Win!</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+            <div class="modal-footer" id="modalButtons">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
         <!-- The game board where the canvas is rendered -->
         <div width=1000px id="game-board"></div>
     </div>
@@ -105,12 +135,7 @@
                 <div class="card-header">High Scores</div>
                 <div class="card-body text-success high-score-table">
                     <h5 class="card-title">Your Best Scores</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item high-score-item">1. 53,500</li>
-                        <li class="list-group-item high-score-item">2. 52,500</li>
-                        <li class="list-group-item high-score-item">3. 50,000</li>
-                        <li class="list-group-item high-score-item">4. 5,500</li>
-                        <li class="list-group-item high-score-item">5. 500</li>
+                    <ul class="list-group list-group-flush" id="high-scores">
                     </ul>
 
                 </div>

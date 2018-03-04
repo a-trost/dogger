@@ -196,11 +196,32 @@ class Barrier extends Character {
 let score = {
     score: 0,
     lives: 3,
-    level: 1,
-    currentWorld: "House",
+    level: 7,
+    currentWorld: "City",
+    highScores: [],
+
+    sortNumbers: function (a, b) {
+        return b - a;
+    },
 
     addToLocalStorage: function () {
-        localStorage.previousScore = this.score;
+        score.highScores.push(this.score)
+        localStorage['scores'] = JSON.stringify(score.highScores);
+    },
+
+    updateHighScoreTable: function () {
+        if (!localStorage.scores) { localStorage.scores = '["0","0"]'; }
+        score.highScores = JSON.parse(localStorage['scores']).map(Number);
+        // var highScores=highScores.map(Number);
+        while (score.highScores.length < 5) {
+            score.highScores.push(0);
+        };
+        score.highScores.sort(score.sortNumbers);
+        document.getElementById('high-scores').innerHTML = `<li class="list-group-item high-score-item">1. ${score.highScores[0]}</li>
+        <li class="list-group-item high-score-item">2. ${score.highScores[1]}</li>
+        <li class="list-group-item high-score-item">3. ${score.highScores[2]}</li>
+        <li class="list-group-item high-score-item">4. ${score.highScores[3]}</li>
+        <li class="list-group-item high-score-item">5. ${score.highScores[4]}</li>`
     },
 
     addLevel: function () {
@@ -242,7 +263,6 @@ let music = {
             music.playing = false;
             music.musicPlayer.pause();
             document.getElementById('music-pause').innerHTML = '<i class="fas fa-play">'
-
         }
         else {
             music.playing = true;
@@ -333,29 +353,53 @@ function startSwipeListener() {
 };
 
 function restartGame() {
+    score.currentWorld = "House";
     score.resetLives();
     score.resetScore();
     score.level = 1;
-    score.currentWorld = "House";
-    startLevel();
+    checkLevelProgress();
+    setTimeout(startLevel(true,true), 2000);
 }
 
 function winGame() {
-    phraseHolder.style.display = 'flex'
-    phraseHolder.innerHTML = '<span class="success-phrase">' + "You Win!" + '</span>';
     stopKeyboardListener();
     score.addPoints(10000);
     score.addPoints(5000 * score.lives);
     score.addToLocalStorage();
+    score.updateHighScoreTable();
+    gameOverModal(true);
 };
 
 function loseGame() {
-    phraseHolder.style.display = 'flex'
-    phraseHolder.innerHTML = '<span class="success-phrase">' + "Game Over!" + '</span>';
     score.addToLocalStorage();
-    // document.getElementById("game-board").removeChild(gameBoard.firstChild);
-    restartGame();
+    score.updateHighScoreTable();
+    gameOverModal(false);
 };
+
+function popUpText(elementId, string) {
+    let textHolder = document.getElementById(elementId)
+    textHolder.style.display = 'flex'
+    textHolder.innerHTML = '<span class="success-phrase">' + string + '</span>';
+    setTimeout(function () {
+        textHolder.style.display = 'none'
+    }, 4000);
+}
+
+function gameOverModal(gameWon = false) {
+    if (gameWon) {
+        let lifeString = (score.lives > 1) ? "lives" : "life";
+        document.getElementById('modalHeader').innerText = `You Win!`
+        document.getElementById('modalBody').innerText = `You earned ${score.score} points and finished with ${score.lives} ${lifeString}. Great Job!`
+        document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Run Through the Field!</button>
+        <button type="button" class="btn btn-primary" onclick="restartGame();" data-dismiss="modal">Play Again</button>`
+    } else {
+        document.getElementById('modalHeader').innerText = `Game Over`
+        document.getElementById('modalBody').innerText = `You finished with ${score.score} points. Give it another run!`
+        document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-primary" data-dismiss="modal">Play Again</button>`
+    }
+    $('#gameOverModal').modal({ backdrop: 'static', keyboard: false });
+}
+
 
 function checkLevelProgress() {
     if (levels[(score.level)].world === "End") {
@@ -373,37 +417,31 @@ function checkLevelProgress() {
 
 function winLevel() {
     score.addLevel();
+    score.addPoints(1000);
     const worldChange = checkLevelProgress();
     stopKeyboardListener();
-    score.addPoints(1000);
     setTimeout(() => {
         startLevel(worldChange);
     }, 2000);
 }
 
 function startGame() {
-    Engine(window);
+    var engine = Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
     document.querySelector('#score-panel').style.display = 'flex';
     startSwipeListener();
-    startLevel(false);
+    startLevel(false, false);
     music.startMusic();
 }
 
-function startLevel(worldChange = false) {
-    if (worldChange){
-        phraseHolder.style.display = 'flex'
-        phraseHolder.innerHTML = '<span class="success-phrase">' + 'The ' + score.currentWorld + '</span>';
-        setTimeout(function () {
-            phraseHolder.style.display = 'none'
-        }, 4000);
-        document.getElementById('world').innerHTML = 'The ' + score.currentWorld;
-    } else {
-        phraseHolder.style.display = 'flex'
-        phraseHolder.innerHTML = '<span class="success-phrase">' + 'Level ' + score.level + '</span>';
-        setTimeout(function () {
-            phraseHolder.style.display = 'none'
-        }, 4000);
+function startLevel(worldChange = false, gameRestart = false) {
+    if (!gameRestart) {
+        if (worldChange) {
+            popUpText('phrase-holder', 'The ' + score.currentWorld);
+            document.getElementById('world').innerHTML = 'The ' + score.currentWorld;
+        } else {
+            popUpText('phrase-holder', 'Level ' + score.level);
+        }
     }
     startKeyboardListener();
     allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [];
@@ -413,7 +451,8 @@ function startLevel(worldChange = false) {
     createBarriers();
     player = new Player('dog');
 }
-const phraseHolder = document.getElementById('phrase-holder')
+
+score.updateHighScoreTable();
 const scorePhraseHolder = document.getElementById('score-phrase-holder');
 document.getElementById("music-pause").addEventListener("click", music.toggleMusic);
 document.getElementById("game-start-btn").addEventListener("click", startGame);
@@ -425,10 +464,6 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
-// TODO: Load different textures for each world
 
-// TODO: Add more textures:
-    // City: Sidewalk, Ambulance
 // TODO: Make each level
-// TODO: Save progress to local machine with initials
-// TODO: Add world select buttons to start screen
+// TODO: Fix End Game logic Flow

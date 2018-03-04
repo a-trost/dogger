@@ -54,6 +54,10 @@ const worldTextures = {
         'images/rock3.png',
         'images/rock4.png',
         'images/tree1.png',
+        'images/pinetree1.png',
+        'images/pinetree2.png',
+        'images/appletree1.png',
+        'images/appletree2.png',
         // Prize
         'images/hotdog.png',
     ],
