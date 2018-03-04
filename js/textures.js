@@ -68,6 +68,10 @@ const worldTextures = {
         'images/block-finish.png',
         'images/block-road-l.png',
         'images/block-road-r.png',
+        'images/block-sidewalk-l.png',
+        'images/block-sidewalk-r.png',
+        
+        
         // Enemies
         'images/carr-r.png',
         'images/carr-l.png',
@@ -79,7 +83,13 @@ const worldTextures = {
         'images/vanw-l.png',
         'images/vang-r.png',
         'images/vang-l.png',
+        'images/copcar-r.png',
+        'images/copcar-l.png',
         // Barriers
+        'images/trashcan1.png',
+        'images/trashcan2.png',
+        'images/firehydrant.png',
+        'images/bicycle.png',
 
         // Prize
         'images/hotdog.png',

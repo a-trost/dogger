@@ -159,26 +159,51 @@ const levels = {
 
         5: {
             world: 'City',
-            rowTextures: ['finish', 'grass', 'road-l', 'road-r', 'road-l', 'road-r', 'grass', 'grass'],
+            rowTextures: ['finish', 'sidewalk-r', 'road-l', 'road-r', 'road-l', 'road-r', 'sidewalk-l', 'sidewalk-r'],
             enemies: [
                 { character: 'carr', row: 2, col: 2, speed: 50, direction: 'l', },
                 { character: 'vanb', row: 2, col: 5, speed: 50, direction: 'l', },
                 { character: 'vang', row: 3, col: 4, speed: 40, direction: 'r', },
                 { character: 'vanw', row: 3, col: 0, speed: 40, direction: 'r', },
-                { character: 'carb', row: 4, col: 2, speed: 40, direction: 'l', },
+                { character: 'copcar', row: 4, col: 2, speed: 40, direction: 'l', },
                 { character: 'vanb', row: 4, col: 6, speed: 40, direction: 'l', },
                 { character: 'carb', row: 5, col: 2, speed: 50, direction: 'r', },
                 { character: 'carr', row: 5, col: 4, speed: 50, direction: 'r', },
             ],
             prizes: [
-                { character: 'hotdog', row: 4, col: 3, value: 100 },
+                { character: 'hotdog', row: 4, col: 5, value: 100 },
             ],
             barriers: [
-                
+                { character: 'firehydrant', row: 6, col: 6 },
+                { character: 'trashcan1', row: 6, col: 4 },
+                { character: 'trashcan2', row: 1, col: 3 },
             ],
         },
 
         6: {
+            world: 'City',
+            rowTextures: ['finish', 'sidewalk-r', 'road-l', 'road-r', 'sidewalk-l', 'road-l', 'road-r', 'sidewalk-r'],
+            enemies: [
+                { character: 'carr', row: 2, col: 2, speed: 50, direction: 'l', },
+                { character: 'vanb', row: 2, col: 5, speed: 50, direction: 'l', },
+                { character: 'vang', row: 3, col: 4, speed: 40, direction: 'r', },
+                { character: 'vanw', row: 3, col: 0, speed: 40, direction: 'r', },
+                { character: 'copcar', row: 5, col: 2, speed: 40, direction: 'l', },
+                { character: 'vanb', row: 5, col: 6, speed: 40, direction: 'l', },
+                { character: 'carb', row: 6, col: 4, speed: 20, direction: 'r', },
+            ],
+            prizes: [
+                { character: 'hotdog', row: 4, col: 5, value: 100 },
+            ],
+            barriers: [
+                { character: 'trashcan2', row: 1, col: 3 },
+
+                
+            ],
+        },
+
+
+        7: {
             world: 'End',
             rowTextures: [],
             enemies: [],

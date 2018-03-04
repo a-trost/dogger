@@ -197,7 +197,7 @@ let score = {
     score: 0,
     lives: 3,
     level: 1,
-    currentWorld: "House",
+    currentWorld: "City",
 
     addToLocalStorage: function () {
         localStorage.previousScore = this.score;
