@@ -77,7 +77,7 @@ class Enemy extends Character {
 };
 
 class Player extends Character {
-    constructor(character = 'dog', x = 0, y = 400, row = 7, col = 4) {
+    constructor(character = 'dog', x = 100, y = 450, row = 7, col = 5) {
         super(character, x, y, row, col)
         this.sprite = `images/${character}-r.png`;
         this.xMovement = 0;
@@ -95,9 +95,9 @@ class Player extends Character {
 
     resetPosition() {
         let playerLosingSquare = findSquareByRowCol(player.row, player.col);
-        player.moveToSquare(findSquareByRowCol(7, 4));
+        player.moveToSquare(findSquareByRowCol(7, 5));
         score.loseLife();
-        player.row = 7, player.col = 4;
+        player.row = 7, player.col = 5;
         playerLosingSquare.status = 'open';
         player.collision = false;
     }

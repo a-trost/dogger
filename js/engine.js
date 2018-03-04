@@ -24,7 +24,7 @@ var Engine = (function (global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 900;
+    canvas.width = 1000;
     canvas.height = 700;
     doc.querySelector('#game-board').appendChild(canvas);
     // doc.body.appendChild(canvas);
