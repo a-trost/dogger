@@ -33,18 +33,20 @@ var Engine = (function (global) {
      * and handles properly calling the update and render methods.
      */
     function main() {
-        if (score.lives === 0) {
-            setTimeout(() => {
-                loseGame();
-                restartGame();
-                main();
-            }, 2000);
-        } else if (player.collision === true) {
-            setTimeout(() => {
-                player.resetPosition();
-                startLevel();
-                main();
-            }, 2000);
+        if (player.collision === true || score.lives ===0) {
+            if (score.lives === 0) {
+                setTimeout(() => {
+                    gameOver(false);
+                    restartGame();
+                    main();
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    player.resetPosition();
+                    startLevel();
+                    main();
+                }, 2000);
+            }
         } else {
             /* Get our time delta information which is required if your game
              * requires smooth animation. Because everyone's computer processes

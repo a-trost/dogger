@@ -1,4 +1,3 @@
-
 // Gameboard Square for player/enemies/prizes to stand on
 class Square {
     constructor(x = 0, y = 0, row = 0, col = 0, status = 'open', texture = 'grass') {
@@ -86,6 +85,7 @@ class Player extends Character {
     }
     update(dt) {
     }
+    
     moveToSquare(newSquare) {
         this.x = newSquare.x;
         this.y = newSquare.y;
@@ -196,8 +196,8 @@ class Barrier extends Character {
 let score = {
     score: 0,
     lives: 3,
-    level: 7,
-    currentWorld: "City",
+    level: 1,
+    currentWorld: "House",
     highScores: [],
 
     sortNumbers: function (a, b) {
@@ -223,7 +223,6 @@ let score = {
         <li class="list-group-item high-score-item">4. ${score.highScores[3]}</li>
         <li class="list-group-item high-score-item">5. ${score.highScores[4]}</li>`
     },
-
     addLevel: function () {
         this.level++;
         document.getElementById('level').innerText = this.level;
@@ -248,6 +247,12 @@ let score = {
         this.score = 0;
         document.getElementById('score').innerText = this.score;
     },
+    resetLevel: function() {
+        this.level = 1;
+        this.currentWorld = "House";
+        document.getElementById('world').innerHTML = 'The ' + this.currentWorld;
+
+    }
 }
 
 let music = {
@@ -270,7 +275,6 @@ let music = {
             document.getElementById('music-pause').innerHTML = '<i class="fas fa-pause">'
         };
     },
-
 }
 
 
@@ -353,27 +357,24 @@ function startSwipeListener() {
 };
 
 function restartGame() {
-    score.currentWorld = "House";
+    score.resetLevel();
     score.resetLives();
     score.resetScore();
-    score.level = 1;
     checkLevelProgress();
+    console.log("Restarting Game");
     setTimeout(startLevel(true,true), 2000);
 }
 
-function winGame() {
+function gameOver(win=false) {
+    console.log("win:"+win);
+    if (win) {
+        score.addPoints(10000);
+        score.addPoints(5000 * score.lives);
+    }
     stopKeyboardListener();
-    score.addPoints(10000);
-    score.addPoints(5000 * score.lives);
     score.addToLocalStorage();
     score.updateHighScoreTable();
-    gameOverModal(true);
-};
-
-function loseGame() {
-    score.addToLocalStorage();
-    score.updateHighScoreTable();
-    gameOverModal(false);
+    gameOverModal(win);
 };
 
 function popUpText(elementId, string) {
@@ -402,12 +403,13 @@ function gameOverModal(gameWon = false) {
 
 
 function checkLevelProgress() {
+    Resources.load(worldTextures[score.currentWorld]);        
     if (levels[(score.level)].world === "End") {
-        winGame();
+        gameOver(true);
     };
     if (score.currentWorld != levels[(score.level)].world) {
         score.currentWorld = levels[(score.level)].world
-        Resources.load(worldTextures[score.currentWorld]);
+        // Resources.load(worldTextures[score.currentWorld]);
         return true;
     }
     else {
@@ -421,7 +423,7 @@ function winLevel() {
     const worldChange = checkLevelProgress();
     stopKeyboardListener();
     setTimeout(() => {
-        startLevel(worldChange);
+        startLevel(worldChange, false);
     }, 2000);
 }
 
@@ -438,7 +440,6 @@ function startLevel(worldChange = false, gameRestart = false) {
     if (!gameRestart) {
         if (worldChange) {
             popUpText('phrase-holder', 'The ' + score.currentWorld);
-            document.getElementById('world').innerHTML = 'The ' + score.currentWorld;
         } else {
             popUpText('phrase-holder', 'Level ' + score.level);
         }
@@ -464,6 +465,6 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
-
 // TODO: Make each level
-// TODO: Fix End Game logic Flow
+// TODO: Add Collision sounds
+// TODO: Add name to Dogger page - footer
