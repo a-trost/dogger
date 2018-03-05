@@ -11,6 +11,10 @@ const worldTextures = [
         'images/block-kitchen.png',
         'images/block-grass.png',
         'images/block-finish.png',
+        'images/block-road-l.png',
+        'images/block-road-r.png',
+        'images/block-sidewalk-l.png',
+        'images/block-sidewalk-r.png',
         // Enemies
         'images/roomba-l.png',
         'images/roomba-r.png',
@@ -18,18 +22,6 @@ const worldTextures = [
         'images/hamster-l.png',
         'images/cat-l.png',
         'images/cat-r.png',
-        // Barriers
-        'images/washer.png',
-        'images/tv.png',
-        'images/toaster.png',
-        'images/chair.png',
-        // Prize
-        'images/hotdog.png',
-    
-
-    //'Forest': [
-
-        // Enemies
         'images/ram-l.png',
         'images/ram-r.png',
         'images/sloth-l.png',
@@ -40,25 +32,6 @@ const worldTextures = [
         'images/deer-r.png',
         'images/ferret-l.png',
         'images/ferret-r.png',
-        // Barriers
-        'images/rock1.png',
-        'images/rock2.png',
-        'images/rock3.png',
-        'images/rock4.png',
-        'images/tree1.png',
-        'images/pinetree1.png',
-        'images/pinetree2.png',
-        'images/appletree1.png',
-        'images/appletree2.png',
-
-        // Floors
-        'images/block-grass.png',
-        'images/block-road-l.png',
-        'images/block-road-r.png',
-        'images/block-sidewalk-l.png',
-        'images/block-sidewalk-r.png',
-
-        // Enemies
         'images/carr-r.png',
         'images/carr-l.png',
         'images/carb-r.png',
@@ -72,8 +45,23 @@ const worldTextures = [
         'images/copcar-r.png',
         'images/copcar-l.png',
         // Barriers
+        'images/washer.png',
+        'images/tv.png',
+        'images/toaster.png',
+        'images/chair.png',
+        'images/rock1.png',
+        'images/rock2.png',
+        'images/rock3.png',
+        'images/rock4.png',
+        'images/tree1.png',
+        'images/pinetree1.png',
+        'images/pinetree2.png',
+        'images/appletree1.png',
+        'images/appletree2.png',
         'images/trashcan1.png',
         'images/trashcan2.png',
         'images/firehydrant.png',
         'images/bicycle.png',
+        // Prize
+        'images/hotdog.png',
     ]
