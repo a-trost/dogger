@@ -85,7 +85,7 @@ class Player extends Character {
     }
     update(dt) {
     }
-    
+
     moveToSquare(newSquare) {
         this.x = newSquare.x;
         this.y = newSquare.y;
@@ -223,9 +223,20 @@ let score = {
         <li class="list-group-item high-score-item">4. ${score.highScores[3]}</li>
         <li class="list-group-item high-score-item">5. ${score.highScores[4]}</li>`
     },
-    addLevel: function () {
-        this.level++;
-        document.getElementById('level').innerText = this.level;
+    addLevel: function (addALevel = true) {
+        if (addALevel) { this.level++; }
+        if (levels[(score.level)].world === "End") {
+            gameOver(true);
+        };
+        let returnValue = false
+        if (score.currentWorld != levels[(score.level)].world) {
+            score.currentWorld = levels[(score.level)].world
+            returnValue = true;
+        }
+        else {
+        }
+        document.getElementById('level').innerText = `Level ${this.level} | The ${this.currentWorld}`;
+        return returnValue;
     },
     addPoints: function (points) {
         this.score += points;
@@ -247,10 +258,9 @@ let score = {
         this.score = 0;
         document.getElementById('score').innerText = this.score;
     },
-    resetLevel: function() {
+    resetLevel: function () {
         this.level = 1;
         this.currentWorld = "House";
-        document.getElementById('world').innerHTML = 'The ' + this.currentWorld;
 
     }
 }
@@ -360,13 +370,13 @@ function restartGame() {
     score.resetLevel();
     score.resetLives();
     score.resetScore();
-    checkLevelProgress();
+    score.addLevel(addALevel=false);
     console.log("Restarting Game");
-    setTimeout(startLevel(true,true), 2000);
+    setTimeout(startLevel(true, true), 2000);
 }
 
-function gameOver(win=false) {
-    console.log("win:"+win);
+function gameOver(win = false) {
+    console.log("win:" + win);
     if (win) {
         score.addPoints(10000);
         score.addPoints(5000 * score.lives);
@@ -401,26 +411,9 @@ function gameOverModal(gameWon = false) {
     $('#gameOverModal').modal({ backdrop: 'static', keyboard: false });
 }
 
-
-function checkLevelProgress() {
-    Resources.load(worldTextures[score.currentWorld]);        
-    if (levels[(score.level)].world === "End") {
-        gameOver(true);
-    };
-    if (score.currentWorld != levels[(score.level)].world) {
-        score.currentWorld = levels[(score.level)].world
-        // Resources.load(worldTextures[score.currentWorld]);
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
 function winLevel() {
-    score.addLevel();
     score.addPoints(1000);
-    const worldChange = checkLevelProgress();
+    const worldChange = score.addLevel(); //Returns true if the new level is in a new world
     stopKeyboardListener();
     setTimeout(() => {
         startLevel(worldChange, false);
@@ -467,4 +460,4 @@ var mySwipeGesture = new ZingTouch.Swipe({
 
 // TODO: Make each level
 // TODO: Add Collision sounds
-// TODO: Add name to Dogger page - footer
+// Fix bug where you can keep running after you collide with an enemy
