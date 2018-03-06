@@ -457,5 +457,4 @@ var mySwipeGesture = new ZingTouch.Swipe({
 });
 
 // TODO: Design each level
-// TODO: Fix bug where you can keep running after you collide with an enemy
 // TODO: Make consumed hotdogs stay gone if player dies on level

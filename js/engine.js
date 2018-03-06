@@ -34,13 +34,14 @@ var Engine = (function (global) {
      */
     function main() {
         if (player.collision === true || score.lives ===0) {
+            stopKeyboardListener();
             if (score.lives === 0) {
                 setTimeout(() => {
                     gameOver(false);
                     restartGame();
                     main();
                 }, 2000);
-            } else {
+            } else { //Player collision
                 setTimeout(() => {
                     player.resetPosition();
                     startLevel();
