@@ -70,7 +70,8 @@ class Enemy extends Character {
             (this.row == player.row)
         ) {
             player.collision = true;
-            //Add Game end functionality here
+            var audio = new Audio('mp3/dog-bark.mp3');
+            audio.play();
         };
     }
 };
@@ -183,7 +184,6 @@ class Barrier extends Character {
         this.x = square.x;
         this.y = square.y;
         this.character = character;
-        this.points = points; // Value for collecting 
         this.sprite = `images/${character}.png`;
         this.width = 200;
         this.height = 200;
@@ -212,7 +212,6 @@ let score = {
     updateHighScoreTable: function () {
         if (!localStorage.scores) { localStorage.scores = '["0","0"]'; }
         score.highScores = JSON.parse(localStorage['scores']).map(Number);
-        // var highScores=highScores.map(Number);
         while (score.highScores.length < 5) {
             score.highScores.push(0);
         };
@@ -261,7 +260,6 @@ let score = {
     resetLevel: function () {
         this.level = 1;
         this.currentWorld = "House";
-
     }
 }
 
@@ -458,6 +456,6 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
-// TODO: Make each level
-// TODO: Add Collision sounds
-// Fix bug where you can keep running after you collide with an enemy
+// TODO: Design each level
+// TODO: Fix bug where you can keep running after you collide with an enemy
+// TODO: Make consumed hotdogs stay gone if player dies on level
