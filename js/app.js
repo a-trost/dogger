@@ -70,8 +70,7 @@ class Enemy extends Character {
             (this.row == player.row)
         ) {
             player.collision = true;
-            var audio = new Audio('mp3/dog-bark.mp3');
-            audio.play();
+            sound.playCollision();
         };
     }
 };
@@ -263,24 +262,30 @@ let score = {
     }
 }
 
-let music = {
+let sound = { 
     musicPlayer: document.createElement("audio"),
-    playing: true,
+    on: true,
     startMusic: function () {
-        music.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
-        music.musicPlayer.loop = true;
-        music.musicPlayer.play();
+        sound.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
+        sound.musicPlayer.loop = true;
+        sound.musicPlayer.play();
     },
     toggleMusic: function () {
-        if (music.playing) {
-            music.playing = false;
-            music.musicPlayer.pause();
+        if (sound.on) {
+            sound.on = false;
+            sound.musicPlayer.pause();
             document.getElementById('music-pause').innerHTML = '<i class="fas fa-play">'
         }
         else {
-            music.playing = true;
-            music.musicPlayer.play()
+            sound.on = true;
+            sound.musicPlayer.play()
             document.getElementById('music-pause').innerHTML = '<i class="fas fa-pause">'
+        };
+    },
+    playCollision: function () {
+        if (sound.on) {
+            var audio = new Audio('mp3/dog-bark.mp3');
+            audio.play();
         };
     },
 }
@@ -368,7 +373,7 @@ function restartGame() {
     score.resetLevel();
     score.resetLives();
     score.resetScore();
-    score.addLevel(addALevel=false);
+    score.addLevel(addALevel = false);
     console.log("Restarting Game");
     setTimeout(startLevel(true, true), 2000);
 }
@@ -424,10 +429,10 @@ function startGame() {
     document.querySelector('#score-panel').style.display = 'flex';
     startSwipeListener();
     startLevel(false, false);
-    music.startMusic();
+    sound.startMusic();
 }
 
-function startLevel(worldChange = false, gameRestart = false) {
+function startLevel(worldChange = false, gameRestart = false, levelRestart = false) {
     if (!gameRestart) {
         if (worldChange) {
             popUpText('phrase-holder', 'The ' + score.currentWorld);
@@ -436,17 +441,17 @@ function startLevel(worldChange = false, gameRestart = false) {
         }
     }
     startKeyboardListener();
-    allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [];
+    allEnemies = [], allSquares = [], allBarriers = [], allPrizes = [];
     createSquares();
     createEnemies();
-    createPrizes();
     createBarriers();
+    createPrizes();
     player = new Player('dog');
 }
 
 score.updateHighScoreTable();
 const scorePhraseHolder = document.getElementById('score-phrase-holder');
-document.getElementById("music-pause").addEventListener("click", music.toggleMusic);
+document.getElementById("music-pause").addEventListener("click", sound.toggleMusic);
 document.getElementById("game-start-btn").addEventListener("click", startGame);
 var gameBoard = document.getElementById('game-board');
 var myRegion = new ZingTouch.Region(gameBoard);
@@ -456,5 +461,7 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
+// TODO: Change play/pause icon to sound icons
+// TODO: Make sound setting save to localStorage
 // TODO: Design each level
 // TODO: Make consumed hotdogs stay gone if player dies on level
