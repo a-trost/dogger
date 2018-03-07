@@ -152,7 +152,7 @@ class Player extends Character {
 
 
 class Prize extends Character {
-    constructor(character = 'hotdog', points = 100, row = 3, col = 4) {
+    constructor(character = 'hotdog1', points = 100, row = 3, col = 4) {
         super(character, x, y, row, col);
         let square = findSquareByRowCol(row, col);
         square.status = 'prize';
@@ -176,7 +176,7 @@ class Prize extends Character {
 };
 
 class Barrier extends Character {
-    constructor(character = 'hotdog', row = 3, col = 4) {
+    constructor(character = 'chair', row = 3, col = 4) {
         super(character, x, y, row, col);
         let square = findSquareByRowCol(row, col);
         square.status = 'barrier';
@@ -195,7 +195,7 @@ class Barrier extends Character {
 let score = {
     score: 0,
     lives: 3,
-    level: 1,
+    level: 6,
     currentWorld: "House",
     highScores: [],
 
@@ -265,16 +265,16 @@ let score = {
 let sound = {
     musicPlayer: document.createElement("audio"),
     soundOn: true,
-    
+
     startMusic: function () {
         if (!localStorage.soundOn) { localStorage.soundOn = 'true'; }
-        sound.soundOn = Boolean(JSON.parse(localStorage['soundOn']));   
+        sound.soundOn = Boolean(JSON.parse(localStorage['soundOn']));
         let onOrOff = sound.soundOn ? 'on' : 'off';
-        document.getElementById('music-pause').innerHTML = `<img src="images/volume-${onOrOff}.svg" class="top-bar-icon">`;        
+        document.getElementById('music-pause').innerHTML = `<img src="images/volume-${onOrOff}.svg" class="top-bar-icon">`;
         sound.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3";
         sound.musicPlayer.loop = true;
         if (sound.soundOn) {
-        sound.musicPlayer.play();
+            sound.musicPlayer.play();
         }
     },
     toggleMusic: function () {
@@ -384,12 +384,10 @@ function restartGame() {
     score.resetLives();
     score.resetScore();
     score.addLevel(addALevel = false);
-    console.log("Restarting Game");
     setTimeout(startLevel(true, true), 2000);
 }
 
 function gameOver(win = false) {
-    console.log("win:" + win);
     if (win) {
         score.addPoints(10000);
         score.addPoints(5000 * score.lives);
@@ -452,11 +450,21 @@ function startLevel(worldChange = false, gameRestart = false, levelRestart = fal
     }
     startKeyboardListener();
     allEnemies = [], allSquares = [], allBarriers = [], allPrizes = [];
+    // This fixes a bug that had enemies in the same row rendering in the same space on game reset
+    if (levelRestart) { 
+        setTimeout(() => {
+        createSquares();
+        createEnemies();
+        createBarriers();
+        createPrizes();
+        player = new Player('dog');
+    }, 10);} else {
     createSquares();
     createEnemies();
     createBarriers();
     createPrizes();
     player = new Player('dog');
+    }
 }
 
 score.updateHighScoreTable();
@@ -471,5 +479,7 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
+
+// TODO: Refactor and comment code
 // TODO: Design each level
 // TODO: Make consumed hotdogs stay gone if player dies on level

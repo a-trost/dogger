@@ -8,6 +8,7 @@ const worldTextures = [
         'images/block-carpet1.png',
         'images/block-carpet2.png',
         'images/block-carpet3.png',
+        'images/block-wood.png',
         'images/block-kitchen.png',
         'images/block-grass.png',
         'images/block-finish.png',
@@ -16,6 +17,9 @@ const worldTextures = [
         'images/block-sidewalk-l.png',
         'images/block-sidewalk-r.png',
         // Enemies
+        'images/tricycle-r.png',
+        'images/tricycle-l.png',
+        
         'images/roomba-l.png',
         'images/roomba-r.png',
         'images/hamster-r.png',
@@ -63,5 +67,7 @@ const worldTextures = [
         'images/firehydrant.png',
         'images/bicycle.png',
         // Prize
-        'images/hotdog.png',
+        'images/hotdog1.png',
+        'images/hotdog2.png',
+        
     ]

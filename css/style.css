@@ -26,6 +26,7 @@ h1, h2, h3, p {
 
 .top-bar-icon{
         height: 20px;
+        padding:0px 2.5px;
 }
 
 #game-intro {

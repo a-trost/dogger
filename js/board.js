@@ -59,27 +59,32 @@ const edgeStartingCoordinates = {
 const levels = {
     1: {
         world: 'House',
-        rowTextures: ['finish', 'carpet2', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'carpet1'],
+        rowTextures: ['finish', 'wood', 'wood', 'wood', 'wood', 'wood', 'wood', 'wood'],
         enemies: [
+            { character: 'hamster', row: 2, col: 2, speed: 50, direction: 'r', },
+            
             { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
             { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
             { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
-            { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
+            { character: 'tricycle', row: 5, col: 6, speed: 60, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 3, col: 1, value: 100 },
+            // { character: 'hotdog', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'washer', row: 5, col: 2 },
 
-            { character: 'chair', row: 5, col: 5 },
+
+            // { character: 'chair', row: 5, col: 5 },
+            // { character: 'chair', row: 5, col: 6 },
+            // { character: 'chair', row: 5, col: 7 },
+            // { character: 'chair', row: 5, col: 8 },
 
         ],
     },
 
     2: {
         world: 'House',
-        rowTextures: ['finish', 'carpet3', 'carpet2', 'carpet2', 'carpet2', 'carpet2', 'carpet2', 'carpet2'],
+        rowTextures: ['finish', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'carpet1', 'wood'],
         enemies: [
             { character: 'hamster', row: 2, col: 2, speed: 50, direction: 'r', },
             { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
@@ -89,17 +94,17 @@ const levels = {
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 3, col: 1, value: 100 },
+            { character: 'hotdog1', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'washer', row: 5, col: 5 },
+            { character: 'chair', row: 5, col: 5 },
             { character: 'toaster', row: 1, col: 3 }
         ],
     },
 
     3: {
         world: 'House',
-        rowTextures: ['finish', 'kitchen', 'carpet3', 'carpet3', 'carpet3', 'carpet3', 'carpet3', 'carpet3'],
+        rowTextures: ['finish', 'carpet3', 'carpet2', 'carpet2', 'carpet2', 'carpet2', 'carpet2', 'carpet2'],
         enemies: [
             { character: 'cat', row: 2, col: 2, speed: 50, direction: 'r', },
             { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
@@ -109,7 +114,7 @@ const levels = {
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 4, col: 3, value: 100 },
+            { character: 'hotdog1', row: 4, col: 3, value: 100 },
         ],
         barriers: [
             { character: 'washer', row: 5, col: 5 },
@@ -128,7 +133,7 @@ const levels = {
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 4, col: 3, value: 100 },
+            { character: 'hotdog2', row: 4, col: 3, value: 100 },
         ],
         barriers: [
             { character: 'washer', row: 5, col: 5 },
@@ -148,7 +153,7 @@ const levels = {
             { character: 'sloth', row: 4, col: 6, speed: 10, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 4, col: 3, value: 100 },
+            { character: 'hotdog2', row: 4, col: 3, value: 100 },
         ],
         barriers: [
             { character: 'rock1', row: 1, col: 2 },            
@@ -169,19 +174,44 @@ const levels = {
         world: 'Forest',
         rowTextures: ['finish', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
         enemies: [
-            { character: 'fox', row: 2, col: 2, speed: 50, direction: 'r', },
-            { character: 'fox', row: 2, col: 5, speed: 50, direction: 'r', },
-            { character: 'ram', row: 3, col: 4, speed: 40, direction: 'r', },
-            { character: 'deer', row: 3, col: 0, speed: 40, direction: 'r', },
-            { character: 'ferret', row: 4, col: 2, speed: 10, direction: 'l', },
-            { character: 'sloth', row: 4, col: 6, speed: 10, direction: 'l', },
+            { character: 'sloth', row: 1, col: 2, speed: 10, direction: 'r', },
+            
+            { character: 'fox', row: 2, col: 2, speed: 90, direction: 'l', },
+            { character: 'fox', row: 2, col: 3, speed: 90, direction: 'l', },
+            { character: 'fox', row: 2, col: 4, speed: 90, direction: 'l', },
+            
+            { character: 'ram', row: 3, col: 4, speed: 50, direction: 'r', },
+            { character: 'deer', row: 3, col: 0, speed: 50, direction: 'r', },
+            { character: 'ferret', row: 4, col: 2, speed: 20, direction: 'l', },
+            { character: 'ferret', row: 4, col: 6, speed: 20, direction: 'l', },
         ],
         prizes: [
-            { character: 'hotdog', row: 4, col: 3, value: 100 },
+            { character: 'hotdog1', row: 3, col: 2, value: 100 },
+            { character: 'hotdog2', row: 4, col: 7, value: 100 },
+            
         ],
         barriers: [
-            { character: 'pinetree1', row: 5, col: 5 },
-            { character: 'pinetree2', row: 5, col: 3 },
+            // Right Side Border
+            { character: 'pinetree2', row: 7, col: 6 },
+            { character: 'pinetree1', row: 6, col: 7 },
+            { character: 'pinetree2', row: 5, col: 8 },
+            { character: 'pinetree1', row: 4, col: 8 },
+            { character: 'pinetree1', row: 4, col: 9 },
+            { character: 'pinetree2', row: 3, col: 8 },
+            { character: 'pinetree1', row: 2, col: 7 },
+            { character: 'pinetree2', row: 1, col: 6 },
+            { character: 'pinetree1', row: 0, col: 5 },
+            
+            // Left Side Border
+            { character: 'pinetree1', row: 7, col: 4 },
+            { character: 'pinetree2', row: 6, col: 3 },
+            { character: 'pinetree1', row: 5, col: 2 },
+            { character: 'pinetree2', row: 4, col: 1 },
+            { character: 'pinetree1', row: 3, col: 0 },
+            { character: 'pinetree2', row: 2, col: 0 },
+            { character: 'pinetree1', row: 1, col: 1 },
+            { character: 'pinetree2', row: 0, col: 2 },
+            
             // { character: 'rock4', row: 4, col: 3 }
         ],
     },
@@ -194,13 +224,13 @@ const levels = {
             { character: 'vanb', row: 2, col: 5, speed: 50, direction: 'l', },
             { character: 'vang', row: 3, col: 4, speed: 40, direction: 'r', },
             { character: 'vanw', row: 3, col: 0, speed: 40, direction: 'r', },
-            { character: 'copcar', row: 4, col: 2, speed: 40, direction: 'l', },
-            { character: 'vanb', row: 4, col: 6, speed: 40, direction: 'l', },
+            { character: 'copcar', row: 4, col: 4, speed: 130, direction: 'l', },
+            { character: 'vanb', row: 4, col: 2, speed: 130, direction: 'l', },
             { character: 'carb', row: 5, col: 2, speed: 50, direction: 'r', },
             { character: 'carr', row: 5, col: 4, speed: 50, direction: 'r', },
         ],
         prizes: [
-            { character: 'hotdog', row: 4, col: 5, value: 100 },
+            { character: 'hotdog2', row: 4, col: 5, value: 100 },
         ],
         barriers: [
             { character: 'firehydrant', row: 6, col: 6 },
@@ -222,7 +252,7 @@ const levels = {
             { character: 'carb', row: 6, col: 4, speed: 20, direction: 'r', },
         ],
         prizes: [
-            { character: 'hotdog', row: 4, col: 5, value: 100 },
+            { character: 'hotdog1', row: 4, col: 5, value: 100 },
         ],
         barriers: [
             { character: 'trashcan2', row: 1, col: 3 },

@@ -43,7 +43,7 @@ var Engine = (function (global) {
                 }, 2000);
             } else { //Player collision
                 setTimeout(() => {
-                    player.resetPosition();
+                    // player.resetPosition();
                     startLevel(false,false, true); //restartlevel=true
                     main();
                 }, 2000);
