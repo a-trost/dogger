@@ -124,6 +124,7 @@ class Player extends Character {
             let newSquare = findSquareByRowCol((this.row + rowChange), (this.col + colChange));
             if (newSquare) {
                 switch (newSquare.status) {
+                    case 'player':
                     case 'open':
                         this.moveToSquare(newSquare);
                         newSquare.status = 'player';
@@ -172,6 +173,7 @@ class Prize extends Character {
         this.height = 0;
         findSquareByRowCol(this.row, this.col).status = 'open';
         score.addPoints(this.points);
+        score.addPrizeCount();
     }
 };
 
@@ -195,8 +197,9 @@ class Barrier extends Character {
 let score = {
     score: 0,
     lives: 3,
-    level: 6,
+    level: 1,
     currentWorld: "House",
+    hotdogsEaten:0,
     highScores: [],
 
     sortNumbers: function (a, b) {
@@ -240,6 +243,9 @@ let score = {
         this.score += points;
         document.getElementById('score').innerText = this.score;
     },
+    addPrizeCount: function (points) {
+        this.hotdogsEaten += 1;
+    },
     loseLife: function () {
         this.lives -= 1;
         if (this.lives > 0) {
@@ -254,6 +260,7 @@ let score = {
     },
     resetScore: function () {
         this.score = 0;
+        this.hotdogsEaten = 0;
         document.getElementById('score').innerText = this.score;
     },
     resetLevel: function () {
@@ -411,12 +418,18 @@ function gameOverModal(gameWon = false) {
     if (gameWon) {
         let lifeString = (score.lives > 1) ? "lives" : "life";
         document.getElementById('modalHeader').innerText = `You Win!`
-        document.getElementById('modalBody').innerText = `You earned ${score.score} points and finished with ${score.lives} ${lifeString}. Great Job!`
+        document.getElementById('modalBody').innerText = `Hotdogs eaten: ${score.hotdogsEaten} x 100 = ${score.hotdogsEaten*100} Points
+        Levels cleared: ${score.level-1} x 1000 = ${(score.level-1)*1000} Points
+        Lives remaining: ${score.lives} x 5000 = ${score.lives*5000} Points
+        End of Game Bonus = 10,000 Points
+        You earned ${score.score} points and finished with ${score.lives} ${lifeString}. Great Job!`
         document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Run Through the Field!</button>
         <button type="button" class="btn btn-primary" onclick="restartGame();" data-dismiss="modal">Play Again</button>`
     } else {
         document.getElementById('modalHeader').innerText = `Game Over`
-        document.getElementById('modalBody').innerText = `You finished with ${score.score} points. Give it another run!`
+        document.getElementById('modalBody').innerText = `Hotdogs eaten: ${score.hotdogsEaten} x 100 = ${score.hotdogsEaten*100} Points
+        Levels cleared: ${score.level-1} x 1000 = ${(score.level-1)*1000} Points
+        You finished with ${score.score} points. Give it another run!`
         document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-primary" data-dismiss="modal">Play Again</button>`
     }
     $('#gameOverModal').modal({ backdrop: 'static', keyboard: false });
@@ -479,7 +492,4 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
-
 // TODO: Refactor and comment code
-// TODO: Design each level
-// TODO: Make consumed hotdogs stay gone if player dies on level
