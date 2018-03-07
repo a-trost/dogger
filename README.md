@@ -15,6 +15,17 @@ Get across the board to go to the next level. Every 5 levels brings you to a new
 
 Explore the House, escape to the Forest, and pass through the city to eventually find the empty field of happiness. 
 
+## Game Features
+- Isometric View
+- Music and sound effect
+- High Score Table
+- Save sound settings and scores to local machine
+- 3d rendered graphics
+- 3 worlds and 15 levels
+- Snazzy custom design
+- Delicious hot dogs to consume
+- Swipe input for play on iPad and android tablets (phones are too small)
+
 ## What is This?
 Why would anyone make such a game? Why would anyone go through all the trouble to make a game that is only mildly fun to play?
 
