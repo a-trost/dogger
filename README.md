@@ -9,9 +9,11 @@ Navigate Dogger through levels of unfriendly animals, dangerous cars, and maybe 
 [Click to play Dogger.](https://a-trost.github.io/dogger/)
 Arrow Keys or WASD will move you around the board. Take a second to orient yourself with what direction "up" is, as the isometric board does not have true Up, Down, Left, or Right.
 
-Avoid any kind of moving character like cats, roombas, hamsters, rams, foxes, etc. Collect hotdogs for points. You can't pass through barriers like TVs, chairs and rocks. 
+Avoid any kind of moving character like cats, roombas, hamsters, rams, foxes, cars, scooters and more. Collect hotdogs for points. You can't pass through barriers like trees, chairs, rocks and trashcans. 
 
-Get across the board to go to the next level. Pass enough levels and go to the next world. 
+Get across the board to go to the next level. Every 5 levels brings you to a new world with 15 levels in all.
+
+Explore the House, escape to the Forest, and pass through the city to eventually find the empty field of happiness. 
 
 ## What is This?
 Why would anyone make such a game? Why would anyone go through all the trouble to make a game that is only mildly fun to play?
