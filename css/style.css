@@ -24,6 +24,10 @@ h1, h2, h3, p {
     background-color: #f5f5f5;
 }
 
+.top-bar-icon{
+        height: 20px;
+}
+
 #game-intro {
     border-radius: 25px;
     background: #fc4a1a;

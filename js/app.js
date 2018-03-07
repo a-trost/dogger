@@ -243,13 +243,13 @@ let score = {
     loseLife: function () {
         this.lives -= 1;
         if (this.lives > 0) {
-            let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
+            let livesIcons = '<img src="images/paw.svg" class="top-bar-icon">'.repeat(this.lives);
             document.getElementById('lives').innerHTML = livesIcons;
         };
     },
     resetLives: function () {
         this.lives = 3;
-        let livesIcons = '<i class="fas fa-paw"></i>'.repeat(this.lives);
+        let livesIcons = '<img src="images/paw.svg" class="top-bar-icon">'.repeat(this.lives);
         document.getElementById('lives').innerHTML = livesIcons;
     },
     resetScore: function () {
@@ -262,28 +262,38 @@ let score = {
     }
 }
 
-let sound = { 
+let sound = {
     musicPlayer: document.createElement("audio"),
-    on: true,
+    soundOn: true,
+    
     startMusic: function () {
-        sound.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3"
+        if (!localStorage.soundOn) { localStorage.soundOn = 'true'; }
+        sound.soundOn = Boolean(JSON.parse(localStorage['soundOn']));   
+        let onOrOff = sound.soundOn ? 'on' : 'off';
+        document.getElementById('music-pause').innerHTML = `<img src="images/volume-${onOrOff}.svg" class="top-bar-icon">`;        
+        sound.musicPlayer.src = "mp3/A_A_Aalto_-_Balloons_Rising.mp3";
         sound.musicPlayer.loop = true;
+        if (sound.soundOn) {
         sound.musicPlayer.play();
+        }
     },
     toggleMusic: function () {
-        if (sound.on) {
-            sound.on = false;
+        if (sound.soundOn) {
+            sound.soundOn = false;
             sound.musicPlayer.pause();
-            document.getElementById('music-pause').innerHTML = '<i class="fas fa-play">'
+            document.getElementById('music-pause').innerHTML = '<img src="images/volume-off.svg" class="top-bar-icon">'
+            localStorage['soundOn'] = JSON.stringify(false);
         }
         else {
-            sound.on = true;
+            sound.soundOn = true;
             sound.musicPlayer.play()
-            document.getElementById('music-pause').innerHTML = '<i class="fas fa-pause">'
+            document.getElementById('music-pause').innerHTML = '<img src="images/volume-on.svg" class="top-bar-icon">'
+            localStorage['soundOn'] = JSON.stringify(true);
+
         };
     },
     playCollision: function () {
-        if (sound.on) {
+        if (sound.soundOn) {
             var audio = new Audio('mp3/dog-bark.mp3');
             audio.play();
         };
@@ -461,7 +471,5 @@ var mySwipeGesture = new ZingTouch.Swipe({
     escapeVelocity: 0.15
 });
 
-// TODO: Change play/pause icon to sound icons
-// TODO: Make sound setting save to localStorage
 // TODO: Design each level
 // TODO: Make consumed hotdogs stay gone if player dies on level
