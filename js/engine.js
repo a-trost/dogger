@@ -37,15 +37,15 @@ var Engine = (function (global) {
             stopKeyboardListener();
             if (score.lives === 0) {
                 setTimeout(() => {
-                    gameOver(false);
+                    gameOver(false); //win=false
                     restartGame();
-                    main();
+                    main(); // Continue this Game loop
                 }, 2000);
             } else { //Player collision
                 setTimeout(() => {
-                    player.resetPosition();
+                    player.resetPosition(); // Subtracts a life, puts player back
                     startLevel(false,false, true); //restartlevel=true
-                    main();
+                    main(); // Continue this Game loop
                 }, 2000);
             }
         } else {

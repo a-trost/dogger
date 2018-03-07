@@ -3,7 +3,7 @@ class Square {
     constructor(x = 0, y = 0, row = 0, col = 0, status = 'open', texture = 'grass') {
         this.x = x;
         this.y = y;
-        // Status Options: open, prize, enemy, player, finish, barrier        
+        // Status determines how the player interacts with the square when trying to move onto it.  
         this.status = status;
         this.texture = texture;
         this.row = row;
@@ -39,8 +39,7 @@ class Enemy extends Character {
         this.sprite = `images/${character}-${direction}.png`;
 
     }
-    // Update the enemy's position, required method for game
-    // Parameter: dt, a time delta between ticks
+
     update(dt) {
         this.moveEnemy(dt);
         this.checkPlayerCollision();
@@ -98,8 +97,8 @@ class Player extends Character {
         player.moveToSquare(findSquareByRowCol(7, 5));
         score.loseLife();
         player.row = 7, player.col = 5;
-        playerLosingSquare.status = 'open';
-        player.collision = false;
+        playerLosingSquare.status = 'open'; //Reset the player's current square to being 'open' so they can move there later.
+        player.collision = false; // Reset the collision variable to allow the script to continue
     }
 
     handleInput(input) {
@@ -151,7 +150,7 @@ class Player extends Character {
     }
 };
 
-
+// Prizes are collected for extra points
 class Prize extends Character {
     constructor(character = 'hotdog1', points = 100, row = 3, col = 4) {
         super(character, x, y, row, col);
@@ -160,7 +159,7 @@ class Prize extends Character {
         this.x = square.x;
         this.y = square.y;
         this.character = character;
-        this.points = points; // Value for collecting 
+        this.points = points; // Point value
         this.sprite = `images/${character}.png`;
         this.width = 200;
         this.height = 200;
@@ -177,6 +176,7 @@ class Prize extends Character {
     }
 };
 
+// Barriers are anything that stops the player from moving onto the square
 class Barrier extends Character {
     constructor(character = 'chair', row = 3, col = 4) {
         super(character, x, y, row, col);
@@ -194,12 +194,13 @@ class Barrier extends Character {
     }
 }
 
+// Handles score, levels, lives, prizes, writing to local storage, etc.
 let score = {
     score: 0,
     lives: 3,
     level: 1,
     currentWorld: "House",
-    hotdogsEaten:0,
+    hotdogsEaten: 0,
     highScores: [],
 
     sortNumbers: function (a, b) {
@@ -269,6 +270,7 @@ let score = {
     }
 }
 
+// Handles music and sound effects
 let sound = {
     musicPlayer: document.createElement("audio"),
     soundOn: true,
@@ -308,8 +310,7 @@ let sound = {
 }
 
 
-let allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [], player = {};
-
+// Object Generation Functions
 function createSquares() {
     let positionIterator = squarePositions.entries();
     for (let [rowIndex, row] of positionIterator) {
@@ -345,10 +346,12 @@ function createBarriers() {
     };
 }
 
+//Helper Functions
 function findSquareByRowCol(row, col) {
     return allSquares.find(function (element) { return element.col == col && element.row == row });
 }
 
+// Listeners for screen swipes and key presses
 function allowedKeys(e) {
     var allowedKeys = {
         'ArrowLeft': 'left',
@@ -386,64 +389,7 @@ function startSwipeListener() {
     });
 };
 
-function restartGame() {
-    score.resetLevel();
-    score.resetLives();
-    score.resetScore();
-    score.addLevel(addALevel = false);
-    setTimeout(startLevel(true, true), 2000);
-}
-
-function gameOver(win = false) {
-    if (win) {
-        score.addPoints(10000);
-        score.addPoints(5000 * score.lives);
-    }
-    stopKeyboardListener();
-    score.addToLocalStorage();
-    score.updateHighScoreTable();
-    gameOverModal(win);
-};
-
-function popUpText(elementId, string) {
-    let textHolder = document.getElementById(elementId)
-    textHolder.style.display = 'flex'
-    textHolder.innerHTML = '<span class="success-phrase">' + string + '</span>';
-    setTimeout(function () {
-        textHolder.style.display = 'none'
-    }, 4000);
-}
-
-function gameOverModal(gameWon = false) {
-    if (gameWon) {
-        let lifeString = (score.lives > 1) ? "lives" : "life";
-        document.getElementById('modalHeader').innerText = `You Win!`
-        document.getElementById('modalBody').innerText = `Hotdogs eaten: ${score.hotdogsEaten} x 100 = ${score.hotdogsEaten*100} Points
-        Levels cleared: ${score.level-1} x 1000 = ${(score.level-1)*1000} Points
-        Lives remaining: ${score.lives} x 5000 = ${score.lives*5000} Points
-        End of Game Bonus = 10,000 Points
-        You earned ${score.score} points and finished with ${score.lives} ${lifeString}. Great Job!`
-        document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Run Through the Field!</button>
-        <button type="button" class="btn btn-primary" onclick="restartGame();" data-dismiss="modal">Play Again</button>`
-    } else {
-        document.getElementById('modalHeader').innerText = `Game Over`
-        document.getElementById('modalBody').innerText = `Hotdogs eaten: ${score.hotdogsEaten} x 100 = ${score.hotdogsEaten*100} Points
-        Levels cleared: ${score.level-1} x 1000 = ${(score.level-1)*1000} Points
-        You finished with ${score.score} points. Give it another run!`
-        document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-primary" data-dismiss="modal">Play Again</button>`
-    }
-    $('#gameOverModal').modal({ backdrop: 'static', keyboard: false });
-}
-
-function winLevel() {
-    score.addPoints(1000);
-    const worldChange = score.addLevel(); //Returns true if the new level is in a new world
-    stopKeyboardListener();
-    setTimeout(() => {
-        startLevel(worldChange, false);
-    }, 2000);
-}
-
+// Major Game Functions
 function startGame() {
     var engine = Engine(window);
     document.querySelector('#game-intro').style.display = 'none';
@@ -464,26 +410,90 @@ function startLevel(worldChange = false, gameRestart = false, levelRestart = fal
     startKeyboardListener();
     allEnemies = [], allSquares = [], allBarriers = [], allPrizes = [];
     // This fixes a bug that had enemies in the same row rendering in the same space on game reset
-    if (levelRestart) { 
+    if (levelRestart) {
         setTimeout(() => {
+            createSquares();
+            createEnemies();
+            createBarriers();
+            createPrizes();
+            player = new Player('dog');
+        }, 10);
+    } else {
         createSquares();
         createEnemies();
         createBarriers();
         createPrizes();
         player = new Player('dog');
-    }, 10);} else {
-    createSquares();
-    createEnemies();
-    createBarriers();
-    createPrizes();
-    player = new Player('dog');
     }
 }
 
+function winLevel() {
+    score.addPoints(1000);
+    const worldChange = score.addLevel(); //Returns true if the new level is in a new world
+    stopKeyboardListener();
+    setTimeout(() => {
+        startLevel(worldChange, false);
+    }, 2000);
+}
+
+function restartGame() {
+    score.resetLevel();
+    score.resetLives();
+    score.resetScore();
+    score.addLevel(addALevel = false);
+    setTimeout(startLevel(true, true), 2000);
+}
+
+function gameOver(win = false) { //Used for winning and losing the game
+    if (win) {
+        score.addPoints(10000);
+        score.addPoints(5000 * score.lives);
+    }
+    stopKeyboardListener();
+    score.addToLocalStorage();
+    score.updateHighScoreTable();
+    gameOverModal(win);
+};
+
+// Decorator text for level changes, game over, etc.
+function popUpText(elementId, string) {
+    let textHolder = document.getElementById(elementId)
+    textHolder.style.display = 'flex'
+    textHolder.innerHTML = '<span class="success-phrase">' + string + '</span>';
+    setTimeout(function () {
+        textHolder.style.display = 'none'
+    }, 4000);
+}
+
+// Popup for stats and further options when the game ends. Handles win and loss.
+function gameOverModal(gameWon = false) {
+    if (gameWon) {
+        let lifeString = (score.lives > 1) ? "lives" : "life";
+        document.getElementById('modalHeader').innerText = `You Win!`
+        document.getElementById('modalBody').innerText = `Hotdogs eaten: ${score.hotdogsEaten} x 100 = ${score.hotdogsEaten * 100} Points
+        Levels cleared: ${score.level - 1} x 1000 = ${(score.level - 1) * 1000} Points
+        Lives remaining: ${score.lives} x 5000 = ${score.lives * 5000} Points
+        End of Game Bonus = 10,000 Points
+        You earned ${score.score} points and finished with ${score.lives} ${lifeString}. Great Job!`
+        document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Run Through the Field!</button>
+        <button type="button" class="btn btn-primary" onclick="restartGame();" data-dismiss="modal">Play Again</button>`
+    } else {
+        document.getElementById('modalHeader').innerText = `Game Over`
+        document.getElementById('modalBody').innerText = `Hotdogs eaten: ${score.hotdogsEaten} x 100 = ${score.hotdogsEaten * 100} Points
+        Levels cleared: ${score.level - 1} x 1000 = ${(score.level - 1) * 1000} Points
+        You finished with ${score.score} points. Give it another run!`
+        document.getElementById('modalButtons').innerHTML = `<button type="button" class="btn btn-primary" data-dismiss="modal">Play Again</button>`
+    }
+    $('#gameOverModal').modal({ backdrop: 'static', keyboard: false });
+}
+
+// Setting global variables
+let allEnemies = [], allSquares = [], allPrizes = [], allBarriers = [], player = {};
 score.updateHighScoreTable();
-const scorePhraseHolder = document.getElementById('score-phrase-holder');
 document.getElementById("music-pause").addEventListener("click", sound.toggleMusic);
 document.getElementById("game-start-btn").addEventListener("click", startGame);
+
+// Add Swipe functionality to game
 var gameBoard = document.getElementById('game-board');
 var myRegion = new ZingTouch.Region(gameBoard);
 var mySwipeGesture = new ZingTouch.Swipe({
@@ -491,5 +501,3 @@ var mySwipeGesture = new ZingTouch.Swipe({
     maxRestTime: 100,
     escapeVelocity: 0.15
 });
-
-// TODO: Refactor and comment code

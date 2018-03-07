@@ -70,7 +70,7 @@ const levels = { // Contains the information for all the levels
             
         ],
         prizes: [
-            // { character: 'hotdog', row: 3, col: 1, value: 100 },
+
         ],
         barriers: [
         ],
@@ -91,7 +91,6 @@ const levels = { // Contains the information for all the levels
         barriers: [
             { character: 'chair', row: 5, col: 3 },
             { character: 'chair', row: 5, col: 7 },
-
         ],
     },
 
@@ -106,7 +105,6 @@ const levels = { // Contains the information for all the levels
             { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
             { character: 'roomba', row: 4, col: 6, speed: 10, direction: 'l', },
             { character: 'tricycle', row: 5, col: 3, speed: 40, direction: 'r', },
-            
         ],
         prizes: [
             { character: 'hotdog1', row: 4, col: 3, value: 100 },
@@ -129,7 +127,6 @@ const levels = { // Contains the information for all the levels
             { character: 'tricycle', row: 4, col: 3, speed: 40, direction: 'r', },
             { character: 'tricycle', row: 4, col: 5, speed: 40, direction: 'r', },
             { character: 'tricycle', row: 4, col: 7, speed: 40, direction: 'r', },
-            
         ],
         prizes: [
             { character: 'hotdog1', row: 4, col: 3, value: 100 },
@@ -139,10 +136,8 @@ const levels = { // Contains the information for all the levels
         barriers: [
             { character: 'chair', row: 5, col: 3 },
             { character: 'chair', row: 5, col: 4 },
-
             { character: 'chair', row: 5, col: 6 },
             { character: 'chair', row: 5, col: 7 },
-
         ],
     },
     5: {
@@ -150,7 +145,6 @@ const levels = { // Contains the information for all the levels
         rowTextures: ['finish', 'grass', 'kitchen', 'kitchen', 'kitchen', 'kitchen', 'kitchen', 'kitchen'],
         enemies: [
             { character: 'tricycle', row: 1, col: 4, speed: 60, direction: 'l', },
-
             { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
             { character: 'cat', row: 3, col: 0, speed: 40, direction: 'r', },
             { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
@@ -161,13 +155,11 @@ const levels = { // Contains the information for all the levels
         prizes: [
             { character: 'hotdog2', row: 5, col: 3, value: 100 },
             { character: 'hotdog1', row: 1, col: 5, value: 100 },
-            
         ],
         barriers: [
             { character: 'fridge', row: 2, col: 5 },
             { character: 'chair', row: 2, col: 4 },
             { character: 'chair', row: 2, col: 3 },
-
         ],
     },
 
@@ -195,21 +187,17 @@ const levels = { // Contains the information for all the levels
             { character: 'appletree1', row: 6, col: 6 },            
             { character: 'appletree2', row: 7, col: 4 },
             { character: 'appletree2', row: 7, col: 6 },
-            
         ],
     },
-
 
     7: { // Border of trees around outside
         world: 'Forest',
         rowTextures: ['finish', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
         enemies: [
             { character: 'sloth', row: 1, col: 2, speed: 10, direction: 'r', },
-            
             { character: 'fox', row: 2, col: 2, speed: 90, direction: 'l', },
             { character: 'fox', row: 2, col: 3, speed: 90, direction: 'l', },
             { character: 'fox', row: 2, col: 4, speed: 90, direction: 'l', },
-            
             { character: 'ram', row: 3, col: 4, speed: 50, direction: 'r', },
             { character: 'deer', row: 3, col: 0, speed: 50, direction: 'r', },
             { character: 'ferret', row: 4, col: 2, speed: 20, direction: 'l', },
@@ -218,7 +206,6 @@ const levels = { // Contains the information for all the levels
         prizes: [
             { character: 'hotdog1', row: 3, col: 2, value: 100 },
             { character: 'hotdog2', row: 4, col: 7, value: 100 },
-            
         ],
         barriers: [
             // Right Side Border
@@ -240,7 +227,6 @@ const levels = { // Contains the information for all the levels
             { character: 'pinetree2', row: 2, col: 0 },
             { character: 'pinetree1', row: 1, col: 1 },
             { character: 'pinetree2', row: 0, col: 2 },
-            
         ],
     },
 
@@ -250,33 +236,26 @@ const levels = { // Contains the information for all the levels
         enemies: [
             { character: 'fox', row: 1, col: 2, speed: 100, direction: 'r', },
             { character: 'fox', row: 1, col: 3, speed: 100, direction: 'r', },
-            
             { character: 'ram', row: 3, col: 2, speed: 90, direction: 'l', },
             { character: 'ram', row: 3, col: 4, speed: 90, direction: 'l', },
             { character: 'ram', row: 3, col: 6, speed: 90, direction: 'l', },
-            
-
             { character: 'ferret', row: 5, col: 2, speed: 80, direction: 'r', },
             { character: 'ferret', row: 5, col: 6, speed: 80, direction: 'r', },
         ],
         prizes: [
             { character: 'hotdog1', row: 3, col: 0, value: 100 },
             { character: 'hotdog2', row: 1, col: 6, value: 100 },
-            
         ],
         barriers: [
             { character: 'rock3', row: 0, col: 2 },
             { character: 'rock4', row: 0, col: 3 },
-            
             { character: 'rock4', row: 2, col: 0 },
-            
             { character: 'rock3', row: 2, col: 2 },
             { character: 'rock4', row: 2, col: 3 },
             { character: 'rock3', row: 2, col: 4 },
             { character: 'rock4', row: 2, col: 5 },
             { character: 'rock3', row: 2, col: 6 },
             { character: 'rock4', row: 2, col: 7 },
-
             { character: 'rock3', row: 4, col: 1 },
             { character: 'rock4', row: 4, col: 2 },
             { character: 'rock3', row: 4, col: 3 },
@@ -284,16 +263,12 @@ const levels = { // Contains the information for all the levels
             { character: 'rock3', row: 4, col: 5 },
             { character: 'rock4', row: 4, col: 6 },
             { character: 'rock3', row: 4, col: 7 },
-
             { character: 'rock2', row: 6, col: 3},
             { character: 'rock1', row: 6, col: 5 },
             { character: 'rock2', row: 6, col: 6 },
             { character: 'rock1', row: 6, col: 7 },
-
-            
         ],
     },
-
 
     9: { // Reindeer Herd
         world: 'Forest',
@@ -310,17 +285,13 @@ const levels = { // Contains the information for all the levels
         prizes: [
             { character: 'hotdog1', row: 2, col: 2, value: 100 },
             { character: 'hotdog2', row: 4, col: 2, value: 100 },
-            
         ],
         barriers: [
             { character: 'pinetree2', row: 5, col: 8 },
             { character: 'pinetree1', row: 1, col: 6 },
             { character: 'pinetree2', row: 4, col: 1 },
-
-            
         ],
     },
-
 
     10: { // Grid of apple trees
         world: 'Forest',
@@ -401,11 +372,8 @@ const levels = { // Contains the information for all the levels
             { character: 'trashcan2', row: 1, col: 3 },
             { character: 'bicycle', row: 4, col: 4 },    
             { character: 'firehydrant', row: 4, col: 9 },            
-                    
-            
         ],
     },
-
 
     13: {
         world: 'City',
@@ -428,7 +396,6 @@ const levels = { // Contains the information for all the levels
             { character: 'hotdog1', row: 1, col: 5, value: 100 },
         ],
         barriers: [
-            // { character: 'trashcan1', row: 1, col: 2 },
             { character: 'trashcan2', row: 1, col: 4 },
             { character: 'firehydrant', row: 1, col: 3 },    
         ],
@@ -442,11 +409,8 @@ const levels = { // Contains the information for all the levels
             { character: 'carb', row: 2, col: 2, speed: 150, direction: 'l', },
             { character: 'vanw', row: 3, col: 5, speed: 150, direction: 'r', },
             { character: 'vanb', row: 3, col: 2, speed: 150, direction: 'r', },
-
             { character: 'vang', row: 5, col: 2, speed: 150, direction: 'l', },
-
             { character: 'carb', row: 6, col: 6, speed: 150, direction: 'r', },
-
             { character: 'scooter', row: 4, col: 6, speed: 60, direction: 'r', },
             
         ],
@@ -454,9 +418,7 @@ const levels = { // Contains the information for all the levels
             { character: 'hotdog1', row: 4, col: 2, value: 100 },
         ],
         barriers: [
-            { character: 'firehydrant', row: 1, col: 1 },
-            // { character: 'trashcan2', row: 1, col: 3 },
-            // { character: 'firehydrant', row: 4, col: 4 },    
+            { character: 'firehydrant', row: 1, col: 1 },   
         ],
     },
 
@@ -468,31 +430,23 @@ const levels = { // Contains the information for all the levels
             { character: 'carb', row: 2, col: 2, speed: 150, direction: 'l', },
             { character: 'vanw', row: 3, col: 5, speed: 150, direction: 'r', },
             { character: 'vanb', row: 3, col: 2, speed: 150, direction: 'r', },
-
             { character: 'vang', row: 5, col: 2, speed: 150, direction: 'r', },
             { character: 'carb', row: 4, col: 4, speed: 120, direction: 'l', },
-
             { character: 'scooter', row: 4, col: 6, speed: 120, direction: 'l', },
             { character: 'raccoon', row: 6, col: 3, speed: 20, direction: 'r', },
-            
         ],
         prizes: [
             { character: 'hotdog2', row: 6, col: 3, value: 100 },
             { character: 'hotdog2', row: 1, col: 6, value: 100 },
             { character: 'hotdog1', row: 1, col: 4, value: 100 },
-            
-            
         ],
         barriers: [
             { character: 'firehydrant', row: 1, col: 1 },
             { character: 'trashcan2', row: 1, col: 2 },
             { character: 'trashcan1', row: 1, col: 3 },
-            { character: 'trashcan2', row: 1, col: 5 },
-            
-            // { character: 'firehydrant', row: 4, col: 4 },    
+            { character: 'trashcan2', row: 1, col: 5 }, 
         ],
     },
-
 
     16: {
         world: 'End',
