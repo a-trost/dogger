@@ -4,23 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dogger</title>
+    <title>Dogger - A Game by Alex Trost</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Asap:400" rel="stylesheet">
-<!-- Favicon Code from Realfavicongenerator.net -->
-<link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-<link rel="manifest" href="images/favicons/site.webmanifest">
-<link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="images/favicons/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="images/favicons/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
-
-
+    <!-- Favicon Code from Realfavicongenerator.net -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
@@ -32,6 +30,7 @@
     </div>
 
     <div class="container-fluid align-items-center">
+        <!-- Box that holds the logo, score, lives, volume button. Only becomes visible on game start -->
         <div class="row mt-3" id="score-panel" style="background:#eee; border-radius:10px;">
             <div class="col col-2 py-2">
                 <img id="small-logo" src="images/dogger-logo-small.png">
@@ -60,7 +59,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal popup for end-game choices and displaying results -->
         <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -78,28 +77,10 @@
             </div>
         </div>
 
-
         <!-- The game board where the canvas is rendered -->
         <div width=1000px id="game-board"></div>
     </div>
     <div class="container justify-content-center">
-        <!-- <div class="col col-sm-auto">
-                <button type="button" id="level-panel" class="btn btn-outline-success disabled" aria-disabled="true">
-                    Level
-                    
-                </button>
-            </div>
-            <div class="col col-sm-auto">
-                <button type="button" id="score-panel" class="btn btn-outline-success disabled" aria-disabled="true">
-                    Score:
-                    
-                </button>
-            </div> -->
-
-        <div class="col col-sm-2 pt-2 pl-0 ml-0" id="score-phrase-holder">
-            <span class="text-success" id="score-phrase"></span>
-        </div>
-        <!-- </div> -->
 
         <!-- The initial game screen users will see with start button -->
         <div class="row justify-content-center align-items-center my-4" id="game-intro">
@@ -107,17 +88,14 @@
                 <img id="hero-image" class="img-fluid" src="images/dogger-hero.png">
             </div>
             <div class="col col-12 col-md-6" style="color:white;">
-                <!-- <h1 class="text-center display-4" id="hero-header">Dogger</h1> -->
                 <img src="images/dogger-logo.png" class="py-3" id="hero-header">
                 <p id="hero-description">Daisy has grown tired of home life and yearns for adventure. Help her escape the tedium of her home and see
                     what’s beyond the backyard. </p>
-
                 <button type="button" class="btn btn-outline-light mx-1 my-3 py-2" id="game-start-btn">Let's go!</button>
             </div>
         </div>
 
-
-
+        <!-- Directions and high score tables under the game board -->
         <div class="row justify-content-between">
             <div class="card bg-light mb-3 col col-12 col-md-8 px-0">
                 <div class="card-header">Directions</div>
@@ -128,17 +106,11 @@
                         board does not have true Up, Down, Left, or Right.
                     </p>
                     <p class="card-text">
-                        Avoid any kind of moving character like cats, rams, cars, etc. 
-
-                        Collect hotdogs. 
-
-                        You can't pass through barriers like
-                        rocks.
+                        Avoid any kind of moving character like cats, rams, cars, etc. Collect hotdogs. You can't pass through barriers like rocks.
                     </p>
                     <p class="card-text">Get across the board to go to the next level.</p>
                 </div>
             </div>
-            <!-- <div class="col col-1"></div> -->
             <div class="card border-success mb-3 col col-12 col-md-3 px-0">
                 <div class="card-header">High Scores</div>
                 <div class="card-body text-success high-score-table">
@@ -156,25 +128,23 @@
     <footer class="footer">
         <div class="container">
             <div class="row justify-content-center">
-
-                    <span class="text-muted">Copyright
-                        <a href="https://github.com/a-trost">Alex Trost</a>, 2018</span>
-
-                    <a href="https://github.com/a-trost/dogger">
-                        <img class="px-4" src="images/github.png">
-                    </a>
-
+                <span class="text-muted">Copyright
+                    <a href="https://github.com/a-trost">Alex Trost</a>, 2018</span>
+                <a href="https://github.com/a-trost/dogger">
+                    <img class="px-4" src="images/github.png">
+                </a>
             </div>
         </div>
     </footer>
 
-
+    <!-- Zingtouch library allows for swipe input detection -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zingtouch/1.0.5/zingtouch.min.js"></script>
     <script src="js/textures.js"></script>
     <script src="js/board.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
