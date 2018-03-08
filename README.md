@@ -1,4 +1,4 @@
-![Dogger](https://raw.githubusercontent.com/a-trost/dogger/master/images/dogger-github-header.png)
+![Dogger](https://raw.githubusercontent.com/a-trost/dogger/master/images/game-screenshots.png)
 
 Dogger - Arcade Game
 ===============================
