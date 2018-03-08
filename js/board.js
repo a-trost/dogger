@@ -64,7 +64,6 @@ const levels = { // Contains the information for all the levels
             { character: 'hamster', row: 2, col: 2, speed: 50, direction: 'r', },
             { character: 'hamster', row: 2, col: 5, speed: 50, direction: 'r', },
             { character: 'cat', row: 3, col: 4, speed: 40, direction: 'r', },
-            { character: 'roomba', row: 4, col: 2, speed: 10, direction: 'l', },
             { character: 'tricycle', row: 5, col: 3, speed: 60, direction: 'r', },
             { character: 'tricycle', row: 5, col: 7, speed: 60, direction: 'l', },
             
@@ -73,6 +72,7 @@ const levels = { // Contains the information for all the levels
 
         ],
         barriers: [
+            { character: 'armchair', row: 4, col: 4 },            
         ],
     },
 
@@ -89,7 +89,7 @@ const levels = { // Contains the information for all the levels
             { character: 'hotdog1', row: 3, col: 1, value: 100 },
         ],
         barriers: [
-            { character: 'chair', row: 5, col: 3 },
+            { character: 'armchair', row: 5, col: 3 },
             { character: 'chair', row: 5, col: 7 },
         ],
     },
@@ -111,6 +111,8 @@ const levels = { // Contains the information for all the levels
         ],
         barriers: [
             { character: 'tv', row: 6, col: 5 },
+            { character: 'armchair', row: 1, col: 2 },
+            
 
         ],
     },
