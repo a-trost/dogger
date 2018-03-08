@@ -56,6 +56,7 @@ const worldTextures = [
         'images/raccoon-l.png',
         // Barriers
         'images/tv.png',
+        'images/armchair.png',        
         'images/chair.png',
         'images/fridge.png',        
         'images/rock1.png',
