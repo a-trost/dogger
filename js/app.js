@@ -26,35 +26,6 @@ class Character {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-};
-
-class Enemy extends Character {
-    constructor(character = 'ram', row = 4, col = 4, direction = 'r', speed = 1) {
-        super(character, x, y, row, col)
-        let square = findSquareByRowCol(row, col);
-        this.x = square.x;
-        this.y = square.y;
-        this.direction = direction;
-        this.speed = speed;
-        this.sprite = `images/${character}-${direction}.png`;
-
-    }
-
-    update(dt) {
-        this.moveEnemy(dt);
-        this.checkPlayerCollision();
-        this.checkEdgeCollision();
-    }
-
-    moveEnemy(dt) {
-        if (this.direction === 'r') {
-            this.x += this.speed * 2 * dt;
-            this.y += this.speed * 1 * dt;
-        } else if (this.direction === 'l') {
-            this.x -= this.speed * 2 * dt;
-            this.y -= this.speed * 1 * dt;
-        };
-    }
 
     checkEdgeCollision() {
         if ((this.x < edgeBorders[this.row][0]) || (this.x > edgeBorders[this.row][1])) {
@@ -70,6 +41,34 @@ class Enemy extends Character {
         ) {
             player.collision = true;
             sound.playCollision();
+        };
+    }
+};
+
+class Enemy extends Character {
+    constructor(character = 'ram', row = 4, col = 4, direction = 'r', speed = 1) {
+        super(character, x, y, row, col)
+        let square = findSquareByRowCol(row, col);
+        this.x = square.x;
+        this.y = square.y;
+        this.direction = direction;
+        this.speed = speed;
+        this.sprite = `images/${character}-${direction}.png`;
+
+    }
+    update(dt) {
+        this.moveEnemy(dt);
+        this.checkPlayerCollision();
+        this.checkEdgeCollision();
+    }
+
+    moveEnemy(dt) {
+        if (this.direction === 'r') {
+            this.x += this.speed * 2 * dt;
+            this.y += this.speed * 1 * dt;
+        } else if (this.direction === 'l') {
+            this.x -= this.speed * 2 * dt;
+            this.y -= this.speed * 1 * dt;
         };
     }
 };
