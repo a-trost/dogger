@@ -14,6 +14,7 @@ h1, h2, h3, p {
 }
 
 /* Intro Hero Box */
+
 #game-intro {
     border-radius: 25px;
     background: #fc4a1a;
@@ -45,6 +46,7 @@ h1, h2, h3, p {
 }
 
 /* Game Status Bar */
+
 .top-bar-icon {
     height: 20px;
     padding: 0px 2.5px;
@@ -55,23 +57,35 @@ h1, h2, h3, p {
 }
 
 #small-logo {
-    height: 40px;
+    max-height: 40px;
 }
 
 #score-panel {
     display: none;
-    width: 1000px;
+    max-width: 1000px;
+    width:100%;
     margin: auto;
     font-size: 14pt;
 }
 
 /* Game Board */
+
 #game-board {
-    width: 1000px;
+    width: 100%;
+    height: auto;
+    z-index: 0;
     margin: auto;
 }
 
+.canvas-container {
+    position: relative;
+    max-width: 1024px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
 /* Directions and High Score Boxes */
+
 .high-score-table {
     padding: 20px 0;
 }
@@ -83,6 +97,7 @@ h1, h2, h3, p {
 }
 
 /* Animated Pop Up Text */
+
 .success-phrase {
     font-size: 10vmin;
     color: white;
@@ -122,6 +137,7 @@ h1, h2, h3, p {
 }
 
 /* Footer */
+
 .footer {
     position: absolute;
     bottom: 0;

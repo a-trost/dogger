@@ -11,7 +11,7 @@ class Square {
         this.sprite = `images/block-${texture}.png`;
     }
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.drawImage(Resources.get(this.sprite), this.x*scaleRatio, this.y*scaleRatio, 200*scaleRatio, 200*scaleRatio);
     }
 };
 
@@ -22,9 +22,12 @@ class Character {
         this.y = y;
         this.row = row;
         this.col = col;
+        this.width = 200;
+        this.height = 200;
     }
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.drawImage(Resources.get(this.sprite), this.x*scaleRatio, this.y*scaleRatio, this.width*scaleRatio, this.height*scaleRatio);
+
     }
 
     checkEdgeCollision() {
@@ -160,11 +163,6 @@ class Prize extends Character {
         this.character = character;
         this.points = points; // Point value
         this.sprite = `images/${character}.png`;
-        this.width = 200;
-        this.height = 200;
-    }
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
     }
     consume() {
         this.width = 0;
@@ -187,9 +185,6 @@ class Barrier extends Character {
         this.sprite = `images/${character}.png`;
         this.width = 200;
         this.height = 200;
-    }
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
     }
 }
 

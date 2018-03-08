@@ -1,3 +1,4 @@
+let scaleRatio = (window.innerWidth > 1000) ? 1 : (window.innerWidth > 700) ? .7 : .5;
 var Engine = (function (global) {
     // Predefine the variables we'll be using within this scope,
     var doc = global.document,
@@ -6,15 +7,17 @@ var Engine = (function (global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 1000;
-    canvas.height = 700;
+    // Width/Height will keep a 10:7 ratio
+    canvas.width = 1000 * scaleRatio;
+    canvas.height = 700 * scaleRatio;
+
     doc.querySelector('#game-board').appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
     function main() {
-        if (player.collision === true || score.lives ===0) {
+        if (player.collision === true || score.lives === 0) {
             stopKeyboardListener();
             if (score.lives === 0) {
                 setTimeout(() => {
@@ -25,7 +28,7 @@ var Engine = (function (global) {
             } else { //Player collision
                 setTimeout(() => {
                     player.resetPosition(); // Subtracts a life, puts player back
-                    startLevel(false,false, true); //restartlevel=true
+                    startLevel(false, false, true); //restartlevel=true
                     main(); // Continue this Game loop
                 }, 2000);
             }
@@ -48,10 +51,6 @@ var Engine = (function (global) {
         }
     }
 
-    /* This function does some initial setup that should only occur once,
-     * particularly setting the lastTime variable that is required for the
-     * game loop.
-     */
     function init() {
         lastTime = Date.now();
         main();
