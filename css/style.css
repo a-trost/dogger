@@ -48,24 +48,29 @@ h1, h2, h3, p {
 /* Game Status Bar */
 
 .top-bar-icon {
-    height: 20px;
-    padding: 0px 2.5px;
+    height: 16px;
+    padding: 0px 2px;
 }
 
 #music-pause {
     cursor: pointer;
 }
 
-#small-logo {
-    max-height: 40px;
-}
-
 #score-panel {
     display: none;
-    max-width: 1000px;
-    width:100%;
-    margin: auto;
-    font-size: 14pt;
+    max-width: 500px;
+    font-size: 11pt;
+    color:#4d4d4d;
+    border: solid #808080 1px;
+}
+
+#score-panel div {
+ border-right: solid #808080 1px;
+}
+
+#score-panel div:last-child {
+    border-right: none;
+
 }
 
 /* Game Board */

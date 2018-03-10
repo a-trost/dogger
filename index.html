@@ -30,36 +30,34 @@
     </div>
 
     <div class="container-fluid align-items-center">
-        <!-- Box that holds the logo, score, lives, volume button. Only becomes visible on game start -->
-        <div class="row mt-3" id="score-panel" style="background:#eee; border-radius:10px;">
-            <div class="col col-2 py-2">
-                <img class="hidden-lg-down" id="small-logo" src="images/dogger-logo-small.png">
-            </div>
-            <div class="col col-3 py-3">Score:
-                <span id="score">0</span>
-                <span style="display:none;" class="text-success" id="score-phrase">+100</span>
-            </div>
-            <div class="col col-3 py-3">Lives:
-                <span id="lives">
-                    <img src="images/paw.svg" class="top-bar-icon">
-                    <img src="images/paw.svg" class="top-bar-icon">
-                    <img src="images/paw.svg" class="top-bar-icon">
-                </span>
-            </div>
-            <div class="col col-3 py-3 hidden-lg-down" id="level">Level
-                <span id="level">1</span> |
-                <span id="world"> The House</span>
-            </div>
-
-            <div class="col col-1 py-3">
-                <span id="music-pause">
-
-                </span>
-            </div>
-        </div>
-
         <!-- The game board where the canvas is rendered -->
         <div class="canvas-container">
+            <!-- Box that holds the logo, score, lives, volume button. Only becomes visible on game start -->
+            <div class="row mt-3" id="score-panel" style="background:#eee; border-radius:10px;">
+                <div class="col-3 py-1">Score:
+                    <span id="score">0</span>
+                    <span style="display:none;" class="text-success" id="score-phrase">+100</span>
+                </div>
+                <div class="col py-1">Lives:
+                    <span id="lives">
+                        <img src="images/paw.svg" class="top-bar-icon">
+                        <img src="images/paw.svg" class="top-bar-icon">
+                        <img src="images/paw.svg" class="top-bar-icon">
+                    </span>
+                </div>
+                <div class="col py-1" id="level">Level
+                    <span id="level">1</span> |
+                    <span id="world"> The House</span>
+                </div>
+
+                <div class="col-auto py-1">
+                    <span id="music-pause">
+
+                    </span>
+                </div>
+            </div>
+
+
             <div width="1000" id="game-board"></div>
         </div>
 
