@@ -120,15 +120,15 @@ const levels = { // Contains the information for all the levels
         world: 'House',
         rowTextures: ['finish', 'wood', 'wood', 'wood', 'wood', 'wood', 'wood', 'wood'],
         enemies: [
-            { character: 'tricycle', row: 2, col: 1, speed: 40, direction: 'l', },
+
             { character: 'tricycle', row: 2, col: 3, speed: 40, direction: 'l', },
             { character: 'tricycle', row: 2, col: 5, speed: 40, direction: 'l', },
-            { character: 'tricycle', row: 3, col: 2, speed: 40, direction: 'r', },
+
             { character: 'tricycle', row: 3, col: 4, speed: 40, direction: 'r', },
             { character: 'tricycle', row: 3, col: 6, speed: 40, direction: 'r', },
             { character: 'tricycle', row: 4, col: 3, speed: 40, direction: 'r', },
             { character: 'tricycle', row: 4, col: 5, speed: 40, direction: 'r', },
-            { character: 'tricycle', row: 4, col: 7, speed: 40, direction: 'r', },
+
         ],
         prizes: [
             { character: 'hotdog1', row: 4, col: 3, value: 100 },
