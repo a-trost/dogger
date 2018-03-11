@@ -13,7 +13,7 @@ Avoid any kind of moving character like cats, roombas, hamsters, rams, foxes, ca
 
 Get across the board to go to the next level. Every 5 levels brings you to a new world with 15 levels in all.
 
-Explore the House, escape to the Forest, and pass through the city to eventually find the empty field of happiness. 
+Explore The House, escape to The Forest, and pass through The City to eventually find the empty field of happiness. 
 
 ## Game Features
 - Isometric View
