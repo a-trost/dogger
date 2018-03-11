@@ -95,12 +95,12 @@ class Player extends Character {
     }
 
     resetPosition() {
-        let playerLosingSquare = findSquareByRowCol(player.row, player.col);
-        player.moveToSquare(findSquareByRowCol(7, 5));
+        let playerLosingSquare = findSquareByRowCol(this.row, this.col);
+        this.moveToSquare(findSquareByRowCol(7, 5));
         score.loseLife();
-        player.row = 7, player.col = 5;
+        this.row = 7, player.col = 5;
         playerLosingSquare.status = 'open'; //Reset the player's current square to being 'open' so they can move there later.
-        player.collision = false; // Reset the collision variable to allow the script to continue
+        this.collision = false; // Reset the collision variable to allow the script to continue
     }
 
     handleInput(input) {
