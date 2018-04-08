@@ -30,12 +30,13 @@ class Character {
     ctx.drawImage(Resources.get(this.sprite), this.x * scaleRatio, this.y * scaleRatio, this.width * scaleRatio, this.height * scaleRatio)
   }
 
+  // Enemy check if it's hit the edge of the map and jumps to other side
   checkEdgeCollision () {
     if ((this.x < edgeBorders[this.row][0]) || (this.x > edgeBorders[this.row][1])) {
       [this.x, this.y] = edgeStartingCoordinates[`${this.row}${this.direction}`]
     };
   }
-
+  // Enemy checks if it's collided w/ player
   checkPlayerCollision () {
     if (
       (this.x + 65 >= player.x) &&
@@ -46,13 +47,36 @@ class Character {
       sound.playCollision()
     };
   }
-
+  // Moving the enemies
+  moveComputer (dt) {
+    if (this.direction === 'r') {
+      this.x += this.speed * 2 * dt
+      this.y += this.speed * 1 * dt
+    } else if (this.direction === 'l') {
+      this.x -= this.speed * 2 * dt
+      this.y -= this.speed * 1 * dt
+    };
+  }
+  // For updating the Enemy
+  update (dt) {
+    this.moveComputer(dt)
+    this.checkPlayerCollision()
+    this.checkEdgeCollision()
+  }
+// For eating the hotdogs
   consume () {
     this.width = 0
     this.height = 0
     findSquareByRowCol(this.row, this.col).status = 'open'
     score.addPoints(this.points)
     score.addPrizeCount()
+  }
+  // Move the player
+  moveToSquare (newSquare) {
+    this.x = newSquare.x
+    this.y = newSquare.y
+    this.row = newSquare.row
+    this.col = newSquare.col
   }
 };
 
@@ -66,21 +90,6 @@ class Enemy extends Character {
     this.speed = speed
     this.sprite = `images/${character}-${direction}.png`
   }
-  update (dt) {
-    this.moveEnemy(dt)
-    this.checkPlayerCollision()
-    this.checkEdgeCollision()
-  }
-
-  moveEnemy (dt) {
-    if (this.direction === 'r') {
-      this.x += this.speed * 2 * dt
-      this.y += this.speed * 1 * dt
-    } else if (this.direction === 'l') {
-      this.x -= this.speed * 2 * dt
-      this.y -= this.speed * 1 * dt
-    };
-  }
 };
 
 class Player extends Character {
@@ -91,22 +100,13 @@ class Player extends Character {
     this.yMovement = 0
     this.collision = false
   }
-  update (dt) {
-  }
-
-  moveToSquare (newSquare) {
-    this.x = newSquare.x
-    this.y = newSquare.y
-    this.row = newSquare.row
-    this.col = newSquare.col
-  }
 
   resetPosition () {
     let playerLosingSquare = findSquareByRowCol(this.row, this.col)
     this.moveToSquare(findSquareByRowCol(7, 5))
     score.loseLife()
     this.row = 7
-    player.col = 5
+    this.col = 5
     playerLosingSquare.status = 'open' // Reset the player's current square to being 'open' so they can move there later.
     this.collision = false // Reset the collision variable to allow the script to continue
   }
@@ -390,7 +390,10 @@ function startGame () {
   sound.startMusic()
 }
 
+// Change this to stop Level 5 from appearing on game end
 function startLevel (worldChange = false, gameRestart = false, levelRestart = false) {
+  console.log("StartLevel " + worldChange + gameRestart + levelRestart);
+  console.log("Lives " + score.lives);
   if (!gameRestart) {
     if (worldChange) {
       popUpText('phrase-holder', 'The ' + score.currentWorld)

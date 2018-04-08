@@ -20,12 +20,14 @@ const Engine = function (global) {
   function main () {
     if (player.collision === true || score.lives === 0) {
       stopKeyboardListener()
+
       if (score.lives === 1) {
         setTimeout(() => {
           gameOver(false) // win=false
           restartGame()
           main() // Continue this Game loop
         }, 2000)
+
       } else { // Player collision
         setTimeout(() => {
           player.resetPosition() // Subtracts a life, puts player back
@@ -65,7 +67,6 @@ const Engine = function (global) {
     allEnemies.forEach(function (enemy) {
       enemy.update(dt)
     })
-    player.update()
   }
 
   /* This function initially draws the "game level", it will then call
