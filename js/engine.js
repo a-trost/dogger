@@ -20,7 +20,6 @@ const Engine = function (global) {
   function main () {
     if (player.collision === true || score.lives === 0) {
       stopKeyboardListener()
-
       if (score.lives === 1) {
         setTimeout(() => {
           gameOver(false) // win=false

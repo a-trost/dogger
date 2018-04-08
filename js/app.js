@@ -390,10 +390,7 @@ function startGame () {
   sound.startMusic()
 }
 
-// Change this to stop Level 5 from appearing on game end
 function startLevel (worldChange = false, gameRestart = false, levelRestart = false) {
-  console.log("StartLevel " + worldChange + gameRestart + levelRestart);
-  console.log("Lives " + score.lives);
   if (!gameRestart) {
     if (worldChange) {
       popUpText('phrase-holder', 'The ' + score.currentWorld)
